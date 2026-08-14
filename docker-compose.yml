@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  screening:
+    build: .
+    image: opinion-piece:latest
+    container_name: opinion-piece-screening
+    volumes:
+      - ./data:/app/data
+      - ./figures:/app/figures
+      - ./report:/app/report
+      - ~/.mistral_key:/root/.mistral_key:ro
+    environment:
+      - MISTRAL_API_KEY_FILE=/root/.mistral_key
+    working_dir: /app
+    command: python code/screen_100.py
+
+  jupyter:
+    build: .
+    image: opinion-piece:latest
+    container_name: opinion-piece-jupyter
+    volumes:
+      - ./:/app
+      - ~/.mistral_key:/root/.mistral_key:ro
+    environment:
+      - MISTRAL_API_KEY_FILE=/root/.mistral_key
+    working_dir: /app
+    ports:
+      - "8888:8888"
+    command: jupyter notebook --ip=0.0.0.0 --allow-root --no-browser

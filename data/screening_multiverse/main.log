@@ -1,0 +1,61 @@
+
+========================================================================
+  MULTIVERSE SCREENING RUN
+  500 papers (drew 755, seed 42) | stages: domain, outcome
+========================================================================
+
+========================================================================
+  STAGE 3 — DOMAIN CLASSIFICATION
+  500 papers x 1 prompt(s) x 2 models = 950 calls pending, 50 already done
+========================================================================
+  [domain] mistral-large-2512 13/475 | claude-sonnet-5 34/475 (3 err) | 47/950 (5%) 3.7/s eta 4.0min
+  [domain] mistral-large-2512 17/475 | claude-sonnet-5 77/475 (6 err) | 94/950 (10%) 3.5/s eta 4.1min
+  [domain] mistral-large-2512 29/475 | claude-sonnet-5 112/475 (8 err) | 141/950 (15%) 3.6/s eta 3.7min
+  [domain] mistral-large-2512 30/475 | claude-sonnet-5 158/475 (8 err) | 188/950 (20%) 3.5/s eta 3.7min
+  [domain] mistral-large-2512 30/475 | claude-sonnet-5 205/475 (8 err) | 235/950 (25%) 3.3/s eta 3.6min
+  [domain] mistral-large-2512 31/475 | claude-sonnet-5 251/475 (8 err) | 282/950 (30%) 3.3/s eta 3.4min
+  [domain] mistral-large-2512 43/475 | claude-sonnet-5 286/475 (8 err) | 329/950 (35%) 3.4/s eta 3.1min
+  [domain] mistral-large-2512 45/475 | claude-sonnet-5 331/475 (10 err) | 376/950 (40%) 3.3/s eta 2.9min
+  [domain] mistral-large-2512 48/475 (3 err) | claude-sonnet-5 375/475 (10 err) | 423/950 (45%) 3.3/s eta 2.7min
+  [domain] mistral-large-2512 48/475 (3 err) | claude-sonnet-5 422/475 (11 err) | 470/950 (49%) 3.3/s eta 2.4min
+  [domain] mistral-large-2512 54/475 (3 err) | claude-sonnet-5 463/475 (15 err) | 517/950 (54%) 3.3/s eta 2.2min
+  [domain] mistral-large-2512 89/475 (10 err) | claude-sonnet-5 475/475 (15 err) | 564/950 (59%) 2.1/s eta 3.1min
+  [domain] mistral-large-2512 136/475 (18 err) | claude-sonnet-5 475/475 (15 err) | 611/950 (64%) 1.5/s eta 3.7min
+  [domain] mistral-large-2512 183/475 (28 err) | claude-sonnet-5 475/475 (15 err) | 658/950 (69%) 1.2/s eta 4.2min
+  [domain] mistral-large-2512 230/475 (35 err) | claude-sonnet-5 475/475 (15 err) | 705/950 (74%) 1.0/s eta 4.1min
+  [domain] mistral-large-2512 277/475 (47 err) | claude-sonnet-5 475/475 (15 err) | 752/950 (79%) 0.9/s eta 3.8min
+  [domain] mistral-large-2512 324/475 (55 err) | claude-sonnet-5 475/475 (15 err) | 799/950 (84%) 0.8/s eta 3.1min
+  [domain] mistral-large-2512 371/475 (65 err) | claude-sonnet-5 475/475 (15 err) | 846/950 (89%) 0.7/s eta 2.4min
+  [domain] mistral-large-2512 418/475 (73 err) | claude-sonnet-5 475/475 (15 err) | 893/950 (94%) 0.7/s eta 83s
+  [domain] mistral-large-2512 465/475 (84 err) | claude-sonnet-5 475/475 (15 err) | 940/950 (99%) 0.6/s eta 16s
+  [domain] mistral-large-2512 475/475 (85 err) | claude-sonnet-5 475/475 (15 err) | 950/950 (100%) 0.6/s eta 0s
+  ✓ domain complete with 100 failures: 950 calls in 24.9min
+
+========================================================================
+  STAGE 4 — OUTCOME GRID
+  500 papers x 5 prompt(s) x 2 models = 4750 calls pending, 250 already done
+========================================================================
+  [outcome] mistral-large-2512 15/2375 | claude-sonnet-5 222/2375 (15 err) | 237/4750 (5%) 3.2/s eta 23.3min
+  [outcome] mistral-large-2512 37/2375 (7 err) | claude-sonnet-5 437/2375 (24 err) | 474/4750 (10%) 3.4/s eta 21.2min
+  [outcome] mistral-large-2512 58/2375 (12 err) | claude-sonnet-5 653/2375 (29 err) | 711/4750 (15%) 3.3/s eta 20.2min
+  [outcome] mistral-large-2512 84/2375 (14 err) | claude-sonnet-5 864/2375 (29 err) | 948/4750 (20%) 3.4/s eta 18.9min
+  [outcome] mistral-large-2512 108/2375 (18 err) | claude-sonnet-5 1077/2375 (29 err) | 1185/4750 (25%) 3.4/s eta 17.7min
+  [outcome] mistral-large-2512 127/2375 (22 err) | claude-sonnet-5 1295/2375 (29 err) | 1422/4750 (30%) 3.3/s eta 16.6min
+  [outcome] mistral-large-2512 148/2375 (28 err) | claude-sonnet-5 1511/2375 (29 err) | 1659/4750 (35%) 3.3/s eta 15.4min
+  [outcome] mistral-large-2512 167/2375 (32 err) | claude-sonnet-5 1729/2375 (39 err) | 1896/4750 (40%) 3.3/s eta 14.3min
+  [outcome] mistral-large-2512 193/2375 (35 err) | claude-sonnet-5 1940/2375 (39 err) | 2133/4750 (45%) 3.3/s eta 13.1min
+  [outcome] mistral-large-2512 221/2375 (41 err) | claude-sonnet-5 2149/2375 (44 err) | 2370/4750 (50%) 3.3/s eta 12.0min
+  [outcome] mistral-large-2512 241/2375 (46 err) | claude-sonnet-5 2366/2375 (58 err) | 2607/4750 (55%) 3.3/s eta 10.8min
+  [outcome] mistral-large-2512 469/2375 (88 err) | claude-sonnet-5 2375/2375 (58 err) | 2844/4750 (60%) 1.8/s eta 17.2min
+  [outcome] mistral-large-2512 706/2375 (136 err) | claude-sonnet-5 2375/2375 (58 err) | 3081/4750 (65%) 1.4/s eta 20.6min
+  [outcome] mistral-large-2512 943/2375 (178 err) | claude-sonnet-5 2375/2375 (58 err) | 3318/4750 (70%) 1.1/s eta 22.0min
+  [outcome] mistral-large-2512 1180/2375 (228 err) | claude-sonnet-5 2375/2375 (58 err) | 3555/4750 (75%) 0.9/s eta 21.4min
+  [outcome] mistral-large-2512 1417/2375 (277 err) | claude-sonnet-5 2375/2375 (58 err) | 3792/4750 (80%) 0.8/s eta 19.2min
+  [outcome] mistral-large-2512 1654/2375 (324 err) | claude-sonnet-5 2375/2375 (58 err) | 4029/4750 (85%) 0.8/s eta 15.9min
+  [outcome] mistral-large-2512 1891/2375 (375 err) | claude-sonnet-5 2375/2375 (58 err) | 4266/4750 (90%) 0.7/s eta 11.5min
+  [outcome] mistral-large-2512 2128/2375 (418 err) | claude-sonnet-5 2375/2375 (58 err) | 4503/4750 (95%) 0.7/s eta 6.2min
+  [outcome] mistral-large-2512 2365/2375 (466 err) | claude-sonnet-5 2375/2375 (58 err) | 4740/4750 (100%) 0.6/s eta 16s
+  [outcome] mistral-large-2512 2375/2375 (470 err) | claude-sonnet-5 2375/2375 (58 err) | 4750/4750 (100%) 0.6/s eta 0s
+  ✓ outcome complete with 528 failures: 4750 calls in 127.8min
+
+All stages finished in 152.8min

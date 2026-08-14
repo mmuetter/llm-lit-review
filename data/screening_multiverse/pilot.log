@@ -1,0 +1,29 @@
+
+========================================================================
+  MULTIVERSE SCREENING RUN
+  25 papers (drew 39, seed 42) | stages: domain, outcome
+========================================================================
+
+========================================================================
+  STAGE 3 — DOMAIN CLASSIFICATION
+  25 papers x 1 prompt(s) x 2 models = 0 calls pending, 50 already done
+========================================================================
+  ✓ nothing to do — already complete
+
+========================================================================
+  STAGE 4 — OUTCOME GRID
+  25 papers x 5 prompt(s) x 2 models = 10 calls pending, 240 already done
+========================================================================
+  [outcome] mistral-large-2512 1/10 | claude-sonnet-5 0/0 | 1/10 (10%) 1.3/s eta 7s
+  [outcome] mistral-large-2512 2/10 | claude-sonnet-5 0/0 | 2/10 (20%) 0.7/s eta 12s
+  [outcome] mistral-large-2512 3/10 | claude-sonnet-5 0/0 | 3/10 (30%) 0.5/s eta 13s
+  [outcome] mistral-large-2512 4/10 | claude-sonnet-5 0/0 | 4/10 (40%) 0.4/s eta 15s
+  [outcome] mistral-large-2512 5/10 | claude-sonnet-5 0/0 | 5/10 (50%) 0.5/s eta 10s
+  [outcome] mistral-large-2512 6/10 | claude-sonnet-5 0/0 | 6/10 (60%) 0.5/s eta 9s
+  [outcome] mistral-large-2512 7/10 | claude-sonnet-5 0/0 | 7/10 (70%) 0.4/s eta 7s
+  [outcome] mistral-large-2512 8/10 | claude-sonnet-5 0/0 | 8/10 (80%) 0.4/s eta 5s
+  [outcome] mistral-large-2512 9/10 | claude-sonnet-5 0/0 | 9/10 (90%) 0.4/s eta 2s
+  [outcome] mistral-large-2512 10/10 | claude-sonnet-5 0/0 | 10/10 (100%) 0.4/s eta 0s
+  ✓ outcome complete: 10 calls in 23s
+
+All stages finished in 23s

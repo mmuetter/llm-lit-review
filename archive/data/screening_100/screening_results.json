@@ -1,0 +1,702 @@
+[
+  {
+    "domain": "ecotoxicology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "27632785",
+    "title": "Untangling the effects of multiple human stressors and their impacts on fish assemblages in European"
+  },
+  {
+    "domain": "ecotoxicology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "39024950",
+    "title": "Combined effects of heat waves and pesticide pollution on zooplankton communities: Does the timing o"
+  },
+  {
+    "domain": "immunology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "39151772",
+    "title": "The effect of platelet-rich plasma and sodium alginate hydrogel on corneal wound healing after corne"
+  },
+  {
+    "domain": "pest_management",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "28905991",
+    "title": "Target of rapamycin signaling orchestrates growth-defense trade-offs in plants."
+  },
+  {
+    "domain": "oncology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "37899423",
+    "title": "The synergy of the XPO1 inhibitors combined with the BET inhibitor INCB057643 in high-grade B-cell l"
+  },
+  {
+    "domain": "ecotoxicology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "36228853",
+    "title": "Effect of nitrogen and glyphosate on the plant community composition in a simulated field margin eco"
+  },
+  {
+    "domain": "antimicrobial",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "39723630",
+    "title": "Pharmacokinetic/pharmacodynamic analysis of meropenem and fosfomycin combinations in in vitro time-k"
+  },
+  {
+    "domain": "antimicrobial",
+    "labels_as_quality_proxy": "yes",
+    "abstract_incomplete": "no",
+    "pmid": "41264017",
+    "title": "Synergistic antibacterial and antibiofilm properties of lupinifolin in combination with antibiotics "
+  },
+  {
+    "domain": "neurology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "26645736",
+    "title": "Role of Aspirin and Dexamethasone against Experimentally Induced Depression in Rats."
+  },
+  {
+    "domain": "antiviral",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "yes",
+    "pmid": "40893672",
+    "title": "A novel C-3-substituted oleanolic acid benzyl amide derivative exhibits therapeutic potential agains"
+  },
+  {
+    "domain": "other",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "26185526",
+    "title": "Discovery of the combined oxidative cleavage of plant xylan and cellulose by a new fungal polysaccha"
+  },
+  {
+    "domain": "other",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "23412136",
+    "title": "Patterned tailored hydrophobic films designed by synergy effect of electrochemical deposition and ch"
+  },
+  {
+    "domain": "oncology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "39125158",
+    "title": "Targeted Polymeric Micelles System, Designed to Carry a Combined Cargo of L-Asparaginase and Doxorub"
+  },
+  {
+    "domain": "other",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "33287400",
+    "title": "Interaction Effects of Air Pollution and Climatic Factors on Circulatory and Respiratory Mortality i"
+  },
+  {
+    "domain": "oncology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "22767186",
+    "title": "SOX1 functions as a tumor suppressor by antagonizing the WNT/\u03b2-catenin signaling pathway in hepatoce"
+  },
+  {
+    "domain": "immunology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "41561061",
+    "title": "Efficacy of dexamethasone intravitreal implant combined with anti-VEGF drugs in the treatment of dia"
+  },
+  {
+    "domain": "ecotoxicology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "yes",
+    "pmid": "30232019",
+    "title": "Toxic effect of triphenyltin in the presence of nano zinc oxide to marine copepod Tigriopus japonicu"
+  },
+  {
+    "domain": "oncology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "33564073",
+    "title": "MNK1 and MNK2 enforce expression of E2F1, FOXM1, and WEE1 to drive soft tissue sarcoma."
+  },
+  {
+    "domain": "antimicrobial",
+    "labels_as_quality_proxy": "yes",
+    "abstract_incomplete": "no",
+    "pmid": "31808159",
+    "title": "In vitro interactions of ambroxol hydrochloride or amlodipine in combination with antibacterial agen"
+  },
+  {
+    "domain": "antimicrobial",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "yes",
+    "pmid": "34576276",
+    "title": "Ruthenium Complexes with 2-Pyridin-2-yl-1"
+  },
+  {
+    "domain": "oncology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "30260737",
+    "title": "Systems Pharmacology: Defining the Interactions of Drug Combinations."
+  },
+  {
+    "domain": "other",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "yes",
+    "pmid": "28737917",
+    "title": "Antagonistic Interplay Between an Intermolecular CH\u00b7\u00b7\u00b7O and an Intramolecular OH\u00b7\u00b7\u00b7O Hydrogen Bond i"
+  },
+  {
+    "domain": "other",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "27856707",
+    "title": "Brassinosteroids modulate ABA-induced stomatal closure in Arabidopsis."
+  },
+  {
+    "domain": "oncology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "28361613",
+    "title": "Synergistic efficacy of ultrasound, sonosensitizers and chemotherapy: a review."
+  },
+  {
+    "domain": "oncology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "36321642",
+    "title": "PD-1 engineered cytomembrane cloaked molybdenum nitride for synergistic photothermal and enhanced im"
+  },
+  {
+    "domain": "other",
+    "labels_as_quality_proxy": "yes",
+    "abstract_incomplete": "no",
+    "pmid": "35489272",
+    "title": "Combination of 1,8-cineole and beta-caryophyllene synergistically reverses cardiac hypertrophy in is"
+  },
+  {
+    "domain": "oncology|ecotoxicology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "yes",
+    "pmid": "41852696",
+    "title": "Nitrogen-doped carbon quantum dots as fluorescent sensor for doxorubicin and chlortetracycline: expe"
+  },
+  {
+    "domain": "oncology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "37345088",
+    "title": "Novel Drugs and Radiotherapy in Relapsed Lymphomas: Abscopal Response and Beyond."
+  },
+  {
+    "domain": "antimicrobial",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "29998564",
+    "title": "In vitro interactions between 17-AAG and azoles against Exophiala dermatitidis."
+  },
+  {
+    "domain": "pest_management",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "yes",
+    "pmid": "37576746",
+    "title": "Assembly of an active microbial consortium by engineering compatible combinations containing foreign"
+  },
+  {
+    "domain": "neurology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "38975431",
+    "title": "Synergistic Interventions for Silencing Oppositional Defiant Disorder and Dyslexia in a Child With A"
+  },
+  {
+    "domain": "ecotoxicology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "yes",
+    "pmid": "40516672",
+    "title": "Ecotoxicological effects of phthalate esters: A review."
+  },
+  {
+    "domain": "other",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "32828272",
+    "title": "Hippo pathway cooperates with ChREBP to regulate hepatic glucose utilization."
+  },
+  {
+    "domain": "ecotoxicology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "35324670",
+    "title": "Ex Vivo and In Vitro Studies Revealed Underlying Mechanisms of Immature Intestinal Inflammatory Resp"
+  },
+  {
+    "domain": "ecotoxicology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "26937024",
+    "title": "Combined effects of alpha particles and depleted uranium on Zebrafish (Danio rerio) embryos."
+  },
+  {
+    "domain": "neurology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "yes",
+    "pmid": "41544353",
+    "title": "Interaction effects of extreme temperature events and air pollutants on neurodegenerative disease mo"
+  },
+  {
+    "domain": "immunology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "yes",
+    "pmid": "41679349",
+    "title": "Integrative metabolomics and network pharmacology reveal the therapeutic mechanisms of Inonotus hisp"
+  },
+  {
+    "domain": "antimicrobial",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "26060128",
+    "title": "Inhibition of penicillin-binding protein 2a (PBP2a) in methicillin resistant Staphylococcus aureus ("
+  },
+  {
+    "domain": "neurology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "28663553",
+    "title": "Functional and dynamic polymerization of the ALS-linked protein TDP-43 antagonizes its pathologic ag"
+  },
+  {
+    "domain": "neurology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "20811878",
+    "title": "PPI deficit induced by amphetamine is attenuated by the histamine H1 antagonist pyrilamine, but is e"
+  },
+  {
+    "domain": "other",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "yes",
+    "pmid": "42155103",
+    "title": "Synergistic Ion- and Electron-Conductive Ca-Al-Layered Double Hydroxide/Graphitized Carbon Black Hyb"
+  },
+  {
+    "domain": "oncology",
+    "labels_as_quality_proxy": "yes",
+    "abstract_incomplete": "no",
+    "pmid": "37830749",
+    "title": "Statistical Assessment of Drug Synergy from In Vivo Combination Studies Using Mouse Tumor Models."
+  },
+  {
+    "domain": "antimicrobial",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "27530257",
+    "title": "A combination of silver nanoparticles and visible blue light enhances the antibacterial efficacy of "
+  },
+  {
+    "domain": "immunology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "40311422",
+    "title": "COPD risk due to extreme temperature exposure: combining epidemiological evidence with pathophysiolo"
+  },
+  {
+    "domain": "neurology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "26854031",
+    "title": "Synergism of perampanel and zonisamide in the rat amygdala kindling model of temporal lobe epilepsy."
+  },
+  {
+    "domain": "oncology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "28187719",
+    "title": "Promotion of HepG2 cell apoptosis by flower of Allium atroviolaceum and the mechanism of action."
+  },
+  {
+    "domain": "ecotoxicology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "yes",
+    "pmid": "29222052",
+    "title": "In vitro co-culture models to evaluate acute cytotoxicity of individual and combined mycotoxin expos"
+  },
+  {
+    "domain": "oncology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "21750577",
+    "title": "Exposure to organochlorine pesticides is independent risk factor of hepatocellular carcinoma: a case"
+  },
+  {
+    "domain": "other",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "31545497",
+    "title": "Evaluation of cytochrome P450 3A4\u2011mediated drug\u2011drug interaction potential between P2Y12 inhibitors "
+  },
+  {
+    "domain": "other",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "39329267",
+    "title": "Noncontact Perception of Thin-Film Transistors by the Synergy of Both Capacitive and Electrostatic I"
+  },
+  {
+    "domain": "neurology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "41684728",
+    "title": "Oridonin attenuates TLR4-driven inflammation and autophagy in LPS-stimulated enteric glial cells: an"
+  },
+  {
+    "domain": "oncology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "38037159",
+    "title": "Upregulated PARP1 confers breast cancer resistance to CDK4/6 inhibitors via YB-1 phosphorylation."
+  },
+  {
+    "domain": "oncology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "25964294",
+    "title": "APO866 Increases Antitumor Activity of Cyclosporin-A by Inducing Mitochondrial and Endoplasmic Retic"
+  },
+  {
+    "domain": "ecotoxicology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "41881327",
+    "title": "Effects of single and combined exposure of hexafluoropropylene oxide dimer acid (HFPO-DA ammonium sa"
+  },
+  {
+    "domain": "other",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "40550488",
+    "title": "Hydrogel and Injectable Platelet-Rich Fibrin: A Synergistic Approach to Osteogenesis."
+  },
+  {
+    "domain": "neurology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "22528248",
+    "title": "Evidence for synergism between cell death mechanisms in a cellular model of neurodegeneration in Par"
+  },
+  {
+    "domain": "other",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "yes",
+    "pmid": "42072133",
+    "title": "Separation and Characterization of Self-Assembled Nanoparticles from "
+  },
+  {
+    "domain": "oncology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "31176068",
+    "title": "Zwitterionic Janus Dendrimer with distinct functional disparity for enhanced protein delivery."
+  },
+  {
+    "domain": "ecotoxicology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "41951248",
+    "title": "A 3D Renal Microsphere Model Reveals Antagonism in Ochratoxin a and Citrinin Co-Exposure."
+  },
+  {
+    "domain": "ecotoxicology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "yes",
+    "pmid": "41260057",
+    "title": "Tolerance of the apple snail Pomacea canaliculata to individual and combined exposures of the pyreth"
+  },
+  {
+    "domain": "oncology",
+    "labels_as_quality_proxy": "yes",
+    "abstract_incomplete": "no",
+    "pmid": "32249693",
+    "title": "Preparation and characterization of PLGA-PEG-PLGA polymeric nanoparticles for co-delivery of 5-Fluor"
+  },
+  {
+    "domain": "oncology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "39800760",
+    "title": "Combinatorial functionomics identifies HDAC6-dependent molecular vulnerability of radioresistant hea"
+  },
+  {
+    "domain": "ecotoxicology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "33418254",
+    "title": "Combined toxic effects of dioxin-like PCB77 with Fe-based nanoparticles in earthworm Eisenia fetida."
+  },
+  {
+    "domain": "antimicrobial",
+    "labels_as_quality_proxy": "yes",
+    "abstract_incomplete": "no",
+    "pmid": "40965613",
+    "title": "Synergistic and additive effects of rifampicin, moxifloxacin, ethambutol, and azithromycin against M"
+  },
+  {
+    "domain": "antimicrobial",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "36462662",
+    "title": "Combination of isothiocyanates and antibiotics increases susceptibility against Acinetobacter bauman"
+  },
+  {
+    "domain": "antimicrobial",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "40737762",
+    "title": "Ceftazidime-avibactam plus aztreonam for extensively drug-resistant gram-negative infections in crit"
+  },
+  {
+    "domain": "pest_management",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "35759052",
+    "title": "Characterization of infected process and primary mechanism in rice Acuce defense against rice blast "
+  },
+  {
+    "domain": "antimicrobial",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "yes",
+    "pmid": "38397028",
+    "title": "Bavachin Rejuvenates Sensitivity of Colistin against Colistin-Resistant Gram-Negative Bacteria."
+  },
+  {
+    "domain": "immunology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "37637228",
+    "title": "Smoking cessation and influenza vaccination can reduce the healthcare burden of COPD."
+  },
+  {
+    "domain": "neurology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "24250654",
+    "title": "Evaluation of Antinociceptive Effect of Pregabalin in Mice and its Combination with Tramadol using T"
+  },
+  {
+    "domain": "oncology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "24727326",
+    "title": "Ganitumab (AMG 479) inhibits IGF-II-dependent ovarian cancer growth and potentiates platinum-based c"
+  },
+  {
+    "domain": "ecotoxicology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "yes",
+    "pmid": "34941783",
+    "title": "Antagonistic Effects of Enrofloxacin on Carbendazim-Induced Developmental Toxicity in Zebrafish Embr"
+  },
+  {
+    "domain": "ecotoxicology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "41506189",
+    "title": "Selenomethionine mitigation of methylmercury-induced epigenetic and transcriptomic alterations in ra"
+  },
+  {
+    "domain": "antimicrobial",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "yes",
+    "pmid": "39699161",
+    "title": "Rutin Synergizes with Colistin to Eradicate Salmonellosis in Mice by Enhancing the Efficacy and Redu"
+  },
+  {
+    "domain": "other",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "30966316",
+    "title": "Multidimensional Nanocomposites of Epoxy Reinforced with 1D and 2D Carbon Nanostructures for Improve"
+  },
+  {
+    "domain": "ecotoxicology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "31460323",
+    "title": "Self-Assembled Naphthylidene-Containing Schiff Base Anchored Polystyrene Nanocomposites Targeted for"
+  },
+  {
+    "domain": "oncology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "yes",
+    "pmid": "39613490",
+    "title": "Bifunctional nanomaterial enabled high-specific isolation of urinary exosomes for cervical cancer me"
+  },
+  {
+    "domain": "ecotoxicology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "41175058",
+    "title": "Assessment of the Effects of Biodegradable and Nonbiodegradable Microplastics Combined with Pesticid"
+  },
+  {
+    "domain": "antimicrobial",
+    "labels_as_quality_proxy": "yes",
+    "abstract_incomplete": "no",
+    "pmid": "41452877",
+    "title": "Antibacterial efficacy of Solanum muricatum aiton metabolites against methicillin-resistant staphylo"
+  },
+  {
+    "domain": "oncology",
+    "labels_as_quality_proxy": "yes",
+    "abstract_incomplete": "no",
+    "pmid": "39971028",
+    "title": "Polyethylene oxide-chitosan-doxorubicin/polycaprolactone-chitosan-curcumin pH-sensitive core/shell n"
+  },
+  {
+    "domain": "oncology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "yes",
+    "pmid": "30885218",
+    "title": "Flavokawain B targets protein neddylation for enhancing the anti-prostate cancer effect of Bortezomi"
+  },
+  {
+    "domain": "oncology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "27546027",
+    "title": "Azacitidine-lenalidomide (ViLen) combination yields a high response rate in higher risk myelodysplas"
+  },
+  {
+    "domain": "other",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "22253588",
+    "title": "Residual structures, conformational fluctuations, and electrostatic interactions in the synergistic "
+  },
+  {
+    "domain": "oncology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "39911900",
+    "title": "Multiple ligands simultaneous molecular docking and dynamics approach to study the synergetic inhibi"
+  },
+  {
+    "domain": "oncology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "33894420",
+    "title": "PERK activation by CCT020312 chemosensitizes colorectal cancer through inducing apoptosis regulated "
+  },
+  {
+    "domain": "neurology",
+    "labels_as_quality_proxy": "yes",
+    "abstract_incomplete": "no",
+    "pmid": "26738990",
+    "title": "Mexiletine and its Interactions with Classical Antiepileptic Drugs: An Isobolographic Analysis."
+  },
+  {
+    "domain": "oncology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "22433711",
+    "title": "Synergistic antitumor efficacy of sequentially combined paclitaxel with sorafenib in vitro and in vi"
+  },
+  {
+    "domain": "pest_management",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "yes",
+    "pmid": "32850741",
+    "title": "Synergistic Degradation of Pyrethroids by the Quorum Sensing-Regulated Carboxylesterase of "
+  },
+  {
+    "domain": "oncology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "26195701",
+    "title": "Mechanisms of Action of Lenalidomide in B-Cell Non-Hodgkin Lymphoma."
+  },
+  {
+    "domain": "oncology",
+    "labels_as_quality_proxy": "yes",
+    "abstract_incomplete": "no",
+    "pmid": "22622284",
+    "title": "Molecular mechanisms involved in the synergistic interaction of the EZH2 inhibitor 3-deazaneplanocin"
+  },
+  {
+    "domain": "pest_management",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "42243708",
+    "title": "Integrative co-application of citric acid and halotolerant/halophilic citrate-utilizing PGPR enhance"
+  },
+  {
+    "domain": "oncology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "29655198",
+    "title": "Combination TS-1 plus EGFR-tyrosine kinase inhibitors (TKIs) for the treatment of non-small cell lun"
+  },
+  {
+    "domain": "other",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "34567279",
+    "title": "A collaborative emergency decision making approach based on BWM and TODIM under interval 2-tuple lin"
+  },
+  {
+    "domain": "oncology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "41022529",
+    "title": "Antagonism of estrogen-related receptor-\u03b1 inhibits mitochondrial oxidative phosphorylation and reduc"
+  },
+  {
+    "domain": "other",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "yes",
+    "pmid": "41924106",
+    "title": "Harnessing the neutral Ca(NO"
+  },
+  {
+    "domain": "oncology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "29764490",
+    "title": "Efficacy of the hypoxia-activated prodrug evofosfamide (TH-302) in nasopharyngeal carcinoma in vitro"
+  },
+  {
+    "domain": "antimicrobial",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "41512507",
+    "title": "A comprehensive review of Candida spp./bacteria interactions within polymicrobial biofilms: resistan"
+  },
+  {
+    "domain": "other",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "40268305",
+    "title": "Single-Cell and Spatial Transcriptomic Analysis of Maize Embryo Development."
+  },
+  {
+    "domain": "oncology",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "35984996",
+    "title": "EphrinB2 Inhibition and Pembrolizumab in Metastatic Urothelial Carcinoma."
+  },
+  {
+    "domain": "other",
+    "labels_as_quality_proxy": "no",
+    "abstract_incomplete": "no",
+    "pmid": "33621529",
+    "title": "Effect of Brachial-Ankle Pulse Wave Velocity Combined with Waist-to-Hip Ratio on Cardiac and Cerebro"
+  }
+]
