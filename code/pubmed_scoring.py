@@ -6,6 +6,7 @@ abstract text, title, author keywords or MeSH indexing.
 
 import json
 import time
+import urllib.error
 import urllib.parse
 import urllib.request
 
@@ -13,24 +14,29 @@ EUTILS_BASE = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils"
 NCBI_DELAY_SECONDS = 0.4
 ESEARCH_PAGE_SIZE = 9999
 ESEARCH_RETRIEVAL_LIMIT = 9999
+MAX_RATE_LIMIT_RETRIES = 6
 
 PUBMED_TERM_GROUPS = {
-    "synergy": "synergism OR synergistic OR synergy",
-    "antagonism": "antagonism OR antagonistic",
-    "additivity": "additive OR additivity OR indifference",
-    "drug_interaction": '"drug interactions" OR "drug combination" OR "pairwise interaction" OR "interaction network"',
-    "fici": 'FICI[tiab] OR "fractional inhibitory concentration"[tiab] OR "FIC index"[tiab]',
-    "checkerboard": "checkerboard[tiab]",
-    "loewe": "Loewe[tiab]",
-    "bliss": "Bliss[tiab]",
-    "chou_talalay": '"Chou-Talalay"[tiab] OR "Chou Talalay"[tiab]',
-    "combination_index": '"combination index"[tiab]',
-    "isobologram": "isobologram[tiab] OR isobolographic[tiab] OR isobole[tiab]",
-    "highest_single_agent": '"highest single agent"[tiab]',
-    "zero_interaction_potency": '"zero interaction potency"[tiab] OR "ZIP score"[tiab]',
-    "musyc": "MuSyC[tiab]",
-    "braid": "BRAID[tiab]",
-    "concentration_addition": '"concentration addition"[tiab] OR "independent action"[tiab]',
+    "theme": ('"drug combination"[tiab] OR "drug interaction"[tiab] OR '
+              '"drug-drug interaction"[tiab] OR "combination therapy"[tiab] OR '
+              '"combined treatment"[tiab] OR "co-treatment"[tiab] OR '
+              'polytherapy[tiab] OR multidrug[tiab]'),
+    "reference_model": ('Bliss[tiab] OR Loewe[tiab] OR "highest single agent"[tiab]'),
+    "interaction_metric": ('"combination index"[tiab] OR FICI[tiab] OR "FIC index"[tiab] OR '
+                           '"fractional inhibitory concentration"[tiab] OR "Chou-Talalay"[tiab] OR '
+                           'isobologram[tiab] OR isobolographic[tiab] OR "ZIP score"[tiab] OR '
+                           '"zero interaction potency"[tiab] OR MuSyC[tiab] OR '
+                           '"interaction index"[tiab] OR "dose reduction index"[tiab] OR '
+                           '"synergy score"[tiab] OR "Bliss excess"[tiab]'),
+    "interaction_labelling": ('synergy[tiab] OR synergism[tiab] OR synergistic[tiab] OR '
+                              'antagonism[tiab] OR antagonistic[tiab] OR "additive effect"[tiab] OR '
+                              'additivity[tiab] OR potentiation[tiab] OR "sub-additive"[tiab] OR '
+                              '"supra-additive"[tiab]'),
+    "assay_design": ('"checkerboard assay"[tiab] OR "checkerboard method"[tiab] OR '
+                     '"checkerboard microdilution"[tiab] OR "checkerboard titration"[tiab] OR '
+                     '"dose-response matrix"[tiab] OR "fixed-ratio design"[tiab] OR '
+                     '"ray design"[tiab]'),
+    "software": ('CompuSyn[tiab] OR CalcuSyn[tiab] OR SynergyFinder[tiab] OR Combenefit[tiab]'),
 }
 
 
@@ -39,9 +45,15 @@ def esearch_page(term, retstart, retmax):
     params = {"db": "pubmed", "term": term, "retmode": "json",
               "retstart": retstart, "retmax": retmax}
     url = f"{EUTILS_BASE}/esearch.fcgi?{urllib.parse.urlencode(params)}"
-    with urllib.request.urlopen(url, timeout=120) as response:
-        body = response.read().decode("utf-8", errors="replace")
-    return json.loads(body, strict=False)["esearchresult"]
+    for attempt in range(MAX_RATE_LIMIT_RETRIES):
+        try:
+            with urllib.request.urlopen(url, timeout=120) as response:
+                body = response.read().decode("utf-8", errors="replace")
+            return json.loads(body, strict=False)["esearchresult"]
+        except urllib.error.HTTPError as error:
+            if error.code != 429 or attempt == MAX_RATE_LIMIT_RETRIES - 1:
+                raise
+            time.sleep(2 * (attempt + 1))
 
 
 def esearch_count(term):

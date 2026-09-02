@@ -1,0 +1,38 @@
+
+========================================================================
+  CLEAN RESTART — Mistral only
+  1000 papers (drew 1465, seed 42) from the unified 2010-2025 gate
+========================================================================
+
+========================================================================
+  STAGE 3 — DOMAIN CLASSIFICATION
+  1000 papers x 1 prompt(s) x 2 models = 1000 calls pending
+========================================================================
+  [domain] mistral-large-2512 50/1000 | 50/1000 (5%) 0.3/s eta 55.9min
+  [domain] mistral-large-2512 100/1000 | 100/1000 (10%) 0.3/s eta 55.6min
+  [domain] mistral-large-2512 150/1000 | 150/1000 (15%) 0.3/s eta 52.9min
+  [domain] mistral-large-2512 200/1000 | 200/1000 (20%) 0.3/s eta 51.7min
+  [domain] mistral-large-2512 250/1000 | 250/1000 (25%) 0.3/s eta 48.4min
+  [domain] mistral-large-2512 300/1000 | 300/1000 (30%) 0.3/s eta 45.1min
+  [domain] mistral-large-2512 350/1000 | 350/1000 (35%) 0.3/s eta 42.6min
+  [domain] mistral-large-2512 400/1000 | 400/1000 (40%) 0.3/s eta 39.2min
+  [domain] mistral-large-2512 450/1000 | 450/1000 (45%) 0.3/s eta 35.9min
+  [domain] mistral-large-2512 500/1000 | 500/1000 (50%) 0.3/s eta 32.2min
+  [domain] mistral-large-2512 550/1000 (4 err) | 550/1000 (55%) 0.3/s eta 28.1min
+  [domain] mistral-large-2512 600/1000 (6 err) | 600/1000 (60%) 0.3/s eta 24.4min
+  [domain] mistral-large-2512 650/1000 (9 err) | 650/1000 (65%) 0.3/s eta 21.2min
+  [domain] mistral-large-2512 700/1000 (10 err) | 700/1000 (70%) 0.3/s eta 18.1min
+  [domain] mistral-large-2512 750/1000 (10 err) | 750/1000 (75%) 0.3/s eta 14.9min
+  [domain] mistral-large-2512 800/1000 (14 err) | 800/1000 (80%) 0.3/s eta 11.9min
+  [domain] mistral-large-2512 850/1000 (16 err) | 850/1000 (85%) 0.3/s eta 8.8min
+  [domain] mistral-large-2512 900/1000 (20 err) | 900/1000 (90%) 0.3/s eta 5.8min
+  [domain] mistral-large-2512 950/1000 (21 err) | 950/1000 (95%) 0.3/s eta 2.9min
+  [domain] mistral-large-2512 1000/1000 (21 err) | 1000/1000 (100%) 0.3/s eta 0s
+  ✓ domain complete with 21 failures: 1000 calls in 57.8min
+
+========================================================================
+  STAGE 4 — OUTCOME GRID
+  1000 papers x 5 prompt(s) x 2 models = 5000 calls pending
+========================================================================
+  [outcome] mistral-large-2512 250/5000 (1 err) | 250/5000 (5%) 0.2/s eta 318.2min
+  [outcome] mistral-large-2512 500/5000 (1 err) | 500/5000 (10%) 0.3/s eta 298.5min

@@ -1,0 +1,618 @@
+{
+  "oncology": {
+    "old": [
+      {
+        "pmid": "36081572",
+        "domain": "oncology",
+        "labels_as_quality_proxy": "no",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "29397453",
+        "domain": "oncology",
+        "labels_as_quality_proxy": "yes",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "30641176",
+        "domain": "oncology",
+        "labels_as_quality_proxy": "yes",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "39608175",
+        "domain": "oncology",
+        "labels_as_quality_proxy": "no",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "27807662",
+        "domain": "oncology",
+        "labels_as_quality_proxy": "no",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "32887622",
+        "domain": "oncology",
+        "labels_as_quality_proxy": "no",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "30233204",
+        "domain": "oncology",
+        "labels_as_quality_proxy": "no",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "22562413",
+        "domain": "oncology",
+        "labels_as_quality_proxy": "yes",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "41326498",
+        "domain": "oncology",
+        "labels_as_quality_proxy": "no",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "24133974",
+        "domain": "oncology",
+        "labels_as_quality_proxy": "yes",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "39970627",
+        "domain": "oncology",
+        "labels_as_quality_proxy": "no",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "38320351",
+        "domain": "oncology",
+        "labels_as_quality_proxy": "no",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "40945534",
+        "domain": "oncology",
+        "labels_as_quality_proxy": "yes",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "39175540",
+        "domain": "oncology",
+        "labels_as_quality_proxy": "no",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "38817005",
+        "domain": "oncology",
+        "labels_as_quality_proxy": "no",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "26956167",
+        "domain": "oncology",
+        "labels_as_quality_proxy": "no",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "26637851",
+        "domain": "oncology",
+        "labels_as_quality_proxy": "yes",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "25729387",
+        "domain": "oncology",
+        "labels_as_quality_proxy": "no",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "33166734",
+        "domain": "oncology",
+        "labels_as_quality_proxy": "no",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "36055113",
+        "domain": "oncology",
+        "labels_as_quality_proxy": "no",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "35486574",
+        "domain": "oncology",
+        "labels_as_quality_proxy": "yes",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "34577645",
+        "domain": "oncology",
+        "labels_as_quality_proxy": "yes",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "41355183",
+        "domain": "oncology",
+        "labels_as_quality_proxy": "yes",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "28978082",
+        "domain": "oncology",
+        "labels_as_quality_proxy": "yes",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "34712959",
+        "domain": "oncology",
+        "labels_as_quality_proxy": "no",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "28138868",
+        "domain": "oncology",
+        "labels_as_quality_proxy": "yes",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "25678112",
+        "domain": "oncology",
+        "labels_as_quality_proxy": "no",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "36130940",
+        "domain": "oncology",
+        "labels_as_quality_proxy": "yes",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "25167883",
+        "domain": "oncology",
+        "labels_as_quality_proxy": "yes",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "35452765",
+        "domain": "oncology",
+        "labels_as_quality_proxy": "no",
+        "abstract_incomplete": "no"
+      }
+    ],
+    "new": [
+      {
+        "pmid": "36081572",
+        "synergy_desirable": "yes"
+      },
+      {
+        "pmid": "29397453",
+        "synergy_desirable": "yes"
+      },
+      {
+        "pmid": "30641176",
+        "synergy_desirable": "yes"
+      },
+      {
+        "pmid": "39608175",
+        "synergy_desirable": "yes"
+      },
+      {
+        "pmid": "27807662",
+        "synergy_desirable": "yes"
+      },
+      {
+        "pmid": "32887622",
+        "synergy_desirable": "yes"
+      },
+      {
+        "pmid": "30233204",
+        "synergy_desirable": "yes"
+      },
+      {
+        "pmid": "22562413",
+        "synergy_desirable": "yes"
+      },
+      {
+        "pmid": "41326498",
+        "synergy_desirable": "yes"
+      },
+      {
+        "pmid": "24133974",
+        "synergy_desirable": "yes"
+      },
+      {
+        "pmid": "39970627",
+        "synergy_desirable": "yes"
+      },
+      {
+        "pmid": "38320351",
+        "synergy_desirable": "yes"
+      },
+      {
+        "pmid": "40945534",
+        "synergy_desirable": "no"
+      },
+      {
+        "pmid": "39175540",
+        "synergy_desirable": "yes"
+      },
+      {
+        "pmid": "38817005",
+        "synergy_desirable": "no"
+      },
+      {
+        "pmid": "26956167",
+        "synergy_desirable": "yes"
+      },
+      {
+        "pmid": "26637851",
+        "synergy_desirable": "yes"
+      },
+      {
+        "pmid": "25729387",
+        "synergy_desirable": "no"
+      },
+      {
+        "pmid": "33166734",
+        "synergy_desirable": "yes"
+      },
+      {
+        "pmid": "36055113",
+        "synergy_desirable": "yes"
+      },
+      {
+        "pmid": "35486574",
+        "synergy_desirable": "yes"
+      },
+      {
+        "pmid": "34577645",
+        "synergy_desirable": "yes"
+      },
+      {
+        "pmid": "41355183",
+        "synergy_desirable": "no"
+      },
+      {
+        "pmid": "28978082",
+        "synergy_desirable": "yes"
+      },
+      {
+        "pmid": "34712959",
+        "synergy_desirable": "no"
+      },
+      {
+        "pmid": "28138868",
+        "synergy_desirable": "yes"
+      },
+      {
+        "pmid": "25678112",
+        "synergy_desirable": "yes"
+      },
+      {
+        "pmid": "36130940",
+        "synergy_desirable": "yes"
+      },
+      {
+        "pmid": "25167883",
+        "synergy_desirable": "yes"
+      },
+      {
+        "pmid": "35452765",
+        "synergy_desirable": "yes"
+      }
+    ],
+    "old_rate": 0.43333333333333335,
+    "new_rate": 0.8333333333333334
+  },
+  "antimicrobial": {
+    "old": [
+      {
+        "pmid": "24270131",
+        "domain": "antimicrobial",
+        "labels_as_quality_proxy": "yes",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "40660172",
+        "domain": "antimicrobial",
+        "labels_as_quality_proxy": "no",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "40715552",
+        "domain": "antimicrobial",
+        "labels_as_quality_proxy": "yes",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "32035220",
+        "domain": "antimicrobial",
+        "labels_as_quality_proxy": "no",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "29075483",
+        "domain": "antimicrobial",
+        "labels_as_quality_proxy": "no",
+        "abstract_incomplete": "yes"
+      },
+      {
+        "pmid": "27406860",
+        "domain": "antimicrobial",
+        "labels_as_quality_proxy": "no",
+        "abstract_incomplete": "yes"
+      },
+      {
+        "pmid": "33774879",
+        "domain": "antimicrobial",
+        "labels_as_quality_proxy": "yes",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "23207251",
+        "domain": "antimicrobial",
+        "labels_as_quality_proxy": "yes",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "24385360",
+        "domain": "antimicrobial",
+        "labels_as_quality_proxy": "yes",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "20961363",
+        "domain": "antimicrobial",
+        "labels_as_quality_proxy": "no",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "27029292",
+        "domain": "antimicrobial",
+        "labels_as_quality_proxy": "yes",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "31454708",
+        "domain": "antimicrobial",
+        "labels_as_quality_proxy": "yes",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "41168248",
+        "domain": "antimicrobial",
+        "labels_as_quality_proxy": "yes",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "38031767",
+        "domain": "antimicrobial",
+        "labels_as_quality_proxy": "yes",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "35841594",
+        "domain": "antimicrobial",
+        "labels_as_quality_proxy": "no",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "39293527",
+        "domain": "antimicrobial",
+        "labels_as_quality_proxy": "yes",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "20072627",
+        "domain": "antimicrobial",
+        "labels_as_quality_proxy": "yes",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "29166272",
+        "domain": "antimicrobial",
+        "labels_as_quality_proxy": "yes",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "40978160",
+        "domain": "antimicrobial",
+        "labels_as_quality_proxy": "no",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "40468536",
+        "domain": "antimicrobial",
+        "labels_as_quality_proxy": "yes",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "39688314",
+        "domain": "antimicrobial",
+        "labels_as_quality_proxy": "yes",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "40125813",
+        "domain": "antimicrobial",
+        "labels_as_quality_proxy": "yes",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "39040003",
+        "domain": "antimicrobial",
+        "labels_as_quality_proxy": "no",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "41204985",
+        "domain": "antimicrobial",
+        "labels_as_quality_proxy": "yes",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "22964249",
+        "domain": "antimicrobial",
+        "labels_as_quality_proxy": "yes",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "22358361",
+        "domain": "antimicrobial",
+        "labels_as_quality_proxy": "yes",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "33582141",
+        "domain": "antimicrobial",
+        "labels_as_quality_proxy": "yes",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "34263306",
+        "domain": "antimicrobial",
+        "labels_as_quality_proxy": "yes",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "32472209",
+        "domain": "antimicrobial",
+        "labels_as_quality_proxy": "no",
+        "abstract_incomplete": "no"
+      },
+      {
+        "pmid": "28673701",
+        "domain": "antimicrobial",
+        "labels_as_quality_proxy": "yes",
+        "abstract_incomplete": "no"
+      }
+    ],
+    "new": [
+      {
+        "pmid": "24270131",
+        "synergy_desirable": "yes"
+      },
+      {
+        "pmid": "40660172",
+        "synergy_desirable": "yes"
+      },
+      {
+        "pmid": "40715552",
+        "synergy_desirable": "yes"
+      },
+      {
+        "pmid": "32035220",
+        "synergy_desirable": "no"
+      },
+      {
+        "pmid": "29075483",
+        "synergy_desirable": "no"
+      },
+      {
+        "pmid": "27406860",
+        "synergy_desirable": "yes"
+      },
+      {
+        "pmid": "33774879",
+        "synergy_desirable": "yes"
+      },
+      {
+        "pmid": "23207251",
+        "synergy_desirable": "yes"
+      },
+      {
+        "pmid": "24385360",
+        "synergy_desirable": "yes"
+      },
+      {
+        "pmid": "20961363",
+        "synergy_desirable": "yes"
+      },
+      {
+        "pmid": "27029292",
+        "synergy_desirable": "yes"
+      },
+      {
+        "pmid": "31454708",
+        "synergy_desirable": "yes"
+      },
+      {
+        "pmid": "41168248",
+        "synergy_desirable": "yes"
+      },
+      {
+        "pmid": "38031767",
+        "synergy_desirable": "yes"
+      },
+      {
+        "pmid": "35841594",
+        "synergy_desirable": "no"
+      },
+      {
+        "pmid": "39293527",
+        "synergy_desirable": "yes"
+      },
+      {
+        "pmid": "20072627",
+        "synergy_desirable": "yes"
+      },
+      {
+        "pmid": "29166272",
+        "synergy_desirable": "yes"
+      },
+      {
+        "pmid": "40978160",
+        "synergy_desirable": "no"
+      },
+      {
+        "pmid": "40468536",
+        "synergy_desirable": "yes"
+      },
+      {
+        "pmid": "39688314",
+        "synergy_desirable": "yes"
+      },
+      {
+        "pmid": "40125813",
+        "synergy_desirable": "yes"
+      },
+      {
+        "pmid": "39040003",
+        "synergy_desirable": "yes"
+      },
+      {
+        "pmid": "41204985",
+        "synergy_desirable": "yes"
+      },
+      {
+        "pmid": "22964249",
+        "synergy_desirable": "yes"
+      },
+      {
+        "pmid": "22358361",
+        "synergy_desirable": "yes"
+      },
+      {
+        "pmid": "33582141",
+        "synergy_desirable": "yes"
+      },
+      {
+        "pmid": "34263306",
+        "synergy_desirable": "yes"
+      },
+      {
+        "pmid": "32472209",
+        "synergy_desirable": "no"
+      },
+      {
+        "pmid": "28673701",
+        "synergy_desirable": "yes"
+      }
+    ],
+    "old_rate": 0.7,
+    "new_rate": 0.8333333333333334
+  }
+}

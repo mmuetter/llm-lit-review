@@ -1,14 +1,22 @@
-"""Deterministic completeness filter and seeded sampling of gated papers."""
+"""Deterministic completeness filter and seeded sampling of gated papers.
+
+Records are fetched from PubMed on demand, because the gate admits papers that
+predate the stored corpus.
+"""
 
 import json
 import random
 import re
+import time
+import urllib.parse
+import urllib.request
+import xml.etree.ElementTree as ET
 from pathlib import Path
 
 DATA_DIR = Path(__file__).parent.parent / "data"
 CORPUS_PATH = DATA_DIR / "pubmed_results_all_years.json"
-TERM_SCORES_PATH = DATA_DIR / "pubmed_term_scores.json"
-SAMPLE_PATH = DATA_DIR / "screening_sample.json"
+TERM_SCORES_PATH = DATA_DIR / "term_scores_v2.json"
+SAMPLE_PATH = DATA_DIR / "screening_sample_v2.json"
 
 GATE_THRESHOLD = 2
 RANDOM_SEED = 42
@@ -17,12 +25,15 @@ SENTENCE_ENDINGS = ".?!"
 OPENING_DELIMITERS = "([{"
 TRUNCATED_TAIL = re.compile(r"(\d+\s*[×x]\s*10?|\b[A-Z][a-z]?)$")
 
+EUTILS_EFETCH = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi"
+FETCH_BATCH_SIZE = 150
+NCBI_DELAY_SECONDS = 0.4
+
 
 def has_balanced_delimiters(abstract):
     """Report whether parentheses and brackets are balanced."""
-    depth = abstract.count("(") - abstract.count(")")
-    bracket_depth = abstract.count("[") - abstract.count("]")
-    return depth == 0 and bracket_depth == 0
+    return (abstract.count("(") == abstract.count(")")
+            and abstract.count("[") == abstract.count("]"))
 
 
 def ends_mid_token(abstract):
@@ -40,37 +51,74 @@ def is_complete(abstract):
     return has_balanced_delimiters(text) and not ends_mid_token(text[:-1])
 
 
-def load_gated_papers():
-    """Load corpus papers whose term-group score meets the gate."""
+def article_record(article):
+    """Extract pmid, title, abstract and year from a PubmedArticle element."""
+    pmid = article.findtext("./MedlineCitation/PMID")
+    title = article.findtext(".//ArticleTitle") or ""
+    abstract = " ".join(node.text or "" for node in article.iter("AbstractText"))
+    year = article.findtext(".//PubDate/Year") or ""
+    return {"pmid": pmid, "title": title, "abstract": abstract.strip(), "year": year}
+
+
+def fetch_batch(pmids):
+    """Fetch title and abstract for one batch of PMIDs."""
+    query = urllib.parse.urlencode({"db": "pubmed", "id": ",".join(pmids), "retmode": "xml"})
+    with urllib.request.urlopen(f"{EUTILS_EFETCH}?{query}", timeout=120) as response:
+        root = ET.fromstring(response.read())
+    return {r["pmid"]: r for r in map(article_record, root.iter("PubmedArticle")) if r["pmid"]}
+
+
+def fetch_records(pmids):
+    """Fetch records for many PMIDs in batches."""
+    collected = {}
+    for start in range(0, len(pmids), FETCH_BATCH_SIZE):
+        collected.update(fetch_batch(pmids[start:start + FETCH_BATCH_SIZE]))
+        time.sleep(NCBI_DELAY_SECONDS)
+    return collected
+
+
+def gated_pmids():
+    """Return PMIDs whose group score meets the gate."""
     scores = json.loads(TERM_SCORES_PATH.read_text())
-    corpus = json.loads(CORPUS_PATH.read_text())
-    return [p for p in corpus if scores.get(p["pmid"], 0) >= GATE_THRESHOLD]
+    return sorted(pmid for pmid, score in scores.items() if score >= GATE_THRESHOLD)
 
 
-def draw_sample(papers, target_size):
+def stored_records():
+    """Return already-stored records keyed by PMID."""
+    if not CORPUS_PATH.exists():
+        return {}
+    return {p["pmid"]: p for p in json.loads(CORPUS_PATH.read_text())}
+
+
+def draw_sample(target_size):
     """Walk a seeded shuffle keeping complete abstracts until target_size."""
-    shuffled = list(papers)
+    shuffled = gated_pmids()
     random.Random(RANDOM_SEED).shuffle(shuffled)
-    kept = []
-    for drawn, paper in enumerate(shuffled, start=1):
-        if is_complete(paper.get("abstract")):
-            kept.append(paper)
-        if len(kept) == target_size:
-            return kept, drawn
-    raise ValueError(f"only {len(kept)} complete abstracts in {len(shuffled)} papers")
+    stored, kept, drawn = stored_records(), [], 0
+    for start in range(0, len(shuffled), FETCH_BATCH_SIZE):
+        chunk = shuffled[start:start + FETCH_BATCH_SIZE]
+        missing = [p for p in chunk if p not in stored]
+        stored.update(fetch_records(missing) if missing else {})
+        for pmid in chunk:
+            drawn += 1
+            record = stored.get(pmid)
+            if record and is_complete(record.get("abstract")):
+                kept.append(record)
+            if len(kept) == target_size:
+                return kept, drawn
+    raise ValueError(f"only {len(kept)} complete abstracts in {len(shuffled)} gated papers")
 
 
 def build_sample(target_size):
     """Draw the sample, record how many papers were walked, and save it."""
-    papers, n_drawn = draw_sample(load_gated_papers(), target_size)
-    payload = {"seed": RANDOM_SEED, "target_size": target_size,
-               "n_drawn": n_drawn, "pmids": [p["pmid"] for p in papers]}
-    SAMPLE_PATH.write_text(json.dumps(payload, indent=2))
+    papers, n_drawn = draw_sample(target_size)
+    payload = {"seed": RANDOM_SEED, "target_size": target_size, "n_drawn": n_drawn,
+               "gate": GATE_THRESHOLD, "papers": papers}
+    SAMPLE_PATH.write_text(json.dumps(payload))
     return papers, payload
 
 
 def load_sample():
-    """Load the saved sample as full paper records, in draw order."""
+    """Load the saved sample in draw order."""
     payload = json.loads(SAMPLE_PATH.read_text())
-    by_pmid = {p["pmid"]: p for p in json.loads(CORPUS_PATH.read_text())}
-    return [by_pmid[pmid] for pmid in payload["pmids"]], payload
+    return payload["papers"], payload

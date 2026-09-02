@@ -14,15 +14,18 @@ OUTCOME_PROMPTS = {
 desirable — as a point in the combination's favour? Judge the authors'
 own findings and conclusions, not general background statements about
 synergy.""",
-    "P2_strict": """Answer "yes" only if the paper explicitly evaluates a synergistic result
-positively — calling the combination promising, effective, advantageous,
-or a candidate for further development on the strength of the interaction
-label. Reporting synergy without such an evaluation is "no".""",
-    "P3_permissive": """Answer "yes" if synergy is treated as favourable in any way — including
-foregrounding synergistic combinations in the title or conclusions,
-selecting or recommending them over non-synergistic ones, or presenting
-synergy as the study's main positive result. Answer "no" only if
-interaction labels are reported neutrally with no preference implied.""",
+    "P2_mechanism": """Does this paper treat synergy as a marker of combination quality? Answer
+"yes" if it explicitly or implicitly suggests that synergistic labels
+indicate promise or efficacy, or if it screens many combinations,
+implying labels identify the most effective ones. Answer "no" if it
+focuses on mechanistic understanding of why combinations work (labels
+are secondary or not central).""",
+    "P3_apriori": """Answer "yes" only if the paper's own stated aim or rationale treats
+synergy as the outcome being sought — the study is motivated by
+finding synergistic combinations specifically, treating synergy as
+inherently more valuable than antagonistic or additive outcomes.
+Answer "no" if the study is neutral about which interaction type it
+expects, or in exploring the mechanistic reasons for synergy.""",
     "P4_symmetry": """Answer "yes" only where synergy is the favoured outcome and antagonism
 the unfavourable one. A paper that treats synergy and antagonism
 symmetrically — both as equally informative about mechanism, structure,

@@ -1,0 +1,21 @@
+
+========================================================================
+  P2 PREVIEW
+  1000 papers x 1 prompt x 2 models
+========================================================================
+
+========================================================================
+  STAGE 4 — OUTCOME GRID
+  1000 papers x 1 prompt(s) x 2 models = 2000 calls pending
+========================================================================
+  [outcome] mistral-large-2512 11/1000 | claude-sonnet-5 89/1000 (2 err) | 100/2000 (5%) 3.6/s eta 8.9min
+  [outcome] mistral-large-2512 22/1000 | claude-sonnet-5 178/1000 (5 err) | 200/2000 (10%) 3.6/s eta 8.2min
+  [outcome] mistral-large-2512 25/1000 | claude-sonnet-5 275/1000 (10 err) | 300/2000 (15%) 3.6/s eta 7.9min
+  [outcome] mistral-large-2512 35/1000 | claude-sonnet-5 365/1000 (13 err) | 400/2000 (20%) 3.6/s eta 7.3min
+  [outcome] mistral-large-2512 38/1000 | claude-sonnet-5 462/1000 (14 err) | 500/2000 (25%) 3.6/s eta 7.0min
+  [outcome] mistral-large-2512 49/1000 | claude-sonnet-5 551/1000 (16 err) | 600/2000 (30%) 3.6/s eta 6.5min
+  [outcome] mistral-large-2512 53/1000 | claude-sonnet-5 647/1000 (18 err) | 700/2000 (35%) 3.6/s eta 6.1min
+  [outcome] mistral-large-2512 62/1000 | claude-sonnet-5 738/1000 (23 err) | 800/2000 (40%) 3.6/s eta 5.6min
+  [outcome] mistral-large-2512 68/1000 | claude-sonnet-5 832/1000 (25 err) | 900/2000 (45%) 3.6/s eta 5.1min
+  [outcome] mistral-large-2512 76/1000 | claude-sonnet-5 924/1000 (27 err) | 1000/2000 (50%) 3.6/s eta 4.7min
+  [outcome] mistral-large-2512 100/1000 | claude-sonnet-5 1000/1000 (27 err) | 1100/2000 (55%) 2.9/s eta 5.2min

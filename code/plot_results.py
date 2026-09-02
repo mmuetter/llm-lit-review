@@ -1,113 +1,176 @@
 """Figures for the multiverse screening results.
 
-Both figures plot extrapolated papers per year rather than within-sample counts.
-Colour encodes the model, marker shape the prompt, so identity never rests on
-colour alone.
+Both figures plot extrapolated papers per year rather than within-sample counts,
+over 2010-2024. Colour encodes the model, marker shape the prompt, so identity
+never rests on colour alone.
 """
 
-import collections
-import json
 from pathlib import Path
 
 import matplotlib.pyplot as plt
 import numpy as np
+from scipy import stats
 
-from analyse_screening import (GATED_CORPUS_SIZE, MODELS, PROMPTS, REPORTED_DOMAINS,
-                               WINDOW_YEARS, all_configurations, load_successful,
-                               resolve_domains)
+from analyse_screening import (MODELS, PROMPTS, REPORTED_DOMAINS, all_configurations,
+                               domain_shares, domain_weights, final_sample_pmids,
+                               load_successful, weights_for)
+from analyse_screening import gated_papers_per_year as load_gated_papers_per_year
 
 DATA_DIR = Path(__file__).parent.parent / "data"
 FIGURE_DIR = Path(__file__).parent.parent / "figures"
-CORPUS_PATH = DATA_DIR / "pubmed_results_all_years.json"
-TERM_SCORES_PATH = DATA_DIR / "pubmed_term_scores.json"
+SUPPLEMENTARY_FIGURE_DIR = Path(__file__).parent.parent.parent / "supplementary" / "figures"
 
-GATE_THRESHOLD = 2
 FIRST_YEAR = 2010
-LAST_YEAR = 2024
-SWARM_DOMAINS = REPORTED_DOMAINS + ["other_therapeutic", "environmental_agricultural"]
+LAST_YEAR = 2025
+ALL_CATEGORY = "all"
+SWARM_CATEGORIES = [ALL_CATEGORY] + REPORTED_DOMAINS + ["other_therapeutic",
+                                                        "environmental_agricultural"]
 
-MODEL_COLOURS = {"mistral-large-2512": "#0072B2", "claude-sonnet-5": "#D55E00"}
-PROMPT_MARKERS = {"P2_strict": "o", "P1_neutral": "s", "P3_permissive": "^",
+MODEL_COLOURS = {"mistral-large-2512": "#045C6E", "claude-sonnet-5": "#FF9127"}
+MODEL_LABELS = {"mistral-large-2512": "mistral", "claude-sonnet-5": "sonnet"}
+PROMPT_MARKERS = {"P2_mechanism": "o", "P1_neutral": "s", "P3_apriori": "^",
                   "P4_symmetry": "D", "P5_screening": "v"}
-MARKER_SIZE = 34
-MARKER_EDGE_WIDTH = 0.6
-JITTER_WIDTH = 0.26
+COLUMN_WIDTH_INCHES = 3.36
+FIGSIZE_COLUMN = (COLUMN_WIDTH_INCHES, 2.62)
+BASE_FONTSIZE = 7
+TICK_FONTSIZE = 7
+LEGEND_FONTSIZE = 6
+TIMELINE_TICK_STEP = 2
+CATEGORY_LABELS = {"all": "all", "antimicrobial": "AMR", "oncology": "oncology",
+                   "other_therapeutic": "other",
+                   "environmental_agricultural": "agricultural"}
+
+MARKER_SIZE = 26
+MARKER_EDGE_WIDTH = 0.9
+MARKER_ALPHA = 0.5
+TREND_ALPHA = 0.5
+TREND_WIDTH = 2.6
+MEDIAN_WIDTH = 2.8
+MEDIAN_HALF_SPAN = 0.23
+JITTER_WIDTH = 0.28
 JITTER_SEED = 7
-GRID_ALPHA = 0.25
-AXIS_GREY = "#444444"
-FIGSIZE_TIMELINE = (7.2, 4.2)
-FIGSIZE_SWARM = (7.2, 4.2)
+GRID_ALPHA = 0.22
+AXIS_GREY = "#333333"
+
+
+
+def output_paths(name):
+    """Return every directory the figure should be written to."""
+    targets = [FIGURE_DIR]
+    if SUPPLEMENTARY_FIGURE_DIR.parent.exists():
+        SUPPLEMENTARY_FIGURE_DIR.mkdir(exist_ok=True)
+        targets.append(SUPPLEMENTARY_FIGURE_DIR)
+    return [directory / name for directory in targets]
+
+
+def save_figure(figure, name):
+    """Save one figure to the analysis folder and the supplementary folder."""
+    for path in output_paths(name):
+        figure.savefig(path)
+    plt.close(figure)
+
+
+def apply_journal_style():
+    """Set a Times-compatible serif at journal-column sizes."""
+    plt.rcParams.update({
+        "font.family": "serif",
+        "font.serif": ["STIXGeneral", "Times New Roman", "DejaVu Serif"],
+        "mathtext.fontset": "stix",
+        "font.size": BASE_FONTSIZE,
+        "axes.labelsize": BASE_FONTSIZE,
+        "xtick.labelsize": TICK_FONTSIZE,
+        "ytick.labelsize": TICK_FONTSIZE,
+        "axes.linewidth": 0.7,
+    })
 
 
 def gated_papers_per_year():
-    """Count gated papers per publication year within the analysis window."""
-    scores = json.loads(TERM_SCORES_PATH.read_text())
-    corpus = json.loads(CORPUS_PATH.read_text())
-    years = [int(p["year"]) for p in corpus
-             if scores.get(p["pmid"], 0) >= GATE_THRESHOLD and p["year"].isdigit()]
-    counts = collections.Counter(y for y in years if FIRST_YEAR <= y <= LAST_YEAR)
-    return {year: counts.get(year, 0) for year in range(FIRST_YEAR, LAST_YEAR + 1)}
+    """Return the true, live-queried gated-paper count for each analysis-window year."""
+    counts = load_gated_papers_per_year()
+    return {year: counts[year] for year in range(FIRST_YEAR, LAST_YEAR + 1)}
 
 
-def configuration_rates(outcome_cells, pmids, keep=None):
+def annual_scale(per_year):
+    """Return the mean number of gated papers per year in the window."""
+    return sum(per_year.values()) / len(per_year)
+
+
+def configuration_rates(outcome_cells, pmids, weights=None):
     """Map each model-by-prompt configuration to its yes-rate."""
     return {(r["model"], r["prompt"]): r["rate"]
-            for r in all_configurations(outcome_cells, pmids, keep)}
+            for r in all_configurations(outcome_cells, pmids, weights)}
 
 
-def domain_shares(resolved):
-    """Return each domain's share of papers both models could resolve."""
-    assigned = collections.Counter(d for d in resolved.values() if d)
-    total = sum(assigned.values())
-    return {domain: assigned[domain] / total for domain in assigned}
-
-
-def style_axes(axes, ylabel, title):
-    """Apply the shared recessive axis styling."""
+def style_axes(axes, ylabel):
+    """Apply the shared boxed, recessive axis styling."""
     axes.set_ylabel(ylabel, color=AXIS_GREY)
-    axes.set_title(title, loc="left", color=AXIS_GREY, fontsize=11)
     axes.grid(axis="y", alpha=GRID_ALPHA, linewidth=0.6)
     axes.set_axisbelow(True)
-    for side in ("top", "right"):
-        axes.spines[side].set_visible(False)
-    for side in ("left", "bottom"):
-        axes.spines[side].set_color(AXIS_GREY)
-    axes.tick_params(colors=AXIS_GREY, labelsize=9)
+    for spine in axes.spines.values():
+        spine.set_visible(True)
+        spine.set_color(AXIS_GREY)
+        spine.set_linewidth(0.8)
+    axes.tick_params(colors=AXIS_GREY, labelsize=TICK_FONTSIZE)
 
 
-def encoding_legend(axes, loc_model="upper left", loc_prompt="lower right"):
-    """Draw separate legends for the model and prompt encodings."""
-    model_handles = [plt.Line2D([], [], marker="o", linestyle="", color=MODEL_COLOURS[m],
-                                markersize=6, label=m) for m in MODELS]
-    prompt_handles = [plt.Line2D([], [], marker=PROMPT_MARKERS[p], linestyle="", color=AXIS_GREY,
-                                 markersize=6, markerfacecolor="none",
-                                 label=p.split("_")[1]) for p in PROMPTS]
-    first = axes.legend(handles=model_handles, loc=loc_model, frameon=False, fontsize=8)
-    axes.add_artist(first)
-    axes.legend(handles=prompt_handles, loc=loc_prompt, frameon=False, fontsize=8, ncol=2)
+def encoding_handles():
+    """Build legend handles: model colours first, then prompt marker shapes."""
+    models = [plt.Line2D([], [], marker="o", linestyle="", markerfacecolor="none",
+                         markeredgecolor=MODEL_COLOURS[m], markeredgewidth=MARKER_EDGE_WIDTH,
+                         markersize=4.5, alpha=MARKER_ALPHA, label=MODEL_LABELS[m])
+              for m in MODELS]
+    prompts = [plt.Line2D([], [], marker=PROMPT_MARKERS[p], linestyle="", markerfacecolor="none",
+                          markeredgecolor=AXIS_GREY, markeredgewidth=MARKER_EDGE_WIDTH,
+                          markersize=4.5, alpha=MARKER_ALPHA, label=p.split("_")[0])
+               for p in sorted(PROMPTS)]
+    return models + prompts
+
+
+def configuration_legend(axes, loc="upper left", ncol=1):
+    """Draw one boxed legend combining the model and prompt encodings."""
+    legend = axes.legend(handles=encoding_handles(), loc=loc, frameon=True,
+                         fontsize=LEGEND_FONTSIZE, ncol=ncol, framealpha=1.0,
+                         edgecolor=AXIS_GREY, labelspacing=0.25, handletextpad=0.4,
+                         columnspacing=0.9, borderpad=0.35, handlelength=1.2)
+    legend.get_frame().set_linewidth(0.6)
+
+
+def draw_points(axes, xs, ys, model, prompt):
+    """Scatter filled markers for one configuration."""
+    axes.scatter(xs, ys, s=MARKER_SIZE, marker=PROMPT_MARKERS[prompt],
+                 facecolors="none", edgecolors=MODEL_COLOURS[model],
+                 linewidths=MARKER_EDGE_WIDTH, alpha=MARKER_ALPHA, zorder=3)
+
+
+def trend_statistics(per_year, rates):
+    """Return pooled slope and the year-level Pearson correlation."""
+    years = sorted(per_year)
+    counts = [per_year[y] for y in years]
+    correlation, p_value = stats.pearsonr(years, counts)
+    mean_rate = float(np.mean(list(rates.values())))
+    slope = float(np.polyfit(years, [c * mean_rate for c in counts], 1)[0])
+    return slope, correlation, p_value
 
 
 def plot_timeline(rates, per_year, path):
     """Plot extrapolated papers per year for every configuration, with a trend."""
-    figure, axes = plt.subplots(figsize=FIGSIZE_TIMELINE)
-    xs, ys = [], []
+    figure, axes = plt.subplots(figsize=FIGSIZE_COLUMN)
+    years = sorted(per_year)
+    pooled_x, pooled_y = [], []
     for (model, prompt), rate in rates.items():
-        years = sorted(per_year)
         values = [per_year[y] * rate for y in years]
-        axes.scatter(years, values, s=MARKER_SIZE, marker=PROMPT_MARKERS[prompt],
-                     facecolors="none", edgecolors=MODEL_COLOURS[model],
-                     linewidths=MARKER_EDGE_WIDTH, alpha=0.85)
-        xs.extend(years)
-        ys.extend(values)
-    slope, intercept = np.polyfit(xs, ys, 1)
-    span = np.array([min(xs), max(xs)])
-    axes.plot(span, slope * span + intercept, color=AXIS_GREY, linewidth=2, zorder=5)
-    style_axes(axes, "estimated papers per year",
-               f"Papers presenting synergy as desirable  (trend {slope:+.0f}/year)")
-    encoding_legend(axes)
+        draw_points(axes, years, values, model, prompt)
+        pooled_x.extend(years)
+        pooled_y.extend(values)
+    fit = np.polyfit(pooled_x, pooled_y, 1)
+    span = np.array([min(years), max(years)])
+    axes.plot(span, np.polyval(fit, span), color=AXIS_GREY, linewidth=TREND_WIDTH,
+              alpha=TREND_ALPHA, zorder=2)
+    axes.set_xticks(years[::TIMELINE_TICK_STEP])
+    style_axes(axes, "estimated papers per year")
+    configuration_legend(axes, ncol=2)
     figure.tight_layout()
-    figure.savefig(path)
-    plt.close(figure)
+    save_figure(figure, path)
 
 
 def swarm_positions(count, centre):
@@ -117,51 +180,54 @@ def swarm_positions(count, centre):
     return centre + offsets
 
 
-def domain_values(outcome_cells, pmids, resolved, shares, domain):
-    """Return each configuration's extrapolated annual count for one domain."""
-    keep = lambda p: resolved.get(p) == domain
-    rates = configuration_rates(outcome_cells, pmids, keep)
-    scale = GATED_CORPUS_SIZE * shares[domain] / WINDOW_YEARS
-    return {config: rate * scale for config, rate in rates.items()}
+def category_values(outcome_cells, pmids, weights, shares, category, scale):
+    """Return each configuration's annual estimate for one category."""
+    if category == ALL_CATEGORY:
+        return {c: r * scale for c, r in configuration_rates(outcome_cells, pmids).items()}
+    rates = configuration_rates(outcome_cells, pmids, weights_for(weights, category))
+    return {c: r * scale * shares[category] for c, r in rates.items()}
 
 
-def plot_domain_swarm(outcome_cells, pmids, resolved, shares, path):
-    """Plot the spread of annual estimates across configurations, by domain."""
-    figure, axes = plt.subplots(figsize=FIGSIZE_SWARM)
-    for index, domain in enumerate(SWARM_DOMAINS):
-        values = domain_values(outcome_cells, pmids, resolved, shares, domain)
-        ordered = list(values.items())
-        positions = swarm_positions(len(ordered), index)
-        for position, ((model, prompt), value) in zip(positions, ordered):
-            axes.scatter(position, value, s=MARKER_SIZE, marker=PROMPT_MARKERS[prompt],
-                         facecolors="none", edgecolors=MODEL_COLOURS[model],
-                         linewidths=MARKER_EDGE_WIDTH)
-        median = np.median([v for _, v in ordered])
-        axes.plot([index - JITTER_WIDTH * 1.4, index + JITTER_WIDTH * 1.4], [median] * 2,
-                  color=AXIS_GREY, linewidth=2, zorder=5)
-    axes.set_xticks(range(len(SWARM_DOMAINS)))
-    axes.set_xticklabels([d.replace("_", "\n") for d in SWARM_DOMAINS], fontsize=9)
-    style_axes(axes, "estimated papers per year",
-               "Annual estimate by domain, one point per configuration (bar = median)")
-    encoding_legend(axes, loc_model="upper right", loc_prompt="center right")
+def plot_category_swarm(outcome_cells, pmids, weights, shares, scale, path):
+    """Plot the spread of annual estimates across configurations, by category."""
+    figure, axes = plt.subplots(figsize=FIGSIZE_COLUMN)
+    for index, category in enumerate(SWARM_CATEGORIES):
+        values = category_values(outcome_cells, pmids, weights, shares, category, scale)
+        entries = list(values.items())
+        for position, ((model, prompt), value) in zip(swarm_positions(len(entries), index),
+                                                      entries):
+            draw_points(axes, [position], [value], model, prompt)
+        median = float(np.median([v for _, v in entries]))
+        axes.plot([index - MEDIAN_HALF_SPAN, index + MEDIAN_HALF_SPAN], [median] * 2,
+                  color=AXIS_GREY, linewidth=MEDIAN_WIDTH, alpha=TREND_ALPHA, zorder=2)
+    axes.set_xticks(range(len(SWARM_CATEGORIES)))
+    axes.set_xticklabels([CATEGORY_LABELS[c] for c in SWARM_CATEGORIES],
+                         fontsize=TICK_FONTSIZE)
+    style_axes(axes, "estimated papers per year")
+    configuration_legend(axes, loc="upper right")
     figure.tight_layout()
-    figure.savefig(path)
-    plt.close(figure)
+    save_figure(figure, path)
 
 
 def main():
-    """Build both result figures."""
+    """Build both result figures and report the trend statistics."""
+    apply_journal_style()
     FIGURE_DIR.mkdir(exist_ok=True)
     domain_cells = load_successful("domain")
     outcome_cells = load_successful("outcome")
-    pmids = sorted({k[0] for k in domain_cells} | {k[0] for k in outcome_cells})
-    resolved = resolve_domains(domain_cells, pmids)
-    shares = domain_shares(resolved)
-    plot_timeline(configuration_rates(outcome_cells, pmids), gated_papers_per_year(),
-                  FIGURE_DIR / "timeline_extrapolated.pdf")
-    plot_domain_swarm(outcome_cells, pmids, resolved, shares,
-                      FIGURE_DIR / "swarm_by_domain.pdf")
-    print(f"wrote {FIGURE_DIR}/timeline_extrapolated.pdf and swarm_by_domain.pdf")
+    available = {k[0] for k in domain_cells} | {k[0] for k in outcome_cells}
+    pmids = sorted(final_sample_pmids() & available)
+    weights = domain_weights(domain_cells, pmids)
+    per_year = gated_papers_per_year()
+    rates = configuration_rates(outcome_cells, pmids)
+    plot_timeline(rates, per_year, "timeline_extrapolated.pdf")
+    plot_category_swarm(outcome_cells, pmids, weights, domain_shares(weights),
+                        annual_scale(per_year), "swarm_by_category.pdf")
+    slope, correlation, p_value = trend_statistics(per_year, rates)
+    print(f"figures written to: {[str(d) for d in output_paths('')]}")
+    print(f"window {FIRST_YEAR}-{LAST_YEAR}, mean gated {annual_scale(per_year):.0f}/year")
+    print(f"trend slope {slope:+.1f} papers/year (mean rate across configurations)")
+    print(f"Pearson r = {correlation:.3f}, p = {p_value:.2e} (n = {len(per_year)} years)")
 
 
 if __name__ == "__main__":

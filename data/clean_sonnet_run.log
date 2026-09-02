@@ -1,0 +1,57 @@
+
+========================================================================
+  CLEAN RESTART — Sonnet
+  1000 papers (seed 42) from the unified 2010-2025 gate
+========================================================================
+
+========================================================================
+  STAGE 3 — DOMAIN CLASSIFICATION
+  1000 papers x 1 prompt(s) x 1 model(s) = 1000 calls pending, 979 already done
+========================================================================
+  [domain] claude-sonnet-5 50/1000 | 50/1000 (5%) 2.9/s eta 5.4min
+  [domain] claude-sonnet-5 100/1000 (3 err) | 100/1000 (10%) 3.1/s eta 4.8min
+  [domain] claude-sonnet-5 150/1000 (5 err) | 150/1000 (15%) 3.2/s eta 4.4min
+  [domain] claude-sonnet-5 200/1000 (5 err) | 200/1000 (20%) 3.2/s eta 4.1min
+  [domain] claude-sonnet-5 250/1000 (5 err) | 250/1000 (25%) 3.2/s eta 3.9min
+  [domain] claude-sonnet-5 300/1000 (6 err) | 300/1000 (30%) 3.2/s eta 3.6min
+  [domain] claude-sonnet-5 350/1000 (7 err) | 350/1000 (35%) 3.2/s eta 3.4min
+  [domain] claude-sonnet-5 400/1000 (7 err) | 400/1000 (40%) 3.2/s eta 3.1min
+  [domain] claude-sonnet-5 450/1000 (7 err) | 450/1000 (45%) 3.2/s eta 2.9min
+  [domain] claude-sonnet-5 500/1000 (7 err) | 500/1000 (50%) 3.2/s eta 2.6min
+  [domain] claude-sonnet-5 550/1000 (8 err) | 550/1000 (55%) 3.2/s eta 2.3min
+  [domain] claude-sonnet-5 600/1000 (10 err) | 600/1000 (60%) 3.2/s eta 2.1min
+  [domain] claude-sonnet-5 650/1000 (12 err) | 650/1000 (65%) 3.2/s eta 1.8min
+  [domain] claude-sonnet-5 700/1000 (12 err) | 700/1000 (70%) 3.2/s eta 1.6min
+  [domain] claude-sonnet-5 750/1000 (12 err) | 750/1000 (75%) 3.2/s eta 78s
+  [domain] claude-sonnet-5 800/1000 (15 err) | 800/1000 (80%) 3.2/s eta 62s
+  [domain] claude-sonnet-5 850/1000 (15 err) | 850/1000 (85%) 3.2/s eta 47s
+  [domain] claude-sonnet-5 900/1000 (16 err) | 900/1000 (90%) 3.2/s eta 31s
+  [domain] claude-sonnet-5 950/1000 (17 err) | 950/1000 (95%) 3.2/s eta 16s
+  [domain] claude-sonnet-5 1000/1000 (17 err) | 1000/1000 (100%) 3.2/s eta 0s
+  ✓ domain complete with 17 failures: 1000 calls in 5.2min
+
+========================================================================
+  STAGE 4 — OUTCOME GRID
+  1000 papers x 5 prompt(s) x 1 model(s) = 5000 calls pending, 4995 already done
+========================================================================
+  [outcome] claude-sonnet-5 250/5000 | 250/5000 (5%) 3.2/s eta 24.8min
+  [outcome] claude-sonnet-5 500/5000 (12 err) | 500/5000 (10%) 3.3/s eta 22.9min
+  [outcome] claude-sonnet-5 750/5000 (25 err) | 750/5000 (15%) 3.3/s eta 21.5min
+  [outcome] claude-sonnet-5 1000/5000 (25 err) | 1000/5000 (20%) 3.3/s eta 20.4min
+  [outcome] claude-sonnet-5 1250/5000 (25 err) | 1250/5000 (25%) 3.3/s eta 19.1min
+  [outcome] claude-sonnet-5 1500/5000 (30 err) | 1500/5000 (30%) 3.3/s eta 17.9min
+  [outcome] claude-sonnet-5 1750/5000 (35 err) | 1750/5000 (35%) 3.3/s eta 16.6min
+  [outcome] claude-sonnet-5 2000/5000 (35 err) | 2000/5000 (40%) 3.3/s eta 15.3min
+  [outcome] claude-sonnet-5 2250/5000 (40 err) | 2250/5000 (45%) 3.3/s eta 14.0min
+  [outcome] claude-sonnet-5 2500/5000 (40 err) | 2500/5000 (50%) 3.3/s eta 12.8min
+  [outcome] claude-sonnet-5 2750/5000 (45 err) | 2750/5000 (55%) 3.3/s eta 11.5min
+  [outcome] claude-sonnet-5 3000/5000 (52 err) | 3000/5000 (60%) 3.3/s eta 10.2min
+  [outcome] claude-sonnet-5 3250/5000 (59 err) | 3250/5000 (65%) 3.3/s eta 8.9min
+  [outcome] claude-sonnet-5 3500/5000 (64 err) | 3500/5000 (70%) 3.3/s eta 7.7min
+  [outcome] claude-sonnet-5 3750/5000 (64 err) | 3750/5000 (75%) 3.3/s eta 6.4min
+  [outcome] claude-sonnet-5 4000/5000 (74 err) | 4000/5000 (80%) 3.3/s eta 5.1min
+  [outcome] claude-sonnet-5 4250/5000 (74 err) | 4250/5000 (85%) 3.3/s eta 3.8min
+  [outcome] claude-sonnet-5 4500/5000 (79 err) | 4500/5000 (90%) 3.3/s eta 2.6min
+  [outcome] claude-sonnet-5 4750/5000 (79 err) | 4750/5000 (95%) 3.3/s eta 77s
+  [outcome] claude-sonnet-5 5000/5000 (79 err) | 5000/5000 (100%) 3.3/s eta 0s
+  ✓ outcome complete with 79 failures: 5000 calls in 25.6min

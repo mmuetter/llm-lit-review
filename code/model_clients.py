@@ -81,15 +81,24 @@ class MistralClient:
                 "max_tokens": MAX_OUTPUT_TOKENS, "response_format": response_format,
                 "messages": [{"role": "user", "content": prompt}]}
 
+    def classify_once(self, prompt, schema):
+        """Make a single classification attempt, raising on any failure."""
+        self.limiter.wait()
+        response = self.session.post(MISTRAL_URL, json=self._body(prompt, schema), timeout=90)
+        if response.status_code == 200:
+            return json.loads(response.json()["choices"][0]["message"]["content"])
+        error = RuntimeError(f"mistral {response.status_code}: {response.text[:200]}")
+        error.status_code = response.status_code
+        raise error
+
     def classify(self, prompt, schema):
-        """Return the parsed classification for one prompt."""
+        """Return the parsed classification for one prompt, retrying transient failures."""
         for attempt in range(MAX_ATTEMPTS):
-            self.limiter.wait()
-            response = self.session.post(MISTRAL_URL, json=self._body(prompt, schema), timeout=90)
-            if response.status_code == 200:
-                return json.loads(response.json()["choices"][0]["message"]["content"])
-            if response.status_code not in RETRYABLE_STATUS:
-                raise RuntimeError(f"mistral {response.status_code}: {response.text[:200]}")
+            try:
+                return self.classify_once(prompt, schema)
+            except RuntimeError as error:
+                if getattr(error, "status_code", None) not in RETRYABLE_STATUS:
+                    raise
             time.sleep(backoff_delay(attempt))
         raise RuntimeError(f"mistral failed after {MAX_ATTEMPTS} attempts")
 

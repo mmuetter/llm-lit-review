@@ -1,0 +1,19 @@
+
+========================================================================
+  P2+P3 FINAL — source=v2
+  848 papers x 2 models x 2 tasks
+========================================================================
+
+========================================================================
+  STAGE 4 — OUTCOME GRID
+  848 papers x 2 prompt(s) x 2 models = 1720 calls pending, 11746 already done
+========================================================================
+  [outcome] mistral-large-2512 9/849 | claude-sonnet-5 77/871 (4 err) | 86/1720 (5%) 3.7/s eta 7.3min
+  [outcome] mistral-large-2512 16/849 | claude-sonnet-5 156/871 (4 err) | 172/1720 (10%) 3.8/s eta 6.7min
+  [outcome] mistral-large-2512 25/849 | claude-sonnet-5 233/871 (11 err) | 258/1720 (15%) 3.9/s eta 6.3min
+  [outcome] mistral-large-2512 30/849 | claude-sonnet-5 314/871 (20 err) | 344/1720 (20%) 3.9/s eta 5.9min
+  [outcome] mistral-large-2512 34/849 | claude-sonnet-5 396/871 (22 err) | 430/1720 (25%) 3.8/s eta 5.6min
+  [outcome] mistral-large-2512 43/849 | claude-sonnet-5 473/871 (28 err) | 516/1720 (30%) 3.9/s eta 5.2min
+  [outcome] mistral-large-2512 45/849 | claude-sonnet-5 557/871 (30 err) | 602/1720 (35%) 3.8/s eta 4.9min
+  [outcome] mistral-large-2512 52/849 | claude-sonnet-5 636/871 (40 err) | 688/1720 (40%) 3.8/s eta 4.5min
+  [outcome] mistral-large-2512 60/849 | claude-sonnet-5 714/871 (44 err) | 774/1720 (45%) 3.8/s eta 4.1min

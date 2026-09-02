@@ -16,7 +16,7 @@ from model_clients import build_clients
 from prompts import DOMAIN_SCHEMA, OUTCOME_PROMPTS, OUTCOME_SCHEMA, domain_prompt, outcome_prompt
 from sampling import build_sample, load_sample
 
-RESULTS_DIR = Path(__file__).parent.parent / "data" / "screening_multiverse"
+RESULTS_DIR = Path(__file__).parent.parent / "data" / "screening_multiverse_v2"
 DOMAIN_TASK = "domain"
 WORKERS_PER_CLIENT = 8
 TARGET_PROGRESS_UPDATES = 20
@@ -170,10 +170,10 @@ def pending_units(papers, clients, tasks, completed):
     return [u for u in all_units if unit_key(u) not in completed]
 
 
-def stage_subtitle(papers, tasks, units, completed_count):
+def stage_subtitle(papers, tasks, units, completed_count, model_count):
     """Describe a stage's scope for the header banner."""
     resumed = f", {completed_count} already done" if completed_count else ""
-    return (f"{len(papers)} papers x {len(tasks)} prompt(s) x 2 models "
+    return (f"{len(papers)} papers x {len(tasks)} prompt(s) x {model_count} model(s) "
             f"= {len(units)} calls pending{resumed}")
 
 
@@ -182,7 +182,7 @@ def run_stage(stage, papers, clients, tasks):
     path = checkpoint_path(stage)
     completed = load_completed(path)
     units = pending_units(papers, clients, tasks, completed)
-    banner(STAGE_TITLES[stage], stage_subtitle(papers, tasks, units, len(completed)))
+    banner(STAGE_TITLES[stage], stage_subtitle(papers, tasks, units, len(completed), len(clients)))
     if not units:
         log("  ✓ nothing to do — already complete")
         return path

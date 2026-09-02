@@ -1,0 +1,16 @@
+
+========================================================================
+  CLEAN RESTART — outcome (wave dispatch)
+  4442 calls pending, 558 already done
+========================================================================
+[wave dispatch] 4442 units @ 0.5s spacing
+  wave @ 0.5s: 585/4442 succeeded in 37.0min (3857 to retry)
+[wave dispatch] 3857 units @ 1.0s spacing
+  wave @ 1.0s: 960/3857 succeeded in 64.3min (2897 to retry)
+[wave dispatch] 2897 units @ 2.0s spacing
+  wave @ 2.0s: 1447/2897 succeeded in 96.5min (1450 to retry)
+[wave dispatch] 1450 units @ 4.0s spacing
+  wave @ 4.0s: 1445/1450 succeeded in 96.6min (5 to retry)
+  5 units failed after all waves
+
+4437/4442 succeeded across all waves
