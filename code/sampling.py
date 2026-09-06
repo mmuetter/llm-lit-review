@@ -16,8 +16,11 @@ from pathlib import Path
 DATA_DIR = Path(__file__).parent.parent / "data"
 CORPUS_PATH = DATA_DIR / "pubmed_results_all_years.json"
 TERM_SCORES_PATH = DATA_DIR / "term_scores_v2.json"
+GATED_YEARS_PATH = DATA_DIR / "gated_paper_years.json"
 SAMPLE_PATH = DATA_DIR / "screening_sample_v2.json"
 
+FIRST_YEAR = 2010
+LAST_YEAR = 2025
 GATE_THRESHOLD = 2
 RANDOM_SEED = 42
 MINIMUM_ABSTRACT_CHARS = 200
@@ -51,13 +54,33 @@ def is_complete(abstract):
     return has_balanced_delimiters(text) and not ends_mid_token(text[:-1])
 
 
+def element_text(node):
+    """Return an element's complete text, including any nested markup."""
+    return "".join(node.itertext()) if node is not None else ""
+
+
+def leading_year(stamp):
+    """Return the four-digit year a date string starts with, if any."""
+    match = re.match(r"\s*(\d{4})", stamp or "")
+    return int(match.group(1)) if match else None
+
+
+def publication_year(article):
+    """Return the later of an article's print and electronic publication years."""
+    stamps = [article.findtext(".//JournalIssue/PubDate/Year"),
+              article.findtext(".//JournalIssue/PubDate/MedlineDate")]
+    stamps += [date.findtext("Year") for date in article.findall(".//ArticleDate")]
+    years = [year for year in map(leading_year, stamps) if year]
+    return str(max(years)) if years else ""
+
+
 def article_record(article):
     """Extract pmid, title, abstract and year from a PubmedArticle element."""
     pmid = article.findtext("./MedlineCitation/PMID")
-    title = article.findtext(".//ArticleTitle") or ""
-    abstract = " ".join(node.text or "" for node in article.iter("AbstractText"))
-    year = article.findtext(".//PubDate/Year") or ""
-    return {"pmid": pmid, "title": title, "abstract": abstract.strip(), "year": year}
+    title = element_text(article.find(".//ArticleTitle"))
+    abstract = " ".join(element_text(node) for node in article.iter("AbstractText"))
+    return {"pmid": pmid, "title": title, "abstract": abstract.strip(),
+            "year": publication_year(article)}
 
 
 def fetch_batch(pmids):
@@ -77,10 +100,21 @@ def fetch_records(pmids):
     return collected
 
 
+def gated_years():
+    """Return each gated PMID's single publication year."""
+    if not GATED_YEARS_PATH.exists():
+        raise FileNotFoundError(
+            f"{GATED_YEARS_PATH.name} is missing; run year_gate_counts.py before sampling")
+    return json.loads(GATED_YEARS_PATH.read_text())
+
+
 def gated_pmids():
-    """Return PMIDs whose group score meets the gate."""
+    """Return in-window PMIDs whose group score meets the gate."""
     scores = json.loads(TERM_SCORES_PATH.read_text())
-    return sorted(pmid for pmid, score in scores.items() if score >= GATE_THRESHOLD)
+    years = gated_years()
+    return sorted(pmid for pmid, score in scores.items()
+                  if score >= GATE_THRESHOLD
+                  and FIRST_YEAR <= years.get(pmid, 0) <= LAST_YEAR)
 
 
 def stored_records():

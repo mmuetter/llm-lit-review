@@ -9,6 +9,8 @@ import json
 import math
 from pathlib import Path
 
+from sampling import FIRST_YEAR, LAST_YEAR
+
 DATA_DIR = Path(__file__).parent.parent / "data"
 RESULTS_DIRS = [DATA_DIR / "screening_final"]
 FINAL_MANIFEST_PATH = DATA_DIR / "screening_sample_v2.json"
@@ -28,8 +30,9 @@ def final_sample_pmids():
 
 
 def gated_papers_per_year():
-    """Load the true per-year gated-paper counts."""
-    return {int(year): count for year, count in json.loads(GATED_PAPERS_PER_YEAR_PATH.read_text()).items()}
+    """Load the per-year gated-paper counts falling inside the analysis window."""
+    counts = {int(year): count for year, count in json.loads(GATED_PAPERS_PER_YEAR_PATH.read_text()).items()}
+    return {year: counts[year] for year in range(FIRST_YEAR, LAST_YEAR + 1)}
 
 
 def stage_records(stage):

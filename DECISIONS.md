@@ -216,5 +216,57 @@ proportionally-sized addition and re-drawing the final reported sample from the
 combined pool, so its year keeps the same per-paper sampling weight as every
 other year rather than being capped to an average year's size.
 
+**Per-year counts come from the pooled gate, not per-year queries.** PubMed's
+`[dp]` field matches both the electronic and the print publication date, so a
+paper e-published in one year and printed in the next is returned by two
+year-filtered queries. Counting each year separately and summing therefore
+double-counts straddlers: the old `year_gate_counts.py` reported 24,405 against
+a gate holding 21,767 distinct papers, a 12% overstatement that propagated into
+every extrapolated count. `year_gate_counts.py` now dates each gated PMID once
+by its `sortpubdate` year, so the per-year series sums to the gate size by
+construction and the two artifacts cannot drift apart again. The sample was
+never affected: `sampling.py` draws from the deduplicated gate file, so only the
+extrapolation base moved.
+
+**The out-of-window papers were swapped, not redrawn — rerun before submission.**
+Applying the latest-publication rule put 14 sampled papers in 2026, outside the
+window. They were dropped and replaced by continuing the same seeded shuffle
+rather than redrawing the sample, because removing PMIDs from the gate changes
+the shuffle permutation and would have forced all 12,000 cells to be
+reclassified. The result is statistically equivalent: a uniform draw from the
+pool stays uniform once filtered on a paper-level property, and topping it back
+up from the same shuffle keeps it uniform. It is not, however, reproducible from
+a clean run of the seed, so the pipeline should be rebuilt end to end before
+final submission, with the window filter applied at gate construction so no
+out-of-window paper can enter the sample in the first place.
+
+**Abstract extraction read only the text before the first markup tag.**
+`article_record` built the abstract with `node.text`, which in ElementTree
+returns the character data *preceding* an element's first child. Any abstract
+containing `<sup>`, `<sub>` or `<i>` was therefore cut at that point, so
+`IC<sub>50</sub>` yielded "IC" and the rest of the abstract was never read. The
+same applied to titles via `findtext`. Both now use `itertext()`.
+
+The defect was self-masking: most truncations stopped mid-token, so the
+completeness filter discarded them, and a 31% rejection rate looked like a
+property of PubMed rather than a bug. Corrected, the filter rejects 1.3%, not
+31%. Two consequences for any run predating the fix -- roughly 30% of the sample
+would differ under a correct draw, since the walk reached position 1,565 instead
+of 1,011 to collect 1,000 papers, and about 8.5% of classified papers were
+judged on truncated text, losing a median 67% of the abstract. The excluded
+papers skew toward markup-heavy quantitative pharmacology, so unlike the
+punctuation rule this exclusion is not plausibly outcome-neutral.
+
+**Dating and the window filter run before sampling, not after.** A paper's year
+is now the later of its print and electronic publication dates, both read from
+the same efetch response, which reproduces PubMed's own `sortpubdate` year. The
+previous source, `PubDate/Year`, returned nothing when the date was a MedlineDate
+string and returned the earlier date whenever a paper's issue year preceded its
+electronic one. `year_gate_counts.py` persists that mapping, and `gated_pmids`
+filters on it, so an out-of-window paper can no longer enter the sample and be
+excluded downstream. Sampling raises rather than proceeding if the mapping is
+absent, which enforces the order: keywords, then dating and the window filter,
+then the completeness filter, then the draw.
+
 **Colour encodes model, marker shape encodes prompt**, so identity never rests on
 colour alone.
