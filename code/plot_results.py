@@ -30,17 +30,17 @@ MODEL_COLOURS = {"mistral-large-2512": "#045C6E", "claude-sonnet-5": "#FF9127"}
 MODEL_LABELS = {"mistral-large-2512": "mistral", "claude-sonnet-5": "sonnet"}
 PROMPT_MARKERS = {"P2_mechanism": "o", "P1_neutral": "s", "P3_apriori": "^",
                   "P4_symmetry": "D", "P5_screening": "v"}
-COLUMN_WIDTH_INCHES = 3.36
-FIGSIZE_COLUMN = (COLUMN_WIDTH_INCHES, 2.62)
-BASE_FONTSIZE = 7
-TICK_FONTSIZE = 7
-LEGEND_FONTSIZE = 6
+COLUMN_WIDTH_INCHES = 7.09
+FIGSIZE_COLUMN = (COLUMN_WIDTH_INCHES, 3.40)
+BASE_FONTSIZE = 9
+TICK_FONTSIZE = 9
+LEGEND_FONTSIZE = 8
 TIMELINE_TICK_STEP = 2
-CATEGORY_LABELS = {"all": "all", "antimicrobial": "AMR", "oncology": "oncology",
+CATEGORY_LABELS = {"all": "all", "antimicrobial": "antimicrobial", "oncology": "oncology",
                    "other_therapeutic": "other",
                    "environmental_agricultural": "agricultural"}
 
-MARKER_SIZE = 26
+MARKER_SIZE = 38
 MARKER_EDGE_WIDTH = 0.9
 MARKER_ALPHA = 0.5
 TREND_ALPHA = 0.5
