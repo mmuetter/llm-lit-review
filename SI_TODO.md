@@ -42,20 +42,12 @@ Pure number fill-ins are applied directly; wording needs approval.
 - [ ] M1/1 [results] "hundreds per year" -> thousands; fields, trajectory;
       abstract ("hundreds of publications each year")
 
-## Conceptual figure (main text; not yet integrated, 3 open)
-Mockup in `checkerboard_mockup/` (script + pdf/png, simulated surfaces). Frame:
-toxicity is underrepresented in the interaction literature, although it is a
-natural complement to the treatment effect (same checkerboard format).
-- [ ] F1/3 [now] Text after main.tex line 111 (end of the "treatment effects
-      directly" paragraph), wording agreed:
-      "Toxicity is a natural complement to the treatment effect, yet it is
-      underrepresented in the interaction literature, even though it can be
-      measured in the same checkerboard format. Overlaying both shows which
-      mixing ratio achieves the strongest effect at a given toxicity level,
-      while remaining comparable between combinations (\autoref{fig:checkerboard})."
-- [ ] F2/3 [now] Figure block + caption (label `fig:checkerboard`); caption must
-      say the surfaces are simulated, define the colour scale (net growth rate;
-      killing red), the toxicity isobole and the star (strongest killing on it);
-      copy the pdf into main/, check graphicx in the class
-- [ ] F3/3 [now] Optional polish: label the isobole and MIC contour, axis and
-      colour-bar labels (psi / chi notation), colour-blind check of the red-blue scale
+## Conceptual figure (main text; 1 open)
+Mockup script: `checkerboard_mockup/checkerboard_mockup.py` (simulated surfaces);
+the figure is copied to `main/figures/checkerboard.pdf`.
+- [x] Text after the "treatment effects directly" paragraph (main.tex 112-114)
+- [x] Figure block and caption (fig:checkerboard), pushed to Overleaf
+- [ ] F1/1 Optional polish: label the isobole and MIC contour, colour-blind
+      check of the red-blue scale, figure width (currently 0.48 columnwidth);
+      optional citation for "underrepresented" (Lehar et al. 2009, Nat Biotechnol,
+      selectivity of combinations on disease vs control cells; verify first)
