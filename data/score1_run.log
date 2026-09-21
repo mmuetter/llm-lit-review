@@ -1,0 +1,306 @@
+  theme                  2010:   5964
+  theme                  2011:   6497
+  theme                  2012:   7322
+  theme                  2013:   7898
+  theme                  2014:   8591
+  theme                  2015:   9318
+  theme                  2016:   9654
+  theme                  2017:  10099
+  theme                  2018:  10649
+  theme                  2019:  11509
+  theme                  2020:  13058
+  theme                  2021:  14403
+  theme                  2022:  14422
+  theme                  2023:  13763
+  theme                  2024:  14626
+  theme                  2025:  17594
+  reference_model        2010:     17
+  reference_model        2011:     20
+  reference_model        2012:     23
+  reference_model        2013:     30
+  reference_model        2014:     23
+  reference_model        2015:     27
+  reference_model        2016:     29
+  reference_model        2017:     31
+  reference_model        2018:     35
+  reference_model        2019:     32
+  reference_model        2020:     32
+  reference_model        2021:     37
+  reference_model        2022:     58
+  reference_model        2023:     52
+  reference_model        2024:     48
+  reference_model        2025:     52
+  interaction_metric     2010:     18
+  interaction_metric     2011:     23
+  interaction_metric     2012:     32
+  interaction_metric     2013:     32
+  interaction_metric     2014:     26
+  interaction_metric     2015:     35
+  interaction_metric     2016:     33
+  interaction_metric     2017:     42
+  interaction_metric     2018:     39
+  interaction_metric     2019:     53
+  interaction_metric     2020:     54
+  interaction_metric     2021:     66
+  interaction_metric     2022:     79
+  interaction_metric     2023:     80
+  interaction_metric     2024:     77
+  interaction_metric     2025:     79
+  interaction_labelling  2010:   7434
+  interaction_labelling  2011:   7944
+  interaction_labelling  2012:   8673
+  interaction_labelling  2013:   9464
+  interaction_labelling  2014:   9983
+  interaction_labelling  2015:  10376
+  interaction_labelling  2016:  11006
+  interaction_labelling  2017:  11910
+  interaction_labelling  2018:  12678
+  interaction_labelling  2019:  14057
+  interaction_labelling  2020:  15798
+  interaction_labelling  2021:  18059
+  interaction_labelling  2022:  19321
+  interaction_labelling  2023:  20238
+  interaction_labelling  2024:  24227
+  interaction_labelling  2025:  35187
+  assay_design           2010:      5
+  assay_design           2011:     13
+  assay_design           2012:      9
+  assay_design           2013:      6
+  assay_design           2014:     14
+  assay_design           2015:     11
+  assay_design           2016:      8
+  assay_design           2017:     15
+  assay_design           2018:     14
+  assay_design           2019:     12
+  assay_design           2020:     14
+  assay_design           2021:     13
+  assay_design           2022:     13
+  assay_design           2023:     19
+  assay_design           2024:     23
+  assay_design           2025:     24
+  software               2010:      0
+  software               2011:      0
+  software               2012:      0
+  software               2013:      1
+  software               2014:      0
+  software               2015:      0
+  software               2016:      0
+  software               2017:      1
+  software               2018:      0
+  software               2019:      0
+  software               2020:      1
+  software               2021:      2
+  software               2022:      1
+  software               2023:      2
+  software               2024:      0
+  software               2025:      1
+  dated 200/367919
+  dated 400/367919
+  dated 600/367919
+  dated 800/367919
+  dated 1000/367919
+  dated 1200/367919
+  dated 1400/367919
+  dated 1600/367919
+  dated 1800/367919
+  dated 2000/367919
+  dated 2200/367919
+  dated 2400/367919
+  dated 2600/367919
+  dated 2800/367919
+  dated 3000/367919
+  dated 3200/367919
+  dated 3400/367919
+  dated 3600/367919
+  dated 3800/367919
+  dated 4000/367919
+  dated 4200/367919
+  dated 4400/367919
+  dated 4600/367919
+  dated 4800/367919
+  dated 5000/367919
+  dated 5200/367919
+  dated 5400/367919
+  dated 5600/367919
+  dated 5800/367919
+  dated 6000/367919
+  dated 6200/367919
+  dated 6400/367919
+  dated 6600/367919
+  dated 6800/367919
+  dated 7000/367919
+  dated 7200/367919
+  dated 7400/367919
+  dated 7600/367919
+  dated 7800/367919
+  dated 8000/367919
+  dated 8200/367919
+  dated 8400/367919
+  dated 8600/367919
+  dated 8800/367919
+  dated 9000/367919
+  dated 9200/367919
+  dated 9400/367919
+  dated 9600/367919
+  dated 9800/367919
+  dated 10000/367919
+  dated 10200/367919
+  dated 10400/367919
+  dated 10600/367919
+  dated 10800/367919
+  dated 11000/367919
+  dated 11200/367919
+  dated 11400/367919
+  dated 11600/367919
+  dated 11800/367919
+  dated 12000/367919
+  dated 12200/367919
+  dated 12400/367919
+  dated 12600/367919
+  dated 12800/367919
+  dated 13000/367919
+  dated 13200/367919
+  dated 13400/367919
+  dated 13600/367919
+  dated 13800/367919
+  dated 14000/367919
+  dated 14200/367919
+  dated 14400/367919
+  dated 14600/367919
+  dated 14800/367919
+  dated 15000/367919
+  dated 15200/367919
+  dated 15400/367919
+  dated 15600/367919
+  dated 15800/367919
+  dated 16000/367919
+  dated 16200/367919
+  dated 16400/367919
+  dated 16600/367919
+  dated 16800/367919
+  dated 17000/367919
+  dated 17200/367919
+  dated 17400/367919
+  dated 17600/367919
+  dated 17800/367919
+  dated 18000/367919
+  dated 18200/367919
+  dated 18400/367919
+  dated 18600/367919
+  dated 18800/367919
+  dated 19000/367919
+  dated 19200/367919
+  dated 19400/367919
+  dated 19600/367919
+  dated 19800/367919
+  dated 20000/367919
+  dated 20200/367919
+  dated 20400/367919
+  dated 20600/367919
+  dated 20800/367919
+  dated 21000/367919
+  dated 21200/367919
+  dated 21400/367919
+  dated 21600/367919
+  dated 21800/367919
+  dated 22000/367919
+  dated 22200/367919
+  dated 22400/367919
+  dated 22600/367919
+  dated 22800/367919
+  dated 23000/367919
+  dated 23200/367919
+  dated 23400/367919
+  dated 23600/367919
+  dated 23800/367919
+  dated 24000/367919
+  dated 24200/367919
+  dated 24400/367919
+  dated 24600/367919
+  dated 24800/367919
+  dated 25000/367919
+  dated 25200/367919
+  dated 25400/367919
+  dated 25600/367919
+  dated 25800/367919
+  dated 26000/367919
+  dated 26200/367919
+  dated 26400/367919
+  dated 26600/367919
+  dated 26800/367919
+  dated 27000/367919
+  dated 27200/367919
+  dated 27400/367919
+  dated 27600/367919
+  dated 27800/367919
+  dated 28000/367919
+  dated 28200/367919
+  dated 28400/367919
+  dated 28600/367919
+  dated 28800/367919
+  dated 29000/367919
+  dated 29200/367919
+  dated 29400/367919
+  dated 29600/367919
+  dated 29800/367919
+  dated 30000/367919
+  dated 30200/367919
+  dated 30400/367919
+  dated 30600/367919
+  dated 30800/367919
+  dated 31000/367919
+  dated 31200/367919
+  dated 31400/367919
+  dated 31600/367919
+  dated 31800/367919
+  dated 32000/367919
+  dated 32200/367919
+  dated 32400/367919
+  dated 32600/367919
+  dated 32800/367919
+  dated 33000/367919
+  dated 33200/367919
+  dated 33400/367919
+  dated 33600/367919
+  dated 33800/367919
+  dated 34000/367919
+  dated 34200/367919
+  dated 34400/367919
+  dated 34600/367919
+  dated 34800/367919
+  dated 35000/367919
+  dated 35200/367919
+  dated 35400/367919
+  dated 35600/367919
+  dated 35800/367919
+  dated 36000/367919
+  dated 36200/367919
+  dated 36400/367919
+  dated 36600/367919
+  dated 36800/367919
+  dated 37000/367919
+  dated 37200/367919
+  dated 37400/367919
+  dated 37600/367919
+  dated 37800/367919
+  dated 38000/367919
+  dated 38200/367919
+  dated 38400/367919
+  dated 38600/367919
+  dated 38800/367919
+  dated 39000/367919
+  dated 39200/367919
+  dated 39400/367919
+  dated 39600/367919
+  dated 39800/367919
+  dated 40000/367919
+  dated 40200/367919
+  dated 40400/367919
+  dated 40600/367919
+  dated 40800/367919
+  dated 41000/367919
+  dated 41200/367919
+  dated 41400/367919
+  dated 41600/367919
+  dated 41800/367919
+  dated 42000/367919

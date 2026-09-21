@@ -15,9 +15,14 @@ from pathlib import Path
 
 DATA_DIR = Path(__file__).parent.parent / "data"
 CORPUS_PATH = DATA_DIR / "pubmed_results_all_years.json"
-TERM_SCORES_PATH = DATA_DIR / "term_scores_v2.json"
-GATED_YEARS_PATH = DATA_DIR / "gated_paper_years.json"
+TERM_SCORES_PATH = DATA_DIR / "term_scores_v3.json"
+GATED_YEARS_PATH = DATA_DIR / "gated_paper_years_v3.json"
+SCORE1_YEARS_PATH = DATA_DIR / "score1_paper_years.json"
 SAMPLE_PATH = DATA_DIR / "screening_sample_v2.json"
+STRATIFIED_SAMPLE_PATH = DATA_DIR / "screening_sample_v4.json"
+SYNERGY_GATE_PATH = DATA_DIR / "synergy_gate_pmids.json"
+TARGET_PER_SCORE = 250
+ALL_SCORES = (1, 2, 3, 4, 5, 6)
 
 FIRST_YEAR = 2010
 LAST_YEAR = 2025
@@ -156,3 +161,80 @@ def load_sample():
     """Load the saved sample in draw order."""
     payload = json.loads(SAMPLE_PATH.read_text())
     return payload["papers"], payload
+
+
+def in_window(years):
+    """Return the PMIDs dated inside the analysis window."""
+    return {pmid for pmid, year in years.items() if FIRST_YEAR <= (year or 0) <= LAST_YEAR}
+
+
+def synergy_pmids():
+    """Return the PMIDs whose title or abstract uses a synergy term."""
+    return set(json.loads(SYNERGY_GATE_PATH.read_text()))
+
+
+def score_strata(scores=ALL_SCORES):
+    """Map each requested group score to its sorted in-window PMIDs."""
+    gated = json.loads(TERM_SCORES_PATH.read_text())
+    strata = {1: sorted(in_window(json.loads(SCORE1_YEARS_PATH.read_text())))} if 1 in scores else {}
+    for pmid in sorted(in_window(gated_years())):
+        if gated[pmid] in scores:
+            strata.setdefault(gated[pmid], []).append(pmid)
+    return strata
+
+
+def synergy_strata(scores=ALL_SCORES):
+    """Map each score to its in-window PMIDs that use a synergy term."""
+    synergy = synergy_pmids()
+    return {score: [p for p in pmids if p in synergy]
+            for score, pmids in score_strata(scores).items()}
+
+
+def walk_complete(pmids, target_size):
+    """Fetch PMIDs in order, keeping complete abstracts until target_size."""
+    kept, drawn = [], 0
+    for start in range(0, len(pmids), FETCH_BATCH_SIZE):
+        records = fetch_records(pmids[start:start + FETCH_BATCH_SIZE])
+        for pmid in pmids[start:start + FETCH_BATCH_SIZE]:
+            drawn += 1
+            if pmid in records and is_complete(records[pmid]["abstract"]):
+                kept.append(records[pmid])
+            if len(kept) == target_size:
+                return kept, drawn
+    return kept, drawn
+
+
+def seeded_order(score, pmids):
+    """Return a score stratum's PMIDs in its seeded random order."""
+    shuffled = list(pmids)
+    random.Random(RANDOM_SEED + score).shuffle(shuffled)
+    return shuffled
+
+
+def draw_stratum(score, pmids, eligible=None):
+    """Draw one stratum's eligible papers in seeded order, or all if few."""
+    shuffled = [p for p in seeded_order(score, pmids) if eligible is None or p in eligible]
+    kept, drawn = walk_complete(shuffled, TARGET_PER_SCORE)
+    if len(shuffled) > TARGET_PER_SCORE and len(kept) < TARGET_PER_SCORE:
+        raise ValueError(f"score {score}: only {len(kept)} complete abstracts in {len(shuffled)}")
+    papers = [dict(record, score=score) for record in kept]
+    return papers, {"population": len(shuffled), "drawn": drawn, "kept": len(kept)}
+
+
+def build_stratified_sample(scores=ALL_SCORES):
+    """Draw the requested score strata from fresh records and save the manifest."""
+    papers, strata = [], {}
+    synergy = synergy_pmids()
+    for score, pmids in sorted(score_strata(scores).items()):
+        drawn, strata[score] = draw_stratum(score, pmids, synergy)
+        papers.extend(drawn)
+    payload = {"seed": RANDOM_SEED, "target_per_score": TARGET_PER_SCORE,
+               "strata": strata, "papers": papers}
+    STRATIFIED_SAMPLE_PATH.write_text(json.dumps(payload))
+    return papers, payload
+
+
+def load_stratified_sample():
+    """Load the stratified sample and its per-score population sizes."""
+    payload = json.loads(STRATIFIED_SAMPLE_PATH.read_text())
+    return payload["papers"], {int(score): s for score, s in payload["strata"].items()}

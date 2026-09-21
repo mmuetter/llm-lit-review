@@ -1,0 +1,351 @@
+  theme x reference_model 2010:      5
+  theme x reference_model 2011:      1
+  theme x reference_model 2012:      5
+  theme x reference_model 2013:      5
+  theme x reference_model 2014:      6
+  theme x reference_model 2015:     15
+  theme x reference_model 2016:     10
+  theme x reference_model 2017:     12
+  theme x reference_model 2018:      5
+  theme x reference_model 2019:     15
+  theme x reference_model 2020:     14
+  theme x reference_model 2021:     17
+  theme x reference_model 2022:     24
+  theme x reference_model 2023:      7
+  theme x reference_model 2024:     15
+  theme x reference_model 2025:     29
+  theme x interaction_metric 2010:     49
+  theme x interaction_metric 2011:     52
+  theme x interaction_metric 2012:     61
+  theme x interaction_metric 2013:     93
+  theme x interaction_metric 2014:    100
+  theme x interaction_metric 2015:    116
+  theme x interaction_metric 2016:    106
+  theme x interaction_metric 2017:    124
+  theme x interaction_metric 2018:    105
+  theme x interaction_metric 2019:    133
+  theme x interaction_metric 2020:    146
+  theme x interaction_metric 2021:    173
+  theme x interaction_metric 2022:    186
+  theme x interaction_metric 2023:    156
+  theme x interaction_metric 2024:    164
+  theme x interaction_metric 2025:    231
+  theme x interaction_labelling 2010:    464
+  theme x interaction_labelling 2011:    546
+  theme x interaction_labelling 2012:    605
+  theme x interaction_labelling 2013:    722
+  theme x interaction_labelling 2014:    841
+  theme x interaction_labelling 2015:    902
+  theme x interaction_labelling 2016:    995
+  theme x interaction_labelling 2017:   1111
+  theme x interaction_labelling 2018:   1142
+  theme x interaction_labelling 2019:   1263
+  theme x interaction_labelling 2020:   1499
+  theme x interaction_labelling 2021:   1641
+  theme x interaction_labelling 2022:   1668
+  theme x interaction_labelling 2023:   1646
+  theme x interaction_labelling 2024:   1955
+  theme x interaction_labelling 2025:   2810
+  theme x assay_design 2010:     10
+  theme x assay_design 2011:      7
+  theme x assay_design 2012:     10
+  theme x assay_design 2013:     15
+  theme x assay_design 2014:     15
+  theme x assay_design 2015:     17
+  theme x assay_design 2016:     24
+  theme x assay_design 2017:     25
+  theme x assay_design 2018:     19
+  theme x assay_design 2019:     38
+  theme x assay_design 2020:     35
+  theme x assay_design 2021:     47
+  theme x assay_design 2022:     62
+  theme x assay_design 2023:     58
+  theme x assay_design 2024:     72
+  theme x assay_design 2025:     62
+  theme x software 2010:      3
+  theme x software 2011:      4
+  theme x software 2012:      1
+  theme x software 2013:      3
+  theme x software 2014:      4
+  theme x software 2015:     11
+  theme x software 2016:     16
+  theme x software 2017:      6
+  theme x software 2018:      8
+  theme x software 2019:     15
+  theme x software 2020:     15
+  theme x software 2021:     25
+  theme x software 2022:     26
+  theme x software 2023:     14
+  theme x software 2024:     27
+  theme x software 2025:     30
+  reference_model x interaction_metric 2010:      4
+  reference_model x interaction_metric 2011:      2
+  reference_model x interaction_metric 2012:      2
+  reference_model x interaction_metric 2013:      3
+  reference_model x interaction_metric 2014:      1
+  reference_model x interaction_metric 2015:      7
+  reference_model x interaction_metric 2016:      3
+  reference_model x interaction_metric 2017:      5
+  reference_model x interaction_metric 2018:      6
+  reference_model x interaction_metric 2019:     12
+  reference_model x interaction_metric 2020:     11
+  reference_model x interaction_metric 2021:     12
+  reference_model x interaction_metric 2022:     21
+  reference_model x interaction_metric 2023:      6
+  reference_model x interaction_metric 2024:     14
+  reference_model x interaction_metric 2025:     21
+  reference_model x interaction_labelling 2010:     13
+  reference_model x interaction_labelling 2011:     12
+  reference_model x interaction_labelling 2012:      9
+  reference_model x interaction_labelling 2013:     13
+  reference_model x interaction_labelling 2014:     19
+  reference_model x interaction_labelling 2015:     27
+  reference_model x interaction_labelling 2016:     17
+  reference_model x interaction_labelling 2017:     19
+  reference_model x interaction_labelling 2018:     19
+  reference_model x interaction_labelling 2019:     32
+  reference_model x interaction_labelling 2020:     33
+  reference_model x interaction_labelling 2021:     39
+  reference_model x interaction_labelling 2022:     40
+  reference_model x interaction_labelling 2023:     30
+  reference_model x interaction_labelling 2024:     45
+  reference_model x interaction_labelling 2025:     62
+  reference_model x assay_design 2010:      0
+  reference_model x assay_design 2011:      0
+  reference_model x assay_design 2012:      1
+  reference_model x assay_design 2013:      1
+  reference_model x assay_design 2014:      0
+  reference_model x assay_design 2015:      1
+  reference_model x assay_design 2016:      0
+  reference_model x assay_design 2017:      0
+  reference_model x assay_design 2018:      3
+  reference_model x assay_design 2019:      3
+  reference_model x assay_design 2020:      1
+  reference_model x assay_design 2021:      4
+  reference_model x assay_design 2022:      1
+  reference_model x assay_design 2023:      2
+  reference_model x assay_design 2024:      3
+  reference_model x assay_design 2025:      3
+  reference_model x software 2010:      0
+  reference_model x software 2011:      0
+  reference_model x software 2012:      0
+  reference_model x software 2013:      0
+  reference_model x software 2014:      0
+  reference_model x software 2015:      0
+  reference_model x software 2016:      1
+  reference_model x software 2017:      0
+  reference_model x software 2018:      1
+  reference_model x software 2019:      2
+  reference_model x software 2020:      0
+  reference_model x software 2021:      1
+  reference_model x software 2022:      3
+  reference_model x software 2023:      2
+  reference_model x software 2024:      1
+  reference_model x software 2025:      4
+  interaction_metric x interaction_labelling 2010:    165
+  interaction_metric x interaction_labelling 2011:    204
+  interaction_metric x interaction_labelling 2012:    191
+  interaction_metric x interaction_labelling 2013:    239
+  interaction_metric x interaction_labelling 2014:    258
+  interaction_metric x interaction_labelling 2015:    289
+  interaction_metric x interaction_labelling 2016:    287
+  interaction_metric x interaction_labelling 2017:    315
+  interaction_metric x interaction_labelling 2018:    314
+  interaction_metric x interaction_labelling 2019:    370
+  interaction_metric x interaction_labelling 2020:    377
+  interaction_metric x interaction_labelling 2021:    419
+  interaction_metric x interaction_labelling 2022:    412
+  interaction_metric x interaction_labelling 2023:    384
+  interaction_metric x interaction_labelling 2024:    387
+  interaction_metric x interaction_labelling 2025:    572
+  interaction_metric x assay_design 2010:     13
+  interaction_metric x assay_design 2011:     14
+  interaction_metric x assay_design 2012:     20
+  interaction_metric x assay_design 2013:     16
+  interaction_metric x assay_design 2014:     21
+  interaction_metric x assay_design 2015:     34
+  interaction_metric x assay_design 2016:     44
+  interaction_metric x assay_design 2017:     35
+  interaction_metric x assay_design 2018:     28
+  interaction_metric x assay_design 2019:     37
+  interaction_metric x assay_design 2020:     48
+  interaction_metric x assay_design 2021:     53
+  interaction_metric x assay_design 2022:     67
+  interaction_metric x assay_design 2023:     52
+  interaction_metric x assay_design 2024:     41
+  interaction_metric x assay_design 2025:     63
+  interaction_metric x software 2010:      6
+  interaction_metric x software 2011:      4
+  interaction_metric x software 2012:      2
+  interaction_metric x software 2013:      4
+  interaction_metric x software 2014:      5
+  interaction_metric x software 2015:     12
+  interaction_metric x software 2016:     16
+  interaction_metric x software 2017:     13
+  interaction_metric x software 2018:     14
+  interaction_metric x software 2019:     19
+  interaction_metric x software 2020:     12
+  interaction_metric x software 2021:     21
+  interaction_metric x software 2022:     23
+  interaction_metric x software 2023:     16
+  interaction_metric x software 2024:     17
+  interaction_metric x software 2025:     26
+  interaction_labelling x assay_design 2010:     28
+  interaction_labelling x assay_design 2011:     25
+  interaction_labelling x assay_design 2012:     38
+  interaction_labelling x assay_design 2013:     36
+  interaction_labelling x assay_design 2014:     40
+  interaction_labelling x assay_design 2015:     66
+  interaction_labelling x assay_design 2016:     87
+  interaction_labelling x assay_design 2017:     74
+  interaction_labelling x assay_design 2018:     70
+  interaction_labelling x assay_design 2019:    104
+  interaction_labelling x assay_design 2020:    114
+  interaction_labelling x assay_design 2021:    123
+  interaction_labelling x assay_design 2022:    159
+  interaction_labelling x assay_design 2023:    146
+  interaction_labelling x assay_design 2024:    153
+  interaction_labelling x assay_design 2025:    159
+  interaction_labelling x software 2010:      7
+  interaction_labelling x software 2011:     12
+  interaction_labelling x software 2012:      6
+  interaction_labelling x software 2013:     13
+  interaction_labelling x software 2014:     14
+  interaction_labelling x software 2015:     27
+  interaction_labelling x software 2016:     33
+  interaction_labelling x software 2017:     18
+  interaction_labelling x software 2018:     21
+  interaction_labelling x software 2019:     32
+  interaction_labelling x software 2020:     33
+  interaction_labelling x software 2021:     45
+  interaction_labelling x software 2022:     42
+  interaction_labelling x software 2023:     40
+  interaction_labelling x software 2024:     45
+  interaction_labelling x software 2025:     67
+  assay_design x software 2010:      0
+  assay_design x software 2011:      0
+  assay_design x software 2012:      0
+  assay_design x software 2013:      0
+  assay_design x software 2014:      0
+  assay_design x software 2015:      0
+  assay_design x software 2016:      0
+  assay_design x software 2017:      1
+  assay_design x software 2018:      1
+  assay_design x software 2019:      1
+  assay_design x software 2020:      1
+  assay_design x software 2021:      1
+  assay_design x software 2022:      0
+  assay_design x software 2023:      0
+  assay_design x software 2024:      2
+  assay_design x software 2025:      0
+score-1 overlap: 0
+  dated 200/21765
+  dated 400/21765
+  dated 600/21765
+  dated 800/21765
+  dated 1000/21765
+  dated 1200/21765
+  dated 1400/21765
+  dated 1600/21765
+  dated 1800/21765
+  dated 2000/21765
+  dated 2200/21765
+  dated 2400/21765
+  dated 2600/21765
+  dated 2800/21765
+  dated 3000/21765
+  dated 3200/21765
+  dated 3400/21765
+  dated 3600/21765
+  dated 3800/21765
+  dated 4000/21765
+  dated 4200/21765
+  dated 4400/21765
+  dated 4600/21765
+  dated 4800/21765
+  dated 5000/21765
+  dated 5200/21765
+  dated 5400/21765
+  dated 5600/21765
+  dated 5800/21765
+  dated 6000/21765
+  dated 6200/21765
+  dated 6400/21765
+  dated 6600/21765
+  dated 6800/21765
+  dated 7000/21765
+  dated 7200/21765
+  dated 7400/21765
+  dated 7600/21765
+  dated 7800/21765
+  dated 8000/21765
+  dated 8200/21765
+  dated 8400/21765
+  dated 8600/21765
+  dated 8800/21765
+  dated 9000/21765
+  dated 9200/21765
+  dated 9400/21765
+  dated 9600/21765
+  dated 9800/21765
+  dated 10000/21765
+  dated 10200/21765
+  dated 10400/21765
+  dated 10600/21765
+  dated 10800/21765
+  dated 11000/21765
+  dated 11200/21765
+  dated 11400/21765
+  dated 11600/21765
+  dated 11800/21765
+  dated 12000/21765
+  dated 12200/21765
+  dated 12400/21765
+  dated 12600/21765
+  dated 12800/21765
+  dated 13000/21765
+  dated 13200/21765
+  dated 13400/21765
+  dated 13600/21765
+  dated 13800/21765
+  dated 14000/21765
+  dated 14200/21765
+  dated 14400/21765
+  dated 14600/21765
+  dated 14800/21765
+  dated 15000/21765
+  dated 15200/21765
+  dated 15400/21765
+  dated 15600/21765
+  dated 15800/21765
+  dated 16000/21765
+  dated 16200/21765
+  dated 16400/21765
+  dated 16600/21765
+  dated 16800/21765
+  dated 17000/21765
+  dated 17200/21765
+  dated 17400/21765
+  dated 17600/21765
+  dated 17800/21765
+  dated 18000/21765
+  dated 18200/21765
+  dated 18400/21765
+  dated 18600/21765
+  dated 18800/21765
+  dated 19000/21765
+  dated 19200/21765
+  dated 19400/21765
+  dated 19600/21765
+  dated 19800/21765
+  dated 20000/21765
+  dated 20200/21765
+  dated 20400/21765
+  dated 20600/21765
+  dated 20800/21765
+  dated 21000/21765
+  dated 21200/21765
+  dated 21400/21765
+  dated 21600/21765
+  dated 21765/21765
+score >= 2: 21765 retrieved, 20338 in 2010-2025; by score [(2, 17943), (3, 2114), (4, 274), (5, 6), (6, 1)]

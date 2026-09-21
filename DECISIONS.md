@@ -52,7 +52,7 @@ rate at which papers were judged to treat labels as a quality marker. Score-1
 papers are dominated by off-topic senses of *interaction* (parent–child
 interaction therapy, drug–ultrasound interaction, protein interactions).
 
-**Open — the candidate pool is structurally inconsistent with the scoring.**
+**Resolved — the candidate pool was structurally inconsistent with the scoring.**
 Scoring is a count over sixteen groups; the retrieval pool is a conjunction
 requiring a synergy/antagonism term AND the literal word "combination" AND a
 method term. Two of those constraints are not expressible in the scoring, so the
@@ -64,7 +64,9 @@ roughly a quarter of matching papers sit outside the pool. The clean design is
 pool = score ≥ 1, gate = score ≥ 2, with no separate query; it is computable
 despite the broad groups by querying all group *pairs*, since score ≥ 2 is the
 union of pairwise intersections and per-paper group membership falls out of
-which pairs a paper appears in. Not yet done.
+which pairs a paper appears in. Done in the September rerun: scores 2-6 come
+from pairwise queries (`rebuild_gated.py`) and score 1 from exclusive queries
+(`enumerate_score1.py`), see the last section.
 
 ## Sampling
 
@@ -259,7 +261,8 @@ punctuation rule this exclusion is not plausibly outcome-neutral.
 
 **Dating and the window filter run before sampling, not after.** A paper's year
 is now the later of its print and electronic publication dates, both read from
-the same efetch response, which reproduces PubMed's own `sortpubdate` year. The
+the same efetch response. (This was first believed to match PubMed's
+`sortpubdate`; it does not in 0.6% of papers -- see below.) The
 previous source, `PubDate/Year`, returned nothing when the date was a MedlineDate
 string and returned the earlier date whenever a paper's issue year preceded its
 electronic one. `year_gate_counts.py` persists that mapping, and `gated_pmids`
@@ -270,3 +273,91 @@ then the completeness filter, then the draw.
 
 **Colour encodes model, marker shape encodes prompt**, so identity never rests on
 colour alone.
+
+**Dating uses the latest publication year everywhere, not `sortpubdate`.** The
+pool was dated by `sortpubdate` while the sampler and the SI used the later of
+the print and electronic years. On 900 pooled papers the two disagree for 0.6%,
+always with `sortpubdate` in the earlier year, which matters at the window's
+edges (a paper printed in 2026 but sorted into 2025 was counted as in-window).
+`year_of` now takes the later of `pubdate` and `epubdate`, falling back to
+`sortpubdate` only when both are absent, and the score-1 dating stores the raw
+date strings so a rule change never requires refetching.
+
+**The stored corpus is not used for abstracts.** `pubmed_results_all_years.json`
+kept only the first section of structured abstracts: on a random 300 of its
+records, 52% were shorter than a fresh fetch, typically ending after the
+Background sentence (e.g. PMID 27050162: 330 of 1,583 characters). Such
+fragments end in a full stop and pass the completeness filter, so the defect is
+invisible downstream. 299 papers of the v2 sample came from this corpus. The
+stratified draw fetches every record fresh.
+
+## Stratified rerun (September 2026)
+
+**The sample is stratified by group score, including score 1.** Following
+Roland's suggestion, papers matching a single indicator group are sampled too,
+removing the threshold as a design choice. Each score is its own stratum: 250
+papers where the score has more, otherwise every paper (scores 5 and 6 are
+censuses). Each stratum is estimated with the unchanged pooled functions --
+within a stratum the draw is uniform -- scaled by its own population, and the
+strata are summed. A uniform sample is the one-stratum case, and on the v2 data
+the stratified code reproduces every reported figure exactly, which is how it
+was verified. A single weight function (for example proportional to score)
+cannot work here: score 1 is seventeen times the size of the pool, so it would
+still take about 890 of 1,000 draws.
+
+**Score-1 papers are enumerated by exclusive queries with date bisection.**
+Single groups exceed PubMed's 9,999-record retrieval limit (2024 alone has
+24,227 labelling-only papers), which is why the gate was built from pairwise
+intersections and score 1 was never materialised. Each group's exclusive set
+(`group NOT any other group`) is queried per year and bisected by date until
+every slice is retrievable; every group-year was checked against PubMed's own
+count and all 96 matched exactly. This replaces the SI's earlier score-1 count
+of 372,093, which had no source in the code or data.
+
+**Pooled configuration rates carry stratified intervals, not Wilson intervals.**
+A rate pooled over strata is a population-weighted sum of stratum rates, so its
+95% interval uses the stratified variance, the sum over strata of
+(N_h/N)^2 p_h(1-p_h)/n_h. With one stratum this reduces to the normal
+approximation, which agrees with the previous Wilson intervals to the reported
+precision.
+
+
+**Eligibility requires a synergy term in the title or abstract.** A hand check of
+100 random score-1 papers (labelled by an LLM, not a human, against the outcome
+prompts' construct) showed that Sonnet counted 2-12% of papers as presenting
+synergy as desirable that the check did not: combination-therapy papers that
+report a benefit but never mention synergy. Errors ran one way (Sonnet-only
+"yes" 2-12, check-only "yes" 0-1 per prompt), so this was a bias, not noise.
+Every paper the check judged "yes" contained "synerg", so the gate loses no true
+positive. The gate is the three exact terms (synergy, synergism, synergistic),
+not the wildcard `synerg*`: the wildcard adds 54,598 papers (2010-2025), and
+the exact terms make the estimate conservative and match the keyword list the
+SI describes. With the gate, agreement with the check is 96-98% across
+prompts (88-97% before). The gate is applied before sampling, so gated-out
+papers leave the eligible population instead of being counted as "no";
+stratification then stays valid because each stratum is uniform. The gated pool
+is 166,349 papers (scores 1-6: 146,881 / 17,037 / 2,137 / 287 / 6 / 1).
+
+**The gated sample patches the ungated one.** Each score keeps the seeded order of
+its earlier shuffle, skips papers failing the gate, and continues down the list
+until 250 complete abstracts are reached, so it is the draw the gated stratum
+would have produced from scratch. 823 of 1,006 papers (and their stored
+answers) were reused; 183 are new. The gated population is exactly "all papers
+with a synergy term", so stratification no longer changes what is estimated,
+only how precisely each score and the total are known; both designs are
+unbiased. The stratified sample is kept because the per-score rates are
+informative and the classification is already done.
+
+**All PubMed queries are from one snapshot (2026-09-21).** Scores 2-6 were
+rebuilt from pairwise group queries on the same day as score 1
+(`rebuild_gated.py`); the result was identical to the August pool (21,438
+papers in the window, no paper changed score or year), so no redraw was needed.
+PubMed's summary endpoint silently skipped 1,100 papers on the first dating
+pass, so the script now refuses to finish while any paper is undated.
+
+**The code folder holds only the current pipeline.** The earlier single-pool
+scripts (`run_clean_*`, `run_p2*`, `p2/p3_*`, the 2025 spike analysis and other
+one-off scripts) were removed; they remain in git history (commit `cdb7883` and
+earlier). Dead code left inside `sampling.py`, `analyse_screening.py` and
+`year_gate_counts.py` (the single-pool draw and loaders) is still to be removed
+once the Mistral run has finished.

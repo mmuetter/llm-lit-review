@@ -4,7 +4,7 @@ Counts are taken from the deduplicated gate file rather than from separate
 per-year queries, so the series sums to the gate size exactly. PubMed's [dp]
 field matches both the electronic and the print publication date, so a paper
 straddling a year boundary is returned by two year queries; each paper is
-instead dated once, by its sortpubdate year.
+instead dated once, by the later of its print and electronic publication years.
 """
 
 import json
@@ -17,6 +17,7 @@ from collections import Counter
 from pathlib import Path
 
 from pubmed_scoring import EUTILS_BASE, MAX_RATE_LIMIT_RETRIES, NCBI_DELAY_SECONDS
+from sampling import leading_year
 
 DATA_DIR = Path(__file__).parent.parent / "data"
 TERM_SCORES_PATH = DATA_DIR / "term_scores_v2.json"
@@ -24,6 +25,8 @@ OUTPUT_PATH = DATA_DIR / "gated_papers_per_year.json"
 YEARS_PATH = DATA_DIR / "gated_paper_years.json"
 GATE_THRESHOLD = 2
 SUMMARY_BATCH_SIZE = 200
+DATE_FIELDS = ("pubdate", "epubdate")
+FALLBACK_DATE_FIELD = "sortpubdate"
 
 
 def gated_pmids():
@@ -48,10 +51,9 @@ def summary_page(pmids):
 
 
 def year_of(record):
-    """Return the sortpubdate year of one record, or None if absent."""
-    stamp = record.get("sortpubdate") or record.get("pubdate") or ""
-    head = stamp[:4]
-    return int(head) if head.isdigit() else None
+    """Return the later of a record's print and electronic publication years."""
+    years = [year for year in map(leading_year, map(record.get, DATE_FIELDS)) if year]
+    return max(years) if years else leading_year(record.get(FALLBACK_DATE_FIELD))
 
 
 def fetch_years(pmids):

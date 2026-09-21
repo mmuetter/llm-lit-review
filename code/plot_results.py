@@ -154,19 +154,30 @@ def trend_statistics(per_year, rates):
 
 def plot_timeline(rates, per_year, path):
     """Plot extrapolated papers per year for every configuration, with a trend."""
-    figure, axes = plt.subplots(figsize=FIGSIZE_COLUMN)
-    years = sorted(per_year)
-    pooled_x, pooled_y = [], []
-    for (model, prompt), rate in rates.items():
-        values = [per_year[y] * rate for y in years]
-        draw_points(axes, years, values, model, prompt)
-        pooled_x.extend(years)
-        pooled_y.extend(values)
-    fit = np.polyfit(pooled_x, pooled_y, 1)
-    span = np.array([min(years), max(years)])
+    series = {c: {year: count * rate for year, count in per_year.items()}
+              for c, rate in rates.items()}
+    plot_timeline_series(series, path)
+
+
+def draw_trend(axes, xs, ys):
+    """Draw a least-squares line through all plotted points."""
+    fit = np.polyfit(xs, ys, 1)
+    span = np.array([min(xs), max(xs)])
     axes.plot(span, np.polyval(fit, span), color=AXIS_GREY, linewidth=TREND_WIDTH,
               alpha=TREND_ALPHA, zorder=2)
-    axes.set_xticks(years[::TIMELINE_TICK_STEP])
+
+
+def plot_timeline_series(series, path):
+    """Plot per-configuration annual series with a pooled trend line."""
+    figure, axes = plt.subplots(figsize=FIGSIZE_COLUMN)
+    pooled_x, pooled_y = [], []
+    for (model, prompt), by_year in series.items():
+        years = sorted(by_year)
+        draw_points(axes, years, [by_year[y] for y in years], model, prompt)
+        pooled_x.extend(years)
+        pooled_y.extend(by_year[y] for y in years)
+    draw_trend(axes, pooled_x, pooled_y)
+    axes.set_xticks(sorted(set(pooled_x))[::TIMELINE_TICK_STEP])
     style_axes(axes, "estimated papers per year")
     configuration_legend(axes, ncol=2)
     figure.tight_layout()
@@ -190,16 +201,26 @@ def category_values(outcome_cells, pmids, weights, shares, category, scale):
 
 def plot_category_swarm(outcome_cells, pmids, weights, shares, scale, path):
     """Plot the spread of annual estimates across configurations, by category."""
+    values = {category: category_values(outcome_cells, pmids, weights, shares, category, scale)
+              for category in SWARM_CATEGORIES}
+    plot_swarm_values(values, path)
+
+
+def draw_category(axes, index, values):
+    """Draw one category's configuration points and their median bar."""
+    entries = list(values.items())
+    for position, ((model, prompt), value) in zip(swarm_positions(len(entries), index), entries):
+        draw_points(axes, [position], [value], model, prompt)
+    median = float(np.median([value for _, value in entries]))
+    axes.plot([index - MEDIAN_HALF_SPAN, index + MEDIAN_HALF_SPAN], [median] * 2,
+              color=AXIS_GREY, linewidth=MEDIAN_WIDTH, alpha=TREND_ALPHA, zorder=2)
+
+
+def plot_swarm_values(values_by_category, path):
+    """Plot precomputed annual estimates per category and configuration."""
     figure, axes = plt.subplots(figsize=FIGSIZE_COLUMN)
     for index, category in enumerate(SWARM_CATEGORIES):
-        values = category_values(outcome_cells, pmids, weights, shares, category, scale)
-        entries = list(values.items())
-        for position, ((model, prompt), value) in zip(swarm_positions(len(entries), index),
-                                                      entries):
-            draw_points(axes, [position], [value], model, prompt)
-        median = float(np.median([v for _, v in entries]))
-        axes.plot([index - MEDIAN_HALF_SPAN, index + MEDIAN_HALF_SPAN], [median] * 2,
-                  color=AXIS_GREY, linewidth=MEDIAN_WIDTH, alpha=TREND_ALPHA, zorder=2)
+        draw_category(axes, index, values_by_category[category])
     axes.set_xticks(range(len(SWARM_CATEGORIES)))
     axes.set_xticklabels([CATEGORY_LABELS[c] for c in SWARM_CATEGORIES],
                          fontsize=TICK_FONTSIZE)
