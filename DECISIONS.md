@@ -358,6 +358,66 @@ pass, so the script now refuses to finish while any paper is undated.
 **The code folder holds only the current pipeline.** The earlier single-pool
 scripts (`run_clean_*`, `run_p2*`, `p2/p3_*`, the 2025 spike analysis and other
 one-off scripts) were removed; they remain in git history (commit `cdb7883` and
-earlier). Dead code left inside `sampling.py`, `analyse_screening.py` and
-`year_gate_counts.py` (the single-pool draw and loaders) is still to be removed
-once the Mistral run has finished.
+earlier). The stratified scripts (`run_stratified.py`, `stratified_estimates.py`)
+were removed for the synerg* design and remain at tag `stratified-v4`.
+
+## Simple synerg* design (September 2026)
+
+Fixed on 2026-09-23, before any results of this design were seen. It supersedes
+the stratified design above, which is preserved at git tag `stratified-v4` and
+in `archive/stratified_v4/` and serves as the more complex cross-check.
+
+**Term scoring is dropped entirely.** Following Roland, the eligible pool is
+simply every paper whose title or abstract uses a synerg* word, 2010-2025. The
+synergy gate already did nearly all the work: requiring a term score of at
+least 1 on top of it removed only about 4,000 of 170,407 papers. No indicator
+groups, strata or score thresholds remain.
+
+**The wildcard `synerg*` replaces the three exact terms**, reversing the choice
+above. The wildcard adds 54,598 papers. Most use the same concept in another
+word form (synergistically about 27,000, synergize and inflections about
+10,000, synergic/synergetic about 11,000, synergies about 4,500, synergist(s)
+about 1,100). Only about 725 use a word unrelated to synergy (synergid cells,
+the bacterial taxon Synergistetes, gamma-synergin), 0.3% of the pool, which the
+`not_a_drug_combination` category absorbs. Off-field uses of the concept were
+already present under the exact terms and are handled by the scope guard and
+the domain stage. "Every paper using a synerg* word" is easier to state and
+defend than a chosen term list, and the hand check above found a synerg* word in
+every paper it judged "yes".
+
+**Simple random sample of 1,000.** The in-window pool is shuffled with seed 42
+and walked with fresh PubMed records, keeping complete abstracts until 1,000
+are reached (completeness rules unchanged). The expected overlap with the
+stratified sample is about five papers, so no stored answers are reused;
+results go to `screening_v5/`.
+
+**Estimation is rate times pool.** Each configuration's sample rate is scaled
+by the pool, overall and per domain (domain share times domain rate).
+`analyse_screening.py` and `plot_results.py` do this unchanged apart from their
+input paths.
+
+**The yearly series uses yearly rates**, reversing "Per-year rates are not
+estimated separately" above. Each year's pool is scaled by the rate among that
+year's sampled papers (27-174 papers per year). With a single rate the series
+is pool growth times a constant, so the trend could not show a change in the
+share of papers presenting synergy as desirable, which is what it is read as.
+The yearly points are noisier; the trend and its Pearson correlation are
+computed on the configuration mean per year, so they test the estimated counts
+rather than the pool counts.
+
+**The trend is tested with Spearman, not Pearson.** The claim is that the
+counts increase, not that they increase linearly, and the growth is visibly
+non-linear; a rank correlation tests exactly the monotonic claim and is less
+sensitive to single noisy years. The least-squares slope is kept as the
+descriptive size of the increase.
+
+**Intervals are 95% normal approximations, not Wilson.** At n = 1,000 the two
+agree to a few tenths of a percentage point, and the normal approximation needs
+no explanation in the SI.
+
+**Dating is unchanged.** Each paper is dated once by the later of its print and
+electronic years; raw dates fetched for the earlier pools are reused, and the
+gate script refuses to finish while any paper is undated.
+
+**Everything else is unchanged:** models, prompts, domain stage, refusal
+handling, request pacing.

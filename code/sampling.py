@@ -1,7 +1,8 @@
-"""Deterministic completeness filter and seeded sampling of gated papers.
+"""Deterministic completeness filter and seeded simple random sample of the pool.
 
-Records are fetched from PubMed on demand, because the gate admits papers that
-predate the stored corpus.
+The pool is every in-window paper whose title or abstract uses a synerg* word
+(see synergy_gate.py). Records are fetched fresh from PubMed while walking a
+seeded shuffle, keeping complete abstracts until the target size is reached.
 """
 
 import json
@@ -14,19 +15,12 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 
 DATA_DIR = Path(__file__).parent.parent / "data"
-CORPUS_PATH = DATA_DIR / "pubmed_results_all_years.json"
-TERM_SCORES_PATH = DATA_DIR / "term_scores_v3.json"
-GATED_YEARS_PATH = DATA_DIR / "gated_paper_years_v3.json"
-SCORE1_YEARS_PATH = DATA_DIR / "score1_paper_years.json"
-SAMPLE_PATH = DATA_DIR / "screening_sample_v2.json"
-STRATIFIED_SAMPLE_PATH = DATA_DIR / "screening_sample_v4.json"
-SYNERGY_GATE_PATH = DATA_DIR / "synergy_gate_pmids.json"
-TARGET_PER_SCORE = 250
-ALL_SCORES = (1, 2, 3, 4, 5, 6)
+ELIGIBLE_YEARS_PATH = DATA_DIR / "synerg_paper_years.json"
+SAMPLE_PATH = DATA_DIR / "screening_sample_v5.json"
+SAMPLE_SIZE = 1000
 
 FIRST_YEAR = 2010
 LAST_YEAR = 2025
-GATE_THRESHOLD = 2
 RANDOM_SEED = 42
 MINIMUM_ABSTRACT_CHARS = 200
 SENTENCE_ENDINGS = ".?!"
@@ -105,91 +99,6 @@ def fetch_records(pmids):
     return collected
 
 
-def gated_years():
-    """Return each gated PMID's single publication year."""
-    if not GATED_YEARS_PATH.exists():
-        raise FileNotFoundError(
-            f"{GATED_YEARS_PATH.name} is missing; run year_gate_counts.py before sampling")
-    return json.loads(GATED_YEARS_PATH.read_text())
-
-
-def gated_pmids():
-    """Return in-window PMIDs whose group score meets the gate."""
-    scores = json.loads(TERM_SCORES_PATH.read_text())
-    years = gated_years()
-    return sorted(pmid for pmid, score in scores.items()
-                  if score >= GATE_THRESHOLD
-                  and FIRST_YEAR <= years.get(pmid, 0) <= LAST_YEAR)
-
-
-def stored_records():
-    """Return already-stored records keyed by PMID."""
-    if not CORPUS_PATH.exists():
-        return {}
-    return {p["pmid"]: p for p in json.loads(CORPUS_PATH.read_text())}
-
-
-def draw_sample(target_size):
-    """Walk a seeded shuffle keeping complete abstracts until target_size."""
-    shuffled = gated_pmids()
-    random.Random(RANDOM_SEED).shuffle(shuffled)
-    stored, kept, drawn = stored_records(), [], 0
-    for start in range(0, len(shuffled), FETCH_BATCH_SIZE):
-        chunk = shuffled[start:start + FETCH_BATCH_SIZE]
-        missing = [p for p in chunk if p not in stored]
-        stored.update(fetch_records(missing) if missing else {})
-        for pmid in chunk:
-            drawn += 1
-            record = stored.get(pmid)
-            if record and is_complete(record.get("abstract")):
-                kept.append(record)
-            if len(kept) == target_size:
-                return kept, drawn
-    raise ValueError(f"only {len(kept)} complete abstracts in {len(shuffled)} gated papers")
-
-
-def build_sample(target_size):
-    """Draw the sample, record how many papers were walked, and save it."""
-    papers, n_drawn = draw_sample(target_size)
-    payload = {"seed": RANDOM_SEED, "target_size": target_size, "n_drawn": n_drawn,
-               "gate": GATE_THRESHOLD, "papers": papers}
-    SAMPLE_PATH.write_text(json.dumps(payload))
-    return papers, payload
-
-
-def load_sample():
-    """Load the saved sample in draw order."""
-    payload = json.loads(SAMPLE_PATH.read_text())
-    return payload["papers"], payload
-
-
-def in_window(years):
-    """Return the PMIDs dated inside the analysis window."""
-    return {pmid for pmid, year in years.items() if FIRST_YEAR <= (year or 0) <= LAST_YEAR}
-
-
-def synergy_pmids():
-    """Return the PMIDs whose title or abstract uses a synergy term."""
-    return set(json.loads(SYNERGY_GATE_PATH.read_text()))
-
-
-def score_strata(scores=ALL_SCORES):
-    """Map each requested group score to its sorted in-window PMIDs."""
-    gated = json.loads(TERM_SCORES_PATH.read_text())
-    strata = {1: sorted(in_window(json.loads(SCORE1_YEARS_PATH.read_text())))} if 1 in scores else {}
-    for pmid in sorted(in_window(gated_years())):
-        if gated[pmid] in scores:
-            strata.setdefault(gated[pmid], []).append(pmid)
-    return strata
-
-
-def synergy_strata(scores=ALL_SCORES):
-    """Map each score to its in-window PMIDs that use a synergy term."""
-    synergy = synergy_pmids()
-    return {score: [p for p in pmids if p in synergy]
-            for score, pmids in score_strata(scores).items()}
-
-
 def walk_complete(pmids, target_size):
     """Fetch PMIDs in order, keeping complete abstracts until target_size."""
     kept, drawn = [], 0
@@ -204,37 +113,44 @@ def walk_complete(pmids, target_size):
     return kept, drawn
 
 
-def seeded_order(score, pmids):
-    """Return a score stratum's PMIDs in its seeded random order."""
-    shuffled = list(pmids)
-    random.Random(RANDOM_SEED + score).shuffle(shuffled)
-    return shuffled
+def eligible_pmids():
+    """Return the in-window synerg* PMIDs in a fixed order."""
+    return sorted(json.loads(ELIGIBLE_YEARS_PATH.read_text()))
 
 
-def draw_stratum(score, pmids, eligible=None):
-    """Draw one stratum's eligible papers in seeded order, or all if few."""
-    shuffled = [p for p in seeded_order(score, pmids) if eligible is None or p in eligible]
-    kept, drawn = walk_complete(shuffled, TARGET_PER_SCORE)
-    if len(shuffled) > TARGET_PER_SCORE and len(kept) < TARGET_PER_SCORE:
-        raise ValueError(f"score {score}: only {len(kept)} complete abstracts in {len(shuffled)}")
-    papers = [dict(record, score=score) for record in kept]
-    return papers, {"population": len(shuffled), "drawn": drawn, "kept": len(kept)}
+def draw_sample(target_size):
+    """Walk a seeded shuffle of the pool keeping complete abstracts until target_size."""
+    shuffled = eligible_pmids()
+    random.Random(RANDOM_SEED).shuffle(shuffled)
+    kept, drawn = walk_complete(shuffled, target_size)
+    if len(kept) < target_size:
+        raise ValueError(f"only {len(kept)} complete abstracts in {len(shuffled)} eligible papers")
+    return kept, drawn, len(shuffled)
 
 
-def build_stratified_sample(scores=ALL_SCORES):
-    """Draw the requested score strata from fresh records and save the manifest."""
-    papers, strata = [], {}
-    synergy = synergy_pmids()
-    for score, pmids in sorted(score_strata(scores).items()):
-        drawn, strata[score] = draw_stratum(score, pmids, synergy)
-        papers.extend(drawn)
-    payload = {"seed": RANDOM_SEED, "target_per_score": TARGET_PER_SCORE,
-               "strata": strata, "papers": papers}
-    STRATIFIED_SAMPLE_PATH.write_text(json.dumps(payload))
+def build_sample(target_size=SAMPLE_SIZE):
+    """Draw the sample, record the pool size and papers walked, and save it."""
+    papers, n_drawn, population = draw_sample(target_size)
+    payload = {"seed": RANDOM_SEED, "target_size": target_size, "n_drawn": n_drawn,
+               "population": population, "papers": papers}
+    SAMPLE_PATH.write_text(json.dumps(payload))
     return papers, payload
 
 
-def load_stratified_sample():
-    """Load the stratified sample and its per-score population sizes."""
-    payload = json.loads(STRATIFIED_SAMPLE_PATH.read_text())
-    return payload["papers"], {int(score): s for score, s in payload["strata"].items()}
+def load_sample():
+    """Load the saved sample in draw order."""
+    payload = json.loads(SAMPLE_PATH.read_text())
+    return payload["papers"], payload
+
+
+def main():
+    """Draw and save the sample, refusing to overwrite an existing one."""
+    if SAMPLE_PATH.exists():
+        raise SystemExit(f"{SAMPLE_PATH.name} exists; delete it to redraw")
+    papers, payload = build_sample()
+    print(f"sample: {len(papers)} complete abstracts from {payload['n_drawn']} walked "
+          f"of {payload['population']} eligible papers (seed {payload['seed']})")
+
+
+if __name__ == "__main__":
+    main()

@@ -1,10 +1,14 @@
 """Figures for the multiverse screening results.
 
 Both figures plot extrapolated papers per year rather than within-sample counts,
-over 2010-2024. Colour encodes the model, marker shape the prompt, so identity
-never rests on colour alone.
+over 2010-2025. The domain swarm scales the mean annual pool by each
+configuration's overall rate; the timeline scales each year's pool by the rate
+among that year's sampled papers. Colour encodes the model, marker shape the
+prompt, so identity never rests on colour alone.
 """
 
+import json
+from collections import defaultdict
 from pathlib import Path
 
 import matplotlib.pyplot as plt
@@ -13,8 +17,9 @@ from scipy import stats
 
 from analyse_screening import (MODELS, PROMPTS, REPORTED_DOMAINS, all_configurations,
                                domain_shares, domain_weights, final_sample_pmids,
-                               load_successful, weights_for)
+                               load_successful, rate_row, weights_for)
 from analyse_screening import gated_papers_per_year as load_gated_papers_per_year
+from sampling import ELIGIBLE_YEARS_PATH
 
 DATA_DIR = Path(__file__).parent.parent / "data"
 FIGURE_DIR = Path(__file__).parent.parent / "figures"
@@ -142,21 +147,30 @@ def draw_points(axes, xs, ys, model, prompt):
                  linewidths=MARKER_EDGE_WIDTH, alpha=MARKER_ALPHA, zorder=3)
 
 
-def trend_statistics(per_year, rates):
-    """Return pooled slope and the year-level Pearson correlation."""
-    years = sorted(per_year)
-    counts = [per_year[y] for y in years]
-    correlation, p_value = stats.pearsonr(years, counts)
-    mean_rate = float(np.mean(list(rates.values())))
-    slope = float(np.polyfit(years, [c * mean_rate for c in counts], 1)[0])
+def yearly_rates(outcome_cells, pmids):
+    """Map each configuration to its yes-rate among each year's sampled papers."""
+    years = json.loads(ELIGIBLE_YEARS_PATH.read_text())
+    by_year = defaultdict(list)
+    for pmid in pmids:
+        by_year[years[pmid]].append(pmid)
+    return {(model, prompt): {year: rate_row(outcome_cells, by_year[year], model, prompt)["rate"]
+                              for year in range(FIRST_YEAR, LAST_YEAR + 1)}
+            for model in MODELS for prompt in PROMPTS}
+
+
+def yearly_series(rates_by_year, per_year):
+    """Scale each year's eligible pool by each configuration's rate for that year."""
+    return {c: {year: per_year[year] * rates[year] for year in per_year}
+            for c, rates in rates_by_year.items()}
+
+
+def trend_statistics(series):
+    """Return the slope and year-level Spearman correlation of the configuration mean."""
+    years = sorted(next(iter(series.values())))
+    mean_by_year = [np.mean([by_year[y] for by_year in series.values()]) for y in years]
+    correlation, p_value = stats.spearmanr(years, mean_by_year)
+    slope = float(np.polyfit(years, mean_by_year, 1)[0])
     return slope, correlation, p_value
-
-
-def plot_timeline(rates, per_year, path):
-    """Plot extrapolated papers per year for every configuration, with a trend."""
-    series = {c: {year: count * rate for year, count in per_year.items()}
-              for c, rate in rates.items()}
-    plot_timeline_series(series, path)
 
 
 def draw_trend(axes, xs, ys):
@@ -240,15 +254,15 @@ def main():
     pmids = sorted(final_sample_pmids() & available)
     weights = domain_weights(domain_cells, pmids)
     per_year = gated_papers_per_year()
-    rates = configuration_rates(outcome_cells, pmids)
-    plot_timeline(rates, per_year, "timeline_extrapolated.pdf")
+    series = yearly_series(yearly_rates(outcome_cells, pmids), per_year)
+    plot_timeline_series(series, "timeline_extrapolated.pdf")
     plot_category_swarm(outcome_cells, pmids, weights, domain_shares(weights),
                         annual_scale(per_year), "swarm_by_category.pdf")
-    slope, correlation, p_value = trend_statistics(per_year, rates)
+    slope, correlation, p_value = trend_statistics(series)
     print(f"figures written to: {[str(d) for d in output_paths('')]}")
     print(f"window {FIRST_YEAR}-{LAST_YEAR}, mean gated {annual_scale(per_year):.0f}/year")
-    print(f"trend slope {slope:+.1f} papers/year (mean rate across configurations)")
-    print(f"Pearson r = {correlation:.3f}, p = {p_value:.2e} (n = {len(per_year)} years)")
+    print(f"trend slope {slope:+.1f} papers/year (mean across configurations, yearly rates)")
+    print(f"Spearman rho = {correlation:.3f}, p = {p_value:.2e} (n = {len(per_year)} years)")
 
 
 if __name__ == "__main__":

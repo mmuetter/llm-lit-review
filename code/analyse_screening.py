@@ -12,9 +12,9 @@ from pathlib import Path
 from sampling import FIRST_YEAR, LAST_YEAR
 
 DATA_DIR = Path(__file__).parent.parent / "data"
-RESULTS_DIRS = [DATA_DIR / "screening_final"]
-FINAL_MANIFEST_PATH = DATA_DIR / "screening_sample_v2.json"
-GATED_PAPERS_PER_YEAR_PATH = DATA_DIR / "gated_papers_per_year.json"
+RESULTS_DIRS = [DATA_DIR / "screening_v5"]
+FINAL_MANIFEST_PATH = DATA_DIR / "screening_sample_v5.json"
+GATED_PAPERS_PER_YEAR_PATH = DATA_DIR / "synerg_papers_per_year.json"
 
 MODELS = ["mistral-large-2512", "claude-sonnet-5"]
 PROMPTS = ["P2_mechanism", "P1_neutral", "P3_apriori", "P4_symmetry", "P5_screening"]
@@ -66,15 +66,13 @@ def load_failures(stage, pmids):
                                for r in last_failure.values())
 
 
-def wilson_interval(successes, total):
-    """Return the Wilson score interval for a proportion."""
+def normal_interval(successes, total):
+    """Return the 95% normal-approximation interval for a proportion."""
     if not total:
         return (0.0, 0.0)
     p = successes / total
-    denominator = 1 + Z_SCORE**2 / total
-    centre = (p + Z_SCORE**2 / (2 * total)) / denominator
-    spread = Z_SCORE / denominator * math.sqrt(p * (1 - p) / total + Z_SCORE**2 / (4 * total**2))
-    return (max(0.0, centre - spread), min(1.0, centre + spread))
+    margin = Z_SCORE * math.sqrt(p * (1 - p) / total)
+    return (max(0.0, p - margin), min(1.0, p + margin))
 
 
 def domain_weights(domain_cells, pmids):
@@ -119,7 +117,7 @@ def rate_row(outcome_cells, pmids, model, prompt, weights=None):
              for p in pmids if (p, model, prompt) in outcome_cells]
     total = sum(w for w, _ in pairs)
     yes = sum(w for w, a in pairs if a == "yes")
-    low, high = wilson_interval(round(yes), round(total))
+    low, high = normal_interval(yes, total)
     return {"model": model, "prompt": prompt, "n": total, "yes": yes,
             "rate": yes / total if total else 0.0, "low": low, "high": high}
 

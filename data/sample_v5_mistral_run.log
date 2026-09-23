@@ -1,0 +1,29 @@
+
+========================================================================
+  SAMPLE - mistral
+  1000 papers from a pool of 219871
+========================================================================
+
+========================================================================
+  SAMPLE - Mistral domain
+  1000 calls pending
+========================================================================
+[wave dispatch] 1000 units @ 0.5s spacing
+  wave @ 0.5s: 140/1000 succeeded in 8.3min (860 to retry)
+[wave dispatch] 860 units @ 1.0s spacing
+  wave @ 1.0s: 220/860 succeeded in 14.3min (640 to retry)
+[wave dispatch] 640 units @ 2.0s spacing
+  wave @ 2.0s: 315/640 succeeded in 21.3min (325 to retry)
+[wave dispatch] 325 units @ 4.0s spacing
+  wave @ 4.0s: 320/325 succeeded in 21.6min (5 to retry)
+  5 units failed after all waves
+
+995/1000 domain cells succeeded
+
+========================================================================
+  SAMPLE - Mistral outcome
+  5000 calls pending
+========================================================================
+[wave dispatch] 5000 units @ 0.5s spacing
+  wave @ 0.5s: 625/5000 succeeded in 41.7min (4375 to retry)
+[wave dispatch] 4375 units @ 1.0s spacing

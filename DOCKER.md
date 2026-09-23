@@ -21,17 +21,22 @@ checkpoints.
 Every script runs from `code/` inside the container:
 
 ```bash
-docker compose run --rm pipeline python run_stratified.py mistral
-docker compose run --rm pipeline python run_stratified.py sonnet
-docker compose run --rm pipeline python stratified_estimates.py
+docker compose run --rm pipeline python synergy_gate.py      # enumerate and date the synerg* pool
+docker compose run --rm pipeline python sampling.py          # draw the 1,000-paper sample
+docker compose run --rm pipeline python run_sample.py mistral
+docker compose run --rm pipeline python run_sample.py sonnet
+docker compose run --rm pipeline python analyse_screening.py
 docker compose run --rm pipeline python plot_results.py
 ```
+
+The earlier term-score-stratified analysis is preserved at git tag
+`stratified-v4` and in `archive/stratified_v4/`.
 
 Omit the command for an interactive shell: `docker compose run --rm pipeline`.
 
 ## Notes
 
-- Results append to `data/screening_v3/`, so a restarted run skips cells that
+- Results append to `data/screening_v5/`, so a restarted run skips cells that
   already succeeded.
 - `plot_results.py` and `export_prompts.py` write into `../supplementary/`,
   which must exist next to this folder.
