@@ -1,55 +1,41 @@
-# Docker Setup for Reproducible Screening
+# Running the pipeline in Docker
 
-This project uses Docker to ensure reproducible screening of paper abstracts using the Mistral API.
-
-## Prerequisites
-
-- Docker and Docker Compose installed
-- Mistral API key saved to `~/.mistral_key`
+The image pins the Python version and dependencies so the screening and
+analysis scripts run the same way on any machine. Code is baked into the image;
+`data/`, `figures/`, `report/` and the sibling `../supplementary/` are mounted,
+so every output lands on the host and interrupted runs resume from the JSONL
+checkpoints.
 
 ## Setup
 
-1. **Add your Mistral API key:**
+1. Copy `.env.example` to `.env` and fill in the keys. Only the model
+   calls need them (`MISTRAL_API_KEY` for Mistral, `ANTHROPIC_API_KEY` for
+   Sonnet); enumeration, analysis and plotting need no keys.
+2. Build the image:
    ```bash
-   echo "your-mistral-api-key" > ~/.mistral_key
+   docker compose build
    ```
 
-2. **Build the Docker image:**
-   ```bash
-   docker-compose build
-   ```
+## Running
 
-## Running Screening
+Every script runs from `code/` inside the container:
 
-### Screen 100 papers:
 ```bash
-docker-compose run screening python code/screen_100.py
+docker compose run --rm pipeline python run_stratified.py mistral
+docker compose run --rm pipeline python run_stratified.py sonnet
+docker compose run --rm pipeline python stratified_estimates.py
+docker compose run --rm pipeline python plot_results.py
 ```
 
-### Screen all papers:
-```bash
-docker-compose run screening python code/screen_all.py
-```
-
-### Run Jupyter notebook (recommended for analysis):
-```bash
-docker-compose up jupyter
-```
-
-Then open `http://localhost:8888` in your browser. Token is printed in console output.
-
-The notebook (`analysis.ipynb`) loads results and generates visualizations with full transparency.
-
-## Outputs
-
-Results are mounted to your local directories:
-- `data/` — screening results, papers, metadata
-- `figures/` — generated visualizations (PDFs)
-- `report/` — analysis reports (markdown)
+Omit the command for an interactive shell: `docker compose run --rm pipeline`.
 
 ## Notes
 
-- API key is mounted read-only from host
-- All outputs persist locally even after container exits
-- Delay between requests: 2-3 seconds (configurable in code)
-- Mistral model: claude-large-latest, temperature 0.1
+- Results append to `data/screening_v3/`, so a restarted run skips cells that
+  already succeeded.
+- `plot_results.py` and `export_prompts.py` write into `../supplementary/`,
+  which must exist next to this folder.
+- The Typst report (`report/automated_analysis.typ`) is not built in the
+  container.
+- Request pacing and retry limits live in `code/model_clients.py` and
+  `code/wave_dispatch.py`.

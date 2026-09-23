@@ -1,30 +1,14 @@
-version: '3.8'
-
 services:
-  screening:
+  pipeline:
     build: .
-    image: opinion-piece:latest
-    container_name: opinion-piece-screening
+    image: llm-lit-review:latest
+    working_dir: /app/code
+    environment:
+      - MISTRAL_API_KEY
+      - ANTHROPIC_API_KEY
     volumes:
       - ./data:/app/data
       - ./figures:/app/figures
       - ./report:/app/report
-      - ~/.mistral_key:/root/.mistral_key:ro
-    environment:
-      - MISTRAL_API_KEY_FILE=/root/.mistral_key
-    working_dir: /app
-    command: python code/screen_100.py
-
-  jupyter:
-    build: .
-    image: opinion-piece:latest
-    container_name: opinion-piece-jupyter
-    volumes:
-      - ./:/app
-      - ~/.mistral_key:/root/.mistral_key:ro
-    environment:
-      - MISTRAL_API_KEY_FILE=/root/.mistral_key
-    working_dir: /app
-    ports:
-      - "8888:8888"
-    command: jupyter notebook --ip=0.0.0.0 --allow-root --no-browser
+      # plot_results.py and export_prompts.py write into the sibling supplementary/
+      - ../supplementary:/supplementary

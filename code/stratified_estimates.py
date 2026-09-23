@@ -124,13 +124,12 @@ def annual_series(strata_rates, by_year, scores):
             for c in CONFIGURATIONS}
 
 
-def trend_statistics(series, by_year, scores):
-    """Return the configuration-mean slope and the pool's year-level Pearson r."""
+def trend_statistics(series):
+    """Return the configuration-mean slope and its year-level Spearman correlation."""
     years = list(range(FIRST_YEAR, LAST_YEAR + 1))
     mean_by_year = [np.mean([series[c][y] for c in CONFIGURATIONS]) for y in years]
     slope = float(np.polyfit(years, mean_by_year, 1)[0])
-    pool = [sum(by_year[s][y] for s in scores) for y in years]
-    correlation, p_value = stats.pearsonr(years, pool)
+    correlation, p_value = stats.spearmanr(years, mean_by_year)
     return slope, correlation, p_value
 
 
@@ -173,8 +172,8 @@ def build_figures(strata_rates, populations, scores):
     by_year = populations_by_year()
     series = annual_series(strata_rates, by_year, scores)
     plot_timeline_series(series, "timeline_extrapolated.pdf")
-    slope, correlation, p_value = trend_statistics(series, by_year, scores)
-    print(f"\nTREND slope {slope:+.1f} papers/year, Pearson r = {correlation:.3f}, "
+    slope, correlation, p_value = trend_statistics(series)
+    print(f"\nTREND slope {slope:+.1f} papers/year, Spearman r = {correlation:.3f}, "
           f"p = {p_value:.2e} (n = {WINDOW_YEARS} years)")
 
 
