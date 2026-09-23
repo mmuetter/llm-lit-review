@@ -1,0 +1,220 @@
+\documentclass[openacc]{rstb}
+
+%%%% Article type
+\titlehead{Supplementary information}
+
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage[framemethod=default]{mdframed}
+
+\mdfdefinestyle{termbox}{%
+  linecolor=black!25, linewidth=0.6pt,
+  leftline=true, rightline=true, topline=true, bottomline=true,
+  backgroundcolor=black!4,
+  innertopmargin=6pt, innerbottommargin=6pt,
+  innerleftmargin=8pt, innerrightmargin=8pt,
+  skipabove=8pt, skipbelow=8pt,
+}
+
+\newlist{termlist}{description}{1}
+\setlist[termlist]{%
+  font=\normalfont\bfseries, itemsep=4pt, topsep=0pt, partopsep=0pt,
+  parsep=2pt, leftmargin=0pt, labelsep=0.4em,
+}
+
+\begin{document}
+
+\title{Supplementary information: The problem with synergy}
+
+\author{Malte Muetter$^{1}$, Daniel Angst$^{1}$, Sebastian Bonhoeffer$^{1}$ and Roland Regoes$^{1}$}
+
+\address{$^{1}$Department of Environmental Systems Science, ETH Z\"urich,
+Universit\"atstrasse 16, 8092 Z\"urich, Switzerland}
+
+%%%% Corresponding author
+\corres{Malte Muetter\\
+\email{science@maltemuetter.ch}}
+
+\maketitle
+\clearpage
+
+\section{Aim and design}
+Here we estimate how many currently published papers imply, implicitly or explicitly, that synergy indicates a combination is therapeutically more valuable than a non-synergistic one.
+
+We do this in two parts.
+First, we use deterministic rules to identify eligible papers on PubMed, score each by the number of keyword groups it matches, and randomly sample up to 250 papers with usable abstracts per score.
+Second, we classify each of these papers with two language models (Mistral-Large and Claude Sonnet): once for its domain, and once under each of five prompt variants asking whether the paper uses synergy as a proxy for therapeutic value.
+We treat each model-prompt pair as one replicate \cite{Dewar2026}.
+
+\section{Finding eligible papers}
+\subsection{Keyword search}
+We searched for eligible papers on PubMed using keywords belonging to six groups that signal that the paper explores drug interactions.
+Each group is issued as its own PubMed query, restricted to title and abstract, and a paper's score is the number of groups it matches.
+Terms were chosen to be conceptually relevant to their group and retained only if they carried at least minimal predictive value in piloting.
+A paper is eligible only if its title or abstract contains a synergy term (synergy, synergism or synergistic).
+
+The six groups we chose are \emph{Theme} -- whether the paper concerns drug combinations at all; \emph{Reference model} -- names of the common reference models; \emph{Interaction metric} -- the number quantifying deviation from the reference model; \emph{Interaction labelling} -- specific interaction labels; \emph{Assay design} -- typical assays used for interaction measures; and \emph{Software} -- tools typically used for exploring drug interactions.
+The full term list for each group is given in `\nameref{sec:appendix}'.
+
+\begin{table}[h]
+  \centering\small
+  \caption{Eligible papers by group score, 2010--2025.
+  The score counts how many of the six indicator-term groups a paper matches.}
+  \begin{tabular}{lrrrrrr}
+    \hline
+    Score  & 1 & 2 & 3 & 4 & 5 & 6 \\
+    \hline
+    Papers & 146{,}881 & 17{,}037 & 2{,}137 & 287 & 6 & 1 \\
+    \hline
+  \end{tabular}
+\end{table}
+
+To prevent papers that appear in the results for several years from being counted more than once, we date each paper by its latest publication date.
+Restricted to 2010--2025, the \emph{eligible pool} comprises 166{,}349 papers.
+
+\subsection{Usable abstracts}
+\label{sec:usable-abstracts}
+We then applied a second round of filtering to remove missing or incomplete abstracts.
+For each score, we drew papers at random from the eligible pool and checked each abstract for completeness using deterministic rules (no LLM):
+an abstract passes if it is at least 200 characters long, ends in sentence-terminating punctuation, contains no unclosed parenthesis or bracket, and does not trail off on an incomplete number or a lone capitalised fragment.
+
+We stopped once 250 abstracts had passed the check, or once every paper of that score had been drawn (1{,}027 papers were drawn in total).
+These 1{,}006 papers are the \emph{screening sample}.
+
+\section{Classification}
+We forced the language models to answer with a single categorical value: we declared the permitted values in a JSON schema and passed it to the API, which constrains the response to match one of them.
+
+The following two steps were run with \texttt{mistral-large-2512} (temperature 0) and \texttt{claude-sonnet-5} (thinking disabled, low effort).
+We call each (paper, model, task) combination a cell: 1{,}006 papers times two models times six tasks (one domain classification and five outcome prompts) gives 12{,}072 cells.
+
+\subsection{Domain}
+\label{sec:domain}
+We prompted both models to categorise each paper into one of five domains: `not a drug combination', `environmental or agricultural', `antimicrobial', `oncology', or `other therapeutic use' (full prompt in `\nameref{sec:appendix}').
+Each paper's weight is split equally across the domains assigned by the two models.
+A paper assigned unambiguously counts in full (922 papers, 91.7\%), while a split call counts half into each (84 papers, 8.3\%).
+
+The two models agreed for 895 papers: `oncology' 351, `antimicrobial' 329, `other therapeutic use' 103, `not a drug combination' 89, `environmental or agricultural' 23.
+For the remaining 27 of the 922, only one model answered.
+
+\subsection{Outcome}
+We prompted both models, under five prompt variants each, to judge whether a paper presents synergy as desirable (full prompts in `\nameref{sec:appendix}').
+
+Across the ten configurations, the rate of papers judged to present synergy as desirable ranges from 27.6\% to 36.9\% (median 33.1\%).
+Restricted to the two domains the main text reports, this rate is 67.6--84.3\% for antimicrobial papers (median 78.1\%, $n=342$) and 64.3--81.7\% for oncology papers (median 76.7\%, $n=358$).
+Of the 960 papers answered by all ten configurations, 742 (77\%) received a unanimous verdict: 574 `yes' and 168 `no'.
+\autoref{tab:rates} gives the rate and confidence interval for every configuration.
+
+\begin{table}[h]
+  \centering\small
+  \caption{Estimated percentage of eligible papers answered `yes' by each configuration.
+  Each score's rate is weighted by its number of eligible papers; intervals are 95\% normal approximations.}
+  \label{tab:rates}
+  \begin{tabular}{llrr}
+    \hline
+    Model & Prompt & Rate & 95\% CI \\
+    \hline
+    mistral & P2 & 27.6\% & 23--32 \\
+    sonnet  & P2 & 28.3\% & 24--33 \\
+    sonnet  & P5 & 32.4\% & 28--37 \\
+    mistral & P1 & 32.6\% & 28--37 \\
+    sonnet  & P1 & 33.0\% & 28--38 \\
+    sonnet  & P3 & 33.2\% & 28--38 \\
+    mistral & P5 & 34.2\% & 29--39 \\
+    mistral & P3 & 34.5\% & 30--39 \\
+    sonnet  & P4 & 36.4\% & 31--41 \\
+    mistral & P4 & 36.9\% & 32--42 \\
+    \hline
+  \end{tabular}
+\end{table}
+
+\subsection{Missing cells}
+11{,}915 of 12{,}072 cells (98.7\%) returned an answer; the remaining 157 were excluded.
+Of these, 120 are Claude Sonnet safety refusals (2.0\% of its 6{,}036 cells) and 37 are Mistral requests that failed after retries for transient reasons (connection resets, rate limits, or timeouts).
+Retries confirmed the refusals were repeatable.
+
+For domain classification, this introduces almost no bias (\nameref{sec:domain}): Sonnet failed to assign a domain for 24 papers, all of which still have a Mistral vote.
+
+Refusals are content-dependent, and therefore not missing at random.
+Using Mistral's domain vote as a reference, Sonnet is missing 10.6\% of its possible outcome cells for `environmental or agricultural' papers (19 of 180), 3.4\% for `antimicrobial' (59 of 1{,}755), 1.7\% for `other therapeutic use' (13 of 770), 1.0\% for `not a drug combination' (5 of 500), and 0.0\% for `oncology' (0 of 1{,}810).
+
+\section{Extrapolation}
+Each configuration's rate, measured on the sampled papers of one score, is used to scale all eligible papers of that score, and the estimates are summed across scores.
+As we sample randomly within each score, and have no reason to expect missing abstracts to correlate with a paper's field or its framing of interactions, we assume the unsampled papers would answer the same way on average.
+
+Formally, the estimated annual count for domain $d$ under configuration $c$ is
+\begin{equation}
+  \hat{N}_{d,c} = \sum_{h=1}^{6} \bar{N}_h \cdot s_{h,d} \cdot r_{h,d,c},
+  \label{eq:extrapolation}
+\end{equation}
+where $h$ is the score, $\bar{N}_h$ is the mean number of eligible papers with score $h$ per year over 2010--2025, $s_{h,d}$ is domain $d$'s weighted share of the sampled papers with score $h$ (\nameref{sec:domain}), and $r_{h,d,c}$ is configuration $c$'s yes-rate among them.
+The all-domain estimate sets $s_{h,d} = 1$ and uses configuration $c$'s yes-rate over all sampled papers with score $h$.
+
+\autoref{tab:scores} gives the sample, rate and estimate for each score.
+
+\begin{table}[h]
+  \centering\small
+  \caption{Estimates by score. $N_h$ is the number of eligible papers, $n_h$ the number sampled.
+  Rates and annual counts give the median across the ten configurations, with the range in brackets.}
+  \label{tab:scores}
+  \begin{tabular}{rrrll}
+    \hline
+    Score & $N_h$ & $n_h$ & Rate `yes' & Papers per year \\
+    \hline
+    1 & 146{,}881 & 250 & 26.5\% [21.0--29.8]  & 2{,}429 [1{,}925--2{,}735] \\
+    2 & 17{,}037  & 250 & 82.6\% [71.0--89.4]  & 880 [756--952] \\
+    3 & 2{,}137   & 250 & 94.2\% [87.4--99.2]  & 126 [117--133] \\
+    4 & 287       & 250 & 94.7\% [89.8--99.6]  & 17 [16--18] \\
+    5 & 6         & 5   & 100.0\% [80.0--100.0] & 0.4 [0.3--0.4] \\
+    6 & 1         & 1   & 100.0\% [100.0--100.0] & 0.1 [0.1--0.1] \\
+    \hline
+  \end{tabular}
+\end{table}
+
+\paragraph{Domain-wise publications per year.}
+Applying the configuration rates derived above to the eligible pool suggests that roughly 562--700 antimicrobial and 1{,}483--1{,}886 oncology papers per year present synergy as desirable.
+The average number of identified publications per year and domain is displayed in \autoref{fig:swarm}.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\columnwidth]{figures/swarm_by_category.pdf}
+  \caption{Estimated number of papers per year by domain, between 2010--2025.
+  Each point is one configuration; the bar marks the median.}
+  \label{fig:swarm}
+\end{figure}
+
+\paragraph{General publication trend.}
+We estimated the number of publications presenting synergy as desirable per year (Figure~\ref{fig:timeline}).
+We fitted a trendline through these data, which yields an estimated increase in publications of 413.3 papers per year.
+We validated the significance of this trendline using a Pearson correlation ($r = 0.898$, $p = 2.4 \times 10^{-6}$).
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\columnwidth]{figures/timeline_extrapolated.pdf}
+  \caption{Estimated papers per year presenting synergy as desirable, 2010--2025.
+    Each point is one of ten model $\times$ prompt configurations; colour encodes
+    the model and marker shape the prompt. The line is a least-squares fit through
+    all points, with slope $+413.3$ papers per year. A Pearson correlation between
+    the eligible pool's annual counts and year gives $r = 0.898$
+  ($p = 2.4 \times 10^{-6}$, $n = 16$ years).}
+  \label{fig:timeline}
+\end{figure}
+
+\section{Limitations}
+\label{sec:limitations}
+
+The LLM-based classification uses titles and abstracts only.
+Papers that compute or rely on interaction labels only in the full text are not counted, making the estimates are conservative in that direction.
+
+\section{Reproducibility}
+
+All PubMed queries were run on 2026-09-21.
+As PubMed returns at most 9{,}999 results per query, we split each query by year, and further by date range wherever a year still exceeded the limit.
+Mistral requests were dispatched in waves at increasing intervals (0.5, 1, 2, and 4\,s); each wave retried only the cells the previous wave failed.
+
+Code, prompts, stored PubMed results and the full result grid are available at \texttt{Zenodo XXXXXX}.
+\input{appendix_prompts}
+
+\bibliographystyle{RS}
+\bibliography{manual}
+
+\end{document}

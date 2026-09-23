@@ -1,0 +1,37 @@
+
+========================================================================
+  STRATIFIED SAMPLE - mistral
+  1006 papers across scores [1, 2, 3, 4, 5, 6]
+========================================================================
+
+========================================================================
+  STRATIFIED - Mistral domain
+  169 calls pending
+========================================================================
+[wave dispatch] 169 units @ 0.5s spacing
+  wave @ 0.5s: 30/169 succeeded in 84s (139 to retry)
+[wave dispatch] 139 units @ 1.0s spacing
+  wave @ 1.0s: 30/139 succeeded in 2.3min (109 to retry)
+[wave dispatch] 109 units @ 2.0s spacing
+  wave @ 2.0s: 50/109 succeeded in 3.6min (59 to retry)
+[wave dispatch] 59 units @ 4.0s spacing
+  wave @ 4.0s: 56/59 succeeded in 3.9min (3 to retry)
+  3 units failed after all waves
+
+166/169 domain cells succeeded
+
+========================================================================
+  STRATIFIED - Mistral outcome
+  3727 calls pending
+========================================================================
+[wave dispatch] 3727 units @ 0.5s spacing
+  wave @ 0.5s: 475/3727 succeeded in 31.1min (3252 to retry)
+[wave dispatch] 3252 units @ 1.0s spacing
+  wave @ 1.0s: 814/3252 succeeded in 54.2min (2438 to retry)
+[wave dispatch] 2438 units @ 2.0s spacing
+  wave @ 2.0s: 1214/2438 succeeded in 81.2min (1224 to retry)
+[wave dispatch] 1224 units @ 4.0s spacing
+  wave @ 4.0s: 1190/1224 succeeded in 81.5min (34 to retry)
+  34 units failed after all waves
+
+3693/3727 outcome cells succeeded

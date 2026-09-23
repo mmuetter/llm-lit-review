@@ -1,0 +1,23 @@
+INTERIM v4 (synergy-term gate): domains both models, outcome Sonnet only
+
+PER SCORE (median and range across configurations)
+  score 1: N  146881  n  250  rate  26.3% (22.4-29.6)   2415.8 (2052.5-2713.1) papers/year
+  score 2: N   17037  n  250  rate  82.6% (71.0-86.7)    879.2 (755.5-923.4) papers/year
+  score 3: N    2137  n  250  rate  91.9% (87.4-94.7)    122.7 (116.8-126.5) papers/year
+  score 4: N     287  n  250  rate  92.7% (89.8-94.3)     16.6 (16.1-16.9) papers/year
+  score 5: N       6  n    5  rate 100.0% (80.0-100.0)      0.4 (0.3-0.4) papers/year
+  score 6: N       1  n    1  rate 100.0% (100.0-100.0)      0.1 (0.1-0.1) papers/year
+
+HEADLINE (scores 1, 2, 3, 4, 5, 6)
+  all            median  3434.7  range  2941.3- 3780.4 papers/year
+  antimicrobial  median   636.5  range   600.7-  652.1 papers/year
+  oncology       median  1772.6  range  1495.9- 1863.3 papers/year
+
+CONFIGURATION RATES, pooled over scores 1, 2, 3, 4, 5, 6
+  claude-sonnet-5      P2_mechanism    28.3%  (24-33)
+  claude-sonnet-5      P5_screening    32.4%  (28-37)
+  claude-sonnet-5      P1_neutral      33.0%  (28-38)
+  claude-sonnet-5      P3_apriori      33.2%  (28-38)
+  claude-sonnet-5      P4_symmetry     36.4%  (31-41)
+
+TREND slope +410.3 papers/year, Pearson r = 0.898, p = 2.38e-06 (n = 16 years)

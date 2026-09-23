@@ -1,0 +1,38 @@
+INTERIM: domains from both models, outcome from Sonnet only (5 configurations)
+sample 1006; populations {1: 362055, 2: 18892, 3: 2246, 4: 293, 5: 6, 6: 1}; total 383493
+
+DOMAINS BY SCORE (weighted share of sampled papers; both models)
+  score 1 (n=250, both agree 175): other_therapeutic 28%, not_a_drug_combination 27%, oncology 19%, antimicrobial 17%, environmental_agricultural 9%
+  score 2 (n=250, both agree 227): oncology 47%, antimicrobial 25%, other_therapeutic 22%, environmental_agricultural 3%, not_a_drug_combination 3%
+  score 3 (n=250, both agree 241): antimicrobial 45%, oncology 44%, other_therapeutic 10%, environmental_agricultural 1%, not_a_drug_combination 0%
+  score 4 (n=250, both agree 242): antimicrobial 60%, oncology 33%, other_therapeutic 7%, not_a_drug_combination 0%, environmental_agricultural 0%
+  score 5 (n=5, both agree 5): other_therapeutic 40%, antimicrobial 40%, oncology 20%
+  score 6 (n=1, both agree 1): antimicrobial 100%
+
+PER SCORE (median and range across configurations)
+  score 1: N  362055  n  250  rate  21.0% (11.7-25.4)   4744.7 (2656.8-5748.4) papers/year
+  score 2: N   18892  n  250  rate  78.5% (67.2-83.5)    927.0 (793.7-985.6) papers/year
+  score 3: N    2246  n  250  rate  89.8% (87.0-93.5)    126.1 (122.1-131.2) papers/year
+  score 4: N     293  n  250  rate  91.5% (88.6-93.9)     16.7 (16.2-17.2) papers/year
+  score 5: N       6  n    5  rate 100.0% (80.0-100.0)      0.4 (0.3-0.4) papers/year
+  score 6: N       1  n    1  rate 100.0% (100.0-100.0)      0.1 (0.1-0.1) papers/year
+
+HEADLINE (scores 1, 2, 3, 4, 5, 6)
+  all            median  5814.2  range  3589.3- 6882.8 papers/year
+  antimicrobial  median   706.3  range   642.9-  811.7 papers/year
+  oncology       median  3188.4  range  1644.8- 3624.5 papers/year
+
+SCORES 2-6 ONLY (for comparison with the August design) (scores 2, 3, 4, 5, 6)
+  all            median  1069.6  range   932.5- 1134.4 papers/year
+  antimicrobial  median   299.0  range   280.8-  313.8 papers/year
+  oncology       median   567.5  range   468.1-  592.3 papers/year
+
+CONFIGURATION RATES, pooled over scores 1, 2, 3, 4, 5, 6
+  claude-sonnet-5      P2_mechanism    15.0%  (11-19)
+  claude-sonnet-5      P3_apriori      21.1%  (17-26)
+  claude-sonnet-5      P1_neutral      24.3%  (19-29)
+  claude-sonnet-5      P5_screening    25.9%  (21-31)
+  claude-sonnet-5      P4_symmetry     28.7%  (24-34)
+
+TREND slope +478.8 papers/year, Pearson r = 0.940, p = 6.46e-08
+pool per year: [12024, 12757, 14417, 15721, 16857, 18087, 19096, 20399, 21548, 23728, 26705, 30450, 32257, 32328, 36942, 50177]
