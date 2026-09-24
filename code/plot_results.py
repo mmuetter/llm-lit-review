@@ -17,7 +17,8 @@ from scipy import stats
 
 from analyse_screening import (MODELS, PROMPTS, REPORTED_DOMAINS, all_configurations,
                                domain_shares, domain_weights, final_sample_pmids,
-                               load_successful, rate_row, weights_for)
+                               headline_fraction, headline_weights, load_successful,
+                               weights_for)
 from analyse_screening import gated_papers_per_year as load_gated_papers_per_year
 from sampling import ELIGIBLE_YEARS_PATH
 
@@ -41,9 +42,9 @@ BASE_FONTSIZE = 9
 TICK_FONTSIZE = 9
 LEGEND_FONTSIZE = 8
 TIMELINE_TICK_STEP = 2
-CATEGORY_LABELS = {"all": "all", "antimicrobial": "antimicrobial", "oncology": "oncology",
-                   "other_therapeutic": "other",
-                   "environmental_agricultural": "agricultural"}
+CATEGORY_LABELS = {"all": "antimicrobial\n+ oncology", "antimicrobial": "antimicrobial",
+                   "oncology": "oncology", "other_therapeutic": "other*",
+                   "environmental_agricultural": "agricultural*"}
 
 MARKER_SIZE = 38
 MARKER_EDGE_WIDTH = 0.9
@@ -147,13 +148,15 @@ def draw_points(axes, xs, ys, model, prompt):
                  linewidths=MARKER_EDGE_WIDTH, alpha=MARKER_ALPHA, zorder=3)
 
 
-def yearly_rates(outcome_cells, pmids):
-    """Map each configuration to its yes-rate among each year's sampled papers."""
+def yearly_rates(outcome_cells, pmids, weights):
+    """Map each configuration to its antimicrobial-plus-oncology yes-share per sampled year."""
     years = json.loads(ELIGIBLE_YEARS_PATH.read_text())
+    headline = headline_weights(weights)
     by_year = defaultdict(list)
     for pmid in pmids:
         by_year[years[pmid]].append(pmid)
-    return {(model, prompt): {year: rate_row(outcome_cells, by_year[year], model, prompt)["rate"]
+    return {(model, prompt): {year: headline_fraction(outcome_cells, by_year[year], model, prompt,
+                                                      headline)
                               for year in range(FIRST_YEAR, LAST_YEAR + 1)}
             for model in MODELS for prompt in PROMPTS}
 
@@ -208,7 +211,9 @@ def swarm_positions(count, centre):
 def category_values(outcome_cells, pmids, weights, shares, category, scale):
     """Return each configuration's annual estimate for one category."""
     if category == ALL_CATEGORY:
-        return {c: r * scale for c, r in configuration_rates(outcome_cells, pmids).items()}
+        headline = headline_weights(weights)
+        return {(m, p): scale * headline_fraction(outcome_cells, pmids, m, p, headline)
+                for m in MODELS for p in PROMPTS}
     rates = configuration_rates(outcome_cells, pmids, weights_for(weights, category))
     return {c: r * scale * shares[category] for c, r in rates.items()}
 
@@ -254,7 +259,7 @@ def main():
     pmids = sorted(final_sample_pmids() & available)
     weights = domain_weights(domain_cells, pmids)
     per_year = gated_papers_per_year()
-    series = yearly_series(yearly_rates(outcome_cells, pmids), per_year)
+    series = yearly_series(yearly_rates(outcome_cells, pmids, weights), per_year)
     plot_timeline_series(series, "timeline_extrapolated.pdf")
     plot_category_swarm(outcome_cells, pmids, weights, domain_shares(weights),
                         annual_scale(per_year), "swarm_by_category.pdf")

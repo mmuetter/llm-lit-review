@@ -47,11 +47,13 @@ DOMAIN_PROMPT = """Assign exactly one category, taking the FIRST that applies:
    food chemistry, epidemiological risk factors, plant physiology).
 2. environmental_agricultural — targets pests, or concerns effects on
    non-target organisms or ecosystems, or is an agricultural application.
-3. antimicrobial — targets bacteria or fungi in a medical or veterinary
-   context.
+3. antimicrobial — targets a pathogen (bacteria, fungi, viruses, or
+   parasites such as malaria parasites or helminths) in a medical or
+   veterinary context.
 4. oncology — targets cancer.
-5. other_therapeutic — any other human or veterinary therapeutic use
-   (antiviral, neurological, immunological, anaesthetic, cardiovascular)."""
+5. other_therapeutic — any other human or veterinary therapeutic use that
+   targets neither a pathogen nor cancer (e.g. neurological, immunological,
+   metabolic, anaesthetic, cardiovascular, probiotics)."""
 
 DOMAIN_CATEGORIES = [
     "not_a_drug_combination",

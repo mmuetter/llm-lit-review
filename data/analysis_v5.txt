@@ -2,20 +2,20 @@
 GRID COMPLETENESS
 =================
   11900/12000 cells answered (99.2%)
-    missing [domain] claude-sonnet-5: 15 (bio)
-    missing [domain] mistral-large-2512: 5 (429})
+    missing [domain] claude-sonnet-5: 16 (bio)
+    missing [domain] mistral-large-2512: 4 (429})
     missing [outcome] claude-sonnet-5: 75 (bio)
     missing [outcome] mistral-large-2512: 3 (429})
     missing [outcome] mistral-large-2512: 2 (503})
 
 DOMAIN RESOLUTION
 =================
-  both models agree: 760/1000 (76%)
-    not_a_drug_combination        334
-    oncology                      208
-    other_therapeutic             105
-    antimicrobial                  68
-    environmental_agricultural     45
+  both models agree: 768/1000 (77%)
+    not_a_drug_combination        317
+    oncology                      217
+    other_therapeutic              99
+    antimicrobial                  85
+    environmental_agricultural     50
 
 SPECIFICATION CURVE — % yes per configuration
 =============================================
@@ -31,8 +31,8 @@ SPECIFICATION CURVE — % yes per configuration
   claude   P4_symmetry    ----------[*----------------------  35.2% [32-38]  n=984.0
 
   range 22.0-35.2%  median 30.8%
-  antimicrobial    n=74  range 63.1-80.7%  median 73.8%
-  oncology         n=226  range 49.4-80.6%  median 73.7%
+  antimicrobial    n=95  range 56.3-79.2%  median 70.0%
+  oncology         n=231  range 48.5-79.2%  median 72.5%
 
 PER-PAPER CONSENSUS (yes-count across 10 configurations)
 ========================================================
@@ -52,16 +52,17 @@ PER-PAPER CONSENSUS (yes-count across 10 configurations)
 DIAGNOSTICS
 ===========
   P4(symmetry)=yes with P1(neutral)=no: 91 cells
-  papers both models call out of scope: 334
+  papers both models call out of scope: 317
     of which scored yes by some configuration: 10 cells
 
 IMPLIED MAGNITUDE
 =================
   mean gated papers/year 13742 (2010-2025, 16 years)
   all domains: 3027-4832 papers/year
-  antimicrobial    share 7%  646-826 papers/year
-  oncology         share 23%  1539-2508 papers/year
+  antimicrobial + oncology: 2350-3540 papers/year
+  antimicrobial    share 10%  735-1034 papers/year
+  oncology         share 23%  1539-2515 papers/year
 figures written to: ['/Users/malte/ETH-Documents/opinion_piece/llm-lit-review/figures', '/Users/malte/ETH-Documents/opinion_piece/supplementary/figures']
 window 2010-2025, mean gated 13742/year
-trend slope +463.8 papers/year (mean across configurations, yearly rates)
-Spearman rho = 0.874, p = 9.87e-06 (n = 16 years)
+trend slope +341.6 papers/year (mean across configurations, yearly rates)
+Spearman rho = 0.774, p = 4.39e-04 (n = 16 years)

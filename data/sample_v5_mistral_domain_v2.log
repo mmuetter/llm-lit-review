@@ -1,0 +1,16 @@
+
+========================================================================
+  SAMPLE - Mistral domain
+  1000 calls pending
+========================================================================
+[wave dispatch] 1000 units @ 0.5s spacing
+  wave @ 0.5s: 135/1000 succeeded in 8.3min (865 to retry)
+[wave dispatch] 865 units @ 1.0s spacing
+  wave @ 1.0s: 213/865 succeeded in 14.4min (652 to retry)
+[wave dispatch] 652 units @ 2.0s spacing
+  wave @ 2.0s: 327/652 succeeded in 21.7min (325 to retry)
+[wave dispatch] 325 units @ 4.0s spacing
+  wave @ 4.0s: 321/325 succeeded in 21.6min (4 to retry)
+  4 units failed after all waves
+
+996/1000 domain cells succeeded

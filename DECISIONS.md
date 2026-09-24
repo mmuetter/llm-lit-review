@@ -19,11 +19,10 @@ readers who interpret the question slightly differently — agreement between th
 is a result, not a precondition.
 
 This framing rules out most "pass/fail" gates on the output. A tight consensus
-is a finding; a wide spread is a finding. Only *incoherence* is a defect, which
-is why P4's criteria are a subset of P1's: privileging synergy over antagonism
-entails presenting synergy favourably, so if P4 ever answers yes where P1
-answers no, the model is not applying the distinguishing clause, and that is a
-bug rather than a difference of opinion.
+is a finding; a wide spread is a finding. P4's criteria were written as a
+subset of P1's, and a P4 "yes" with a P1 "no" was first treated as a bug; that
+check was dropped for the synerg* design (see the last section), because each
+prompt is a separate reader.
 
 ## Eligibility gate
 
@@ -421,3 +420,25 @@ gate script refuses to finish while any paper is undated.
 
 **Everything else is unchanged:** models, prompts, domain stage, refusal
 handling, request pacing.
+
+**The headline counts antimicrobial plus oncology only (2026-09-24).** Decided
+after the first complete run. The paper's argument concerns treatment effects
+that reduce a population, pathogens or cancer cells; "other therapeutic use"
+(metabolic, inflammatory, regenerative, neurological, probiotic and similar
+combinations) uses synergy for physiological effects, and environmental or
+agricultural papers are outside the paper's medical scope. Both remain
+categories and appear in the domain figure (marked *), but "all", the domain
+totals and the yearly trend are antimicrobial plus oncology. The reason is the
+paper's framing, not the numbers, although the headline falls as a result.
+
+**Antimicrobial covers all pathogens.** The domain prompt now defines it as
+targeting bacteria, fungi, viruses or parasites, in line with the usual meaning
+of antimicrobial; antiviral papers previously went to "other". Only the domain
+stage was rerun; the earlier domain answers are kept in
+`screening_v5/domain_v1.jsonl`. A keyword check found too few virus and
+parasite papers in the sample to report the pathogen groups separately.
+
+**Configurations are independent readers, including P1 and P4.** The coherence
+check above (P4 "yes" with P1 "no" as a bug) is dropped: each model-prompt pair
+is a separate notional reader, so two prompts of the same model may disagree
+on a paper like two research groups would. The diagnostic is still printed.

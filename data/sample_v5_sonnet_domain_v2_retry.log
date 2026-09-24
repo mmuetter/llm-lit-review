@@ -1,0 +1,22 @@
+
+========================================================================
+  STAGE 3 — DOMAIN CLASSIFICATION
+  1000 papers x 1 prompt(s) x 1 model(s) = 16 calls pending, 1980 already done
+========================================================================
+  [domain] claude-sonnet-5 1/16 (1 err) | 1/16 (6%) 0.6/s eta 26s
+  [domain] claude-sonnet-5 2/16 (2 err) | 2/16 (12%) 1.2/s eta 12s
+  [domain] claude-sonnet-5 3/16 (3 err) | 3/16 (19%) 1.6/s eta 8s
+  [domain] claude-sonnet-5 4/16 (4 err) | 4/16 (25%) 2.1/s eta 6s
+  [domain] claude-sonnet-5 5/16 (5 err) | 5/16 (31%) 2.4/s eta 5s
+  [domain] claude-sonnet-5 6/16 (6 err) | 6/16 (38%) 2.8/s eta 4s
+  [domain] claude-sonnet-5 7/16 (7 err) | 7/16 (44%) 3.3/s eta 3s
+  [domain] claude-sonnet-5 8/16 (8 err) | 8/16 (50%) 3.5/s eta 2s
+  [domain] claude-sonnet-5 9/16 (9 err) | 9/16 (56%) 2.7/s eta 3s
+  [domain] claude-sonnet-5 10/16 (10 err) | 10/16 (62%) 3.0/s eta 2s
+  [domain] claude-sonnet-5 11/16 (11 err) | 11/16 (69%) 3.2/s eta 2s
+  [domain] claude-sonnet-5 12/16 (12 err) | 12/16 (75%) 3.4/s eta 1s
+  [domain] claude-sonnet-5 13/16 (13 err) | 13/16 (81%) 3.6/s eta 1s
+  [domain] claude-sonnet-5 14/16 (14 err) | 14/16 (88%) 3.8/s eta 1s
+  [domain] claude-sonnet-5 15/16 (15 err) | 15/16 (94%) 4.0/s eta 0s
+  [domain] claude-sonnet-5 16/16 (16 err) | 16/16 (100%) 4.0/s eta 0s
+  ✓ domain complete with 16 failures: 16 calls in 4s

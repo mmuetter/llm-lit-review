@@ -100,6 +100,19 @@ def domain_shares(weights):
     return {domain: value / total for domain, value in mass.items()}
 
 
+def headline_weights(weights):
+    """Return each paper's weight in the headline domains (antimicrobial plus oncology)."""
+    return {pmid: sum(w.get(d, 0.0) for d in REPORTED_DOMAINS) for pmid, w in weights.items()}
+
+
+def headline_fraction(outcome_cells, pmids, model, prompt, headline):
+    """Return the share of answered papers that fall in the headline domains and answer yes."""
+    answered = [p for p in pmids if (p, model, prompt) in outcome_cells]
+    yes = sum(headline[p] for p in answered
+              if outcome_cells[(p, model, prompt)]["synergy_desirable"] == "yes")
+    return yes / len(answered) if answered else 0.0
+
+
 def resolve_domains(domain_cells, pmids):
     """Resolve each paper to a single domain, or None if the models disagree."""
     resolved = {}
@@ -242,6 +255,10 @@ def report_magnitude(outcome_cells, pmids, weights, per_year):
     print(f"  mean gated papers/year {mean_annual_gated:.0f} "
           f"({min(per_year)}-{max(per_year)}, {len(per_year)} years)")
     print(f"  all domains: {min(counts):.0f}-{max(counts):.0f} papers/year")
+    headline = headline_weights(weights)
+    counts = [mean_annual_gated * headline_fraction(outcome_cells, pmids, m, p, headline)
+              for m in MODELS for p in PROMPTS]
+    print(f"  antimicrobial + oncology: {min(counts):.0f}-{max(counts):.0f} papers/year")
     shares = domain_shares(weights)
     for domain in REPORTED_DOMAINS:
         share = shares[domain]
