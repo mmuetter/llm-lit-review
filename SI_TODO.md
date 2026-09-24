@@ -8,13 +8,10 @@ Line numbers refer to `supplementary/main.tex` as of 2026-09-23.
 Passages 1-12 were agreed and applied on 2026-09-23 (supplementary 556d830).
 Numbers that depend on the run are marked \textbf{XX} in main.tex.
 
-## Numbers still XX (from the run)
-- l94, l96-97 domain weights and agreement counts
-- l102-104 outcome rates, domain rates and n, unanimity
-- Table 2 values (one placeholder row; ten rows needed)
-- l131-138 missing cells (check the failure reasons in l132 still apply)
-- l174 domain-wise papers per year
-- Figures: `plot_results.py` writes into `supplementary/figures/`
+## Results
+All run-dependent numbers filled 2026-09-24 from the complete run (both
+models; Sonnet refusals retried once, 90 of 91 repeated). Report:
+`data/analysis_v5.txt`.
 
 ## Open
 - 13 [results, wording] Short passage referring back to the stratified

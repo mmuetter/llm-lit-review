@@ -1,0 +1,58 @@
+
+========================================================================
+  SAMPLE - sonnet
+  1000 papers from a pool of 219871
+========================================================================
+
+========================================================================
+  STAGE 3 — DOMAIN CLASSIFICATION
+  1000 papers x 1 prompt(s) x 1 model(s) = 15 calls pending, 1980 already done
+========================================================================
+  [domain] claude-sonnet-5 1/15 (1 err) | 1/15 (7%) 0.7/s eta 19s
+  [domain] claude-sonnet-5 2/15 (2 err) | 2/15 (13%) 1.4/s eta 9s
+  [domain] claude-sonnet-5 3/15 (3 err) | 3/15 (20%) 2.1/s eta 6s
+  [domain] claude-sonnet-5 4/15 (4 err) | 4/15 (27%) 2.8/s eta 4s
+  [domain] claude-sonnet-5 5/15 (5 err) | 5/15 (33%) 3.0/s eta 3s
+  [domain] claude-sonnet-5 6/15 (6 err) | 6/15 (40%) 3.6/s eta 3s
+  [domain] claude-sonnet-5 7/15 (7 err) | 7/15 (47%) 3.8/s eta 2s
+  [domain] claude-sonnet-5 8/15 (8 err) | 8/15 (53%) 3.9/s eta 2s
+  [domain] claude-sonnet-5 9/15 (9 err) | 9/15 (60%) 3.5/s eta 2s
+  [domain] claude-sonnet-5 10/15 (10 err) | 10/15 (67%) 3.9/s eta 1s
+  [domain] claude-sonnet-5 11/15 (11 err) | 11/15 (73%) 4.2/s eta 1s
+  [domain] claude-sonnet-5 12/15 (12 err) | 12/15 (80%) 4.4/s eta 1s
+  [domain] claude-sonnet-5 13/15 (13 err) | 13/15 (87%) 4.6/s eta 0s
+  [domain] claude-sonnet-5 14/15 (14 err) | 14/15 (93%) 4.7/s eta 0s
+  [domain] claude-sonnet-5 15/15 (15 err) | 15/15 (100%) 4.9/s eta 0s
+  ✓ domain complete with 15 failures: 15 calls in 3s
+
+========================================================================
+  STAGE 4 — OUTCOME GRID
+  1000 papers x 5 prompt(s) x 1 model(s) = 76 calls pending, 9919 already done
+========================================================================
+  [outcome] claude-sonnet-5 3/76 (3 err) | 3/76 (4%) 2.4/s eta 30s
+  [outcome] claude-sonnet-5 6/76 (6 err) | 6/76 (8%) 4.4/s eta 16s
+  [outcome] claude-sonnet-5 9/76 (9 err) | 9/76 (12%) 4.0/s eta 17s
+  [outcome] claude-sonnet-5 12/76 (12 err) | 12/76 (16%) 4.9/s eta 13s
+  [outcome] claude-sonnet-5 15/76 (15 err) | 15/76 (20%) 5.2/s eta 12s
+  [outcome] claude-sonnet-5 18/76 (18 err) | 18/76 (24%) 5.2/s eta 11s
+  [outcome] claude-sonnet-5 21/76 (21 err) | 21/76 (28%) 5.5/s eta 10s
+  [outcome] claude-sonnet-5 24/76 (24 err) | 24/76 (32%) 5.9/s eta 9s
+  [outcome] claude-sonnet-5 27/76 (27 err) | 27/76 (36%) 5.6/s eta 9s
+  [outcome] claude-sonnet-5 30/76 (30 err) | 30/76 (39%) 6.0/s eta 8s
+  [outcome] claude-sonnet-5 33/76 (33 err) | 33/76 (43%) 6.0/s eta 7s
+  [outcome] claude-sonnet-5 36/76 (36 err) | 36/76 (47%) 6.0/s eta 7s
+  [outcome] claude-sonnet-5 39/76 (39 err) | 39/76 (51%) 6.0/s eta 6s
+  [outcome] claude-sonnet-5 42/76 (42 err) | 42/76 (55%) 5.9/s eta 6s
+  [outcome] claude-sonnet-5 45/76 (45 err) | 45/76 (59%) 6.1/s eta 5s
+  [outcome] claude-sonnet-5 48/76 (48 err) | 48/76 (63%) 6.1/s eta 5s
+  [outcome] claude-sonnet-5 51/76 (51 err) | 51/76 (67%) 6.1/s eta 4s
+  [outcome] claude-sonnet-5 54/76 (54 err) | 54/76 (71%) 6.3/s eta 4s
+  [outcome] claude-sonnet-5 57/76 (57 err) | 57/76 (75%) 6.3/s eta 3s
+  [outcome] claude-sonnet-5 60/76 (60 err) | 60/76 (79%) 6.2/s eta 3s
+  [outcome] claude-sonnet-5 63/76 (63 err) | 63/76 (83%) 6.4/s eta 2s
+  [outcome] claude-sonnet-5 66/76 (66 err) | 66/76 (87%) 6.2/s eta 2s
+  [outcome] claude-sonnet-5 69/76 (69 err) | 69/76 (91%) 6.3/s eta 1s
+  [outcome] claude-sonnet-5 72/76 (71 err) | 72/76 (95%) 6.4/s eta 1s
+  [outcome] claude-sonnet-5 75/76 (74 err) | 75/76 (99%) 6.0/s eta 0s
+  [outcome] claude-sonnet-5 76/76 (75 err) | 76/76 (100%) 6.0/s eta 0s
+  ✓ outcome complete with 75 failures: 76 calls in 13s
