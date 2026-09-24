@@ -13,17 +13,14 @@ All run-dependent numbers filled 2026-09-24 from the complete run (both
 models; Sonnet refusals retried once, 90 of 91 repeated). Report:
 `data/analysis_v5.txt`.
 
-## Open (before forwarding / sending to Roland)
-- Antimicrobial precision: ~75 sampled papers (weighted); enlarge the sample?
-- Main l134 "mostly from oncology and antimicrobial research": holds (~70% of
-  the total), but other therapeutic (~1,000/yr) exceeds antimicrobial (~750/yr).
-- SI l98 failure reasons changed to "rate limits or server errors" (the run's
-  actual 429/503 errors); check wording.
-- Coherence diagnostic: 91 cells with P4 = yes but P1 = no (DECISIONS calls
-  this a defect); inspect before sending.
-- Passage 13 (back-reference to the stratified analysis): drop if it stays
-  unmentioned.
-- Zenodo ID (SI l168).
+## Open
+- Zenodo ID (SI), once everyone has agreed on the final version.
+
+Resolved 2026-09-24: antimicrobial precision accepted; antimicrobial now
+covers bacteria, fungi, viruses and parasites, and the headline, domain totals
+and trend count antimicrobial plus oncology (other and agricultural marked *);
+failure-reason wording kept; P4/P1 disagreements accepted as independent
+readers; no back-reference to the stratified analysis.
 
 ## Main text
 Done 2026-09-23 (main e8a11be, ca586f0): pool 219,871, "a random sample of
